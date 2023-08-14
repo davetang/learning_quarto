@@ -5,7 +5,7 @@ set -euo pipefail
 num_param=1
 
 usage(){
-   echo "Usage: $0 <file.qmd> [outfile.md]"
+   echo "Usage: $0 <file.qmd> [{pdf,html,docx}]"
    exit 1
 }
 
@@ -19,10 +19,9 @@ if [[ ! -e ${infile} ]]; then
   exit 1
 fi
 
-# not used, yet
-outfile=README.md
+out_format=html
 if [[ $# -ge 2 ]]; then
-   outfile=$2
+   out_format=$2
 fi
 
 check_depend (){
@@ -74,7 +73,7 @@ docker run \
    -w $(pwd) \
    -u $(id -u):$(id -g) \
    ${docker_image} \
-   Rscript -e ".libPaths('/packages'); quarto::quarto_render('${infile}')"
+   Rscript -e ".libPaths('/packages'); quarto::quarto_render('${infile}', output_format = '${out_format}')"
 
 rm -rf ./deno-x86_64-unknown-linux-gnu
 
