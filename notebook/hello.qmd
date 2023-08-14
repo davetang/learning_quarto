@@ -1,6 +1,8 @@
 ---
 title: "Hello, Quarto"
 format: html
+date: '`r format(Sys.Date(), "%Y-%m-%d")`'
+date-format: "YYYY-MM-DD"
 editor: visual
 ---
 
