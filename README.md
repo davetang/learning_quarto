@@ -125,7 +125,7 @@ Using the Quarto CLI tool.
 ./script/quarto.sh notebook/hello.qmd
 ```
 ```
-   [ 2023/08/15 09:26:00 ] Start job
+[ 2023/08/15 09:26:00 ] Start job
 
 
 
