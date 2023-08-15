@@ -27,6 +27,48 @@ switch. From the blog post:
   the .md (Markdown) output file. In case a new tool (oh God, no thanks) like
   knitr and jupyter is invented, Quarto can integrate with it, too.
 
+# Quarto CLI
+
+Quarto is a Command Line Interface (CLI) tool, although there is a `quarto` R
+package that provides an R interface to some operations from the CLI. I have a
+`Dockerfile` that builds an image with the CLI tool; the image is called
+`davetang/quarto:4.3.1` and I have versioned it with the corresponding R
+version. The image is 3.72GB and its size could be decreased by excluding some
+tools and libraries.
+
+```console
+docker run --rm davetang/quarto:4.3.1 check
+
+[✓] Checking versions of quarto binary dependencies...
+      Pandoc version 3.1.1: OK
+      Dart Sass version 1.55.0: OK
+[✓] Checking versions of quarto dependencies......OK
+[✓] Checking Quarto installation......OK
+      Version: 1.3.450
+      Path: /opt/quarto/bin
+
+[✓] Checking basic markdown render....OK
+
+[✓] Checking Python 3 installation....OK
+      Version: 3.10.12
+      Path: /usr/bin/python3
+      Jupyter: 5.3.1
+      Kernels: python3
+
+[✓] Checking Jupyter engine render....OK
+
+[✓] Checking R installation...........OK
+      Version: 4.3.1
+      Path: /usr/local/lib/R
+      LibPaths:
+        - /usr/local/lib/R/site-library
+        - /usr/local/lib/R/library
+      knitr: 1.43
+      rmarkdown: 2.22
+
+[✓] Checking Knitr engine render......OK
+```
+
 # Notebooks
 
 To render the notebooks, use the `qmd_render.sh` script; it requires Docker.
