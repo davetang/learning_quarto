@@ -71,55 +71,95 @@ docker run --rm davetang/quarto:4.3.1 check
 
 # Notebooks
 
-To render the notebooks, use the `qmd_render.sh` script; it requires Docker.
-The rendered HTML files will be in the `notebook` folder.
+To render the notebooks, use either the `qmd_render.sh` or `quarto.sh` script;
+they both require Docker. The former script uses the R `quarto` package and the
+latter script uses the Quarto CLI tool. The rendered HTML files will be in the
+`notebook` folder.
+
+Using the R `quarto` package.
 
 ```console
 ./script/qmd_render.sh notebook/computations.qmd
 ```
 ```
-[ 2023/08/14 13:32:49 ] Start job
+[ 2023/08/15 09:25:34 ] Start job
 
-[31m
 
-processing file: computations.qmd
-[39m1/11                  
-2/11 [load-packages]  
-3/11                  
-4/11 [fig-scatterplot]
-5/11                  
-6/11 [fig-mpg]        
-7/11                  
-8/11 [tab-mpg]        
-9/11                  
-10/11 [session_info]   
-11/11                  
-[31moutput file: computations.knit.md
 
-[39m[1mpandoc [22m
+processing file: hello.qmd
+1/5
+2/5 [load-packages]
+3/5
+4/5 [plot-penguins]
+5/5
+output file: hello.knit.md
+
+pandoc
   to: html
-  output-file: computations.html
+  output-file: hello.html
   standalone: true
   section-divs: true
   html-math-method: mathjax
   wrap: none
   default-image-extension: png
-  
-[1mmetadata[22m
+
+metadata
   document-css: false
   link-citations: true
   lang: en
-  title: Quarto Computations
+  title: 'Hello, Quarto'
   date: '`r format(Sys.Date(), "%Y-%m-%d")`'
   date-format: YYYY-MM-DD
-  
-[31mWarning message:
-In postprocess(params$input, params$format, params$output, params$preserve) :
-  The downlit and xml2 packages are required for code linking
-[39mOutput created: computations.html
+  editor: visual
 
-[ 2023/08/14 13:32:56 ] Work complete
-0 minutes and 7 seconds elapsed.
+Output created: hello.html
+
+
+[ 2023/08/15 09:25:40 ] Work complete
+0 minutes and 6 seconds elapsed.
+```
+
+Using the Quarto CLI tool.
+
+```console
+./script/quarto.sh notebook/hello.qmd
+```
+```
+   [ 2023/08/15 09:26:00 ] Start job
+
+
+
+processing file: hello.qmd
+1/5
+2/5 [load-packages]
+3/5
+4/5 [plot-penguins]
+5/5
+output file: hello.knit.md
+
+pandoc
+  to: html
+  output-file: hello.html
+  standalone: true
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+
+metadata
+  document-css: false
+  link-citations: true
+  lang: en
+  title: 'Hello, Quarto'
+  date: '`r format(Sys.Date(), "%Y-%m-%d")`'
+  date-format: YYYY-MM-DD
+  editor: visual
+
+Output created: hello.html
+
+
+[ 2023/08/15 09:26:06 ] Work complete
+0 minutes and 6 seconds elapsed.
 ```
 
 # Useful links
