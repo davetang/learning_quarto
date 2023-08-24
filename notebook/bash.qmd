@@ -1,0 +1,53 @@
+---
+title: "Bash commands in Quarto"
+date: '`r format(Sys.Date(), "%Y-%m-%d")`'
+date-format: "YYYY-MM-DD"
+execute:
+  echo: true
+  cache: false
+format:
+   gfm:
+     html-math-method: webtex
+     toc: true
+---
+
+Generating [GitHub Flavoured
+Markdown](https://quarto.org/docs/output-formats/gfm.html) (GFM); see [GFM
+Options](https://quarto.org/docs/reference/formats/markdown/gfm.html).
+
+## Hello, World
+
+```{bash}
+#| label: hello_world
+
+echo Hello, World
+```
+
+## Loops
+
+```{bash}
+for i in {0..9}; do
+   echo ${i}
+done
+```
+
+## Version
+
+Bash version used.
+
+```{bash}
+#| label: bash_version
+
+bash --version
+```
+
+<!-- If I do not include a R code block, Jupyter Notebook is used and the
+document does not render properly. -->
+
+```{r}
+#| label: session_info
+#| echo: false
+#| output: false
+
+sessionInfo()
+```
