@@ -1,0 +1,82 @@
+---
+title: "Using the Jupyter engine with Docker"
+execute:
+  echo: true
+  cache: false
+format:
+   gfm:
+     html-math-method: webtex
+     toc: true
+engine: jupyter
+---
+
+I created a Quarto Docker image for executing my Quarto documents. This works
+fine (so far) when using the Knitr engine but fails when using the Jupyter
+engine.
+
+```
+Starting python3 kernel.../usr/local/lib/python3.10/dist-packages/IPython/paths.py:69: UserWarning: IPython parent '/' is not a writable location, using a temp directory.
+  warn("IPython parent '{0}' is not a writable location,"
+/usr/local/lib/python3.10/dist-packages/IPython/paths.py:69: UserWarning: IPython parent '/' is not a writable location, using a temp directory.
+  warn("IPython parent '{0}' is not a writable location,"
+Done
+```
+
+After searching online it seems that the problem is that the `HOME` environment
+variable is not correctly set. Adding the `--env HOME=$(pwd)` gets rid of the
+error above but the code output is not included.
+
+There is a [GitHub issue](https://github.com/quarto-dev/quarto-cli/issues/3203)
+showing the Bash output is not executed but that may be because [more than one
+type of
+code](https://github.com/quarto-dev/quarto-cli/issues/3203#issuecomment-1305371192)
+was present. This does not explain my case since I only have Bash code.
+
+It turns out that I need to use [Jupyter shell
+magics](https://quarto.org/docs/computations/execution-options.html#shell-commands),
+which is prepending an exclamation mark in front of my shell command.
+
+## Python Hello, World
+
+```{python}
+#| label: python_hello
+
+print("Hello, World")
+```
+
+
+## Shell Hello, World
+
+```{python}
+#| label: hello_world
+
+!echo Hello, World
+```
+
+## Environmental variables
+
+SHELL environmental variable.
+
+```{python}
+#| label: shell_var
+
+!echo $SHELL
+```
+
+All environmental variables.
+
+```{python}
+#| label: env
+
+!env
+```
+
+## Version
+
+Bash version used.
+
+```{python}
+#| label: bash_version
+
+!bash --version
+```
