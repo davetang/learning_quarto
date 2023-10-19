@@ -1,0 +1,37 @@
+---
+title: "Graphviz"
+format: html
+date-format: "YYYY-MM-DD"
+editor: visual
+---
+
+[Diagrams](https://quarto.org/docs/authoring/diagrams.html).
+
+```{dot}
+//| label: fig-simple
+//| fig-cap: "This is a simple graphviz graph."
+graph G {
+  layout=neato
+  run -- intr;
+  intr -- runbl;
+  runbl -- run;
+  run -- kernel;
+  kernel -- zombie;
+  kernel -- sleep;
+  kernel -- runmem;
+  sleep -- swap;
+  swap -- runswap;
+  runswap -- new;
+  runswap -- runmem;
+  new -- runmem;
+  sleep -- runmem;
+}
+```
+
+From a file.
+
+```{dot}
+//| label: rnaseq_variant_calling
+//| fig-cap: "RNA-seq variant calling"
+//| file: ../data/rnaseq_variant_calling.dot
+```
