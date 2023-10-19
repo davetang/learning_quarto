@@ -67,6 +67,7 @@ docker run \
    --env DENO_DIR=/tmp/quarto_deno_cache_home \
    --env XDG_CACHE_HOME=/tmp/quarto_cache_home \
    --env XDG_DATA_HOME=/tmp/quarto_data_home \
+   --env HOME=$(pwd) \
    -v $(pwd):$(pwd) \
    -v ${package_dir}:/packages \
    -w $(pwd) \
