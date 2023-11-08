@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Graphviz</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="graphviz_files/libs/clipboard/clipboard.min.js"></script>
+<script src="graphviz_files/libs/quarto-html/quarto.js"></script>
+<script src="graphviz_files/libs/quarto-html/popper.min.js"></script>
+<script src="graphviz_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="graphviz_files/libs/quarto-html/anchor.min.js"></script>
+<link href="graphviz_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="graphviz_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="graphviz_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="graphviz_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="graphviz_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Graphviz</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://quarto.org/docs/authoring/diagrams.html">Diagrams</a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-simple" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 370.99 246.71" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 242.71)">
+<title>
+G
+</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-242.71 366.99,-242.71 366.99,4 -4,4"></polygon> <!-- run --> <g id="node1" class="node">
+<title>
+run
+</title>
+<ellipse fill="none" stroke="black" cx="105.22" cy="-110.03" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="105.22" y="-105.83" font-family="Times,serif" font-size="14.00">run</text> </g> <!-- intr --> <g id="node2" class="node">
+<title>
+intr
+</title>
+<ellipse fill="none" stroke="black" cx="48.11" cy="-59.71" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="48.11" y="-55.51" font-family="Times,serif" font-size="14.00">intr</text> </g> <!-- run&#45;&#45;intr --> <g id="edge1" class="edge">
+<title>
+run–intr
+</title>
+<path fill="none" stroke="black" d="M88.7,-95.48C81.19,-88.86 72.32,-81.04 64.79,-74.4"></path> </g> <!-- kernel --> <g id="node4" class="node">
+<title>
+kernel
+</title>
+<ellipse fill="none" stroke="black" cx="180.95" cy="-137.54" rx="35.33" ry="18"></ellipse> <text text-anchor="middle" x="180.95" y="-133.34" font-family="Times,serif" font-size="14.00">kernel</text> </g> <!-- run&#45;&#45;kernel --> <g id="edge4" class="edge">
+<title>
+run–kernel
+</title>
+<path fill="none" stroke="black" d="M129.18,-118.73C136.46,-121.38 144.54,-124.31 152.1,-127.06"></path> </g> <!-- runbl --> <g id="node3" class="node">
+<title>
+runbl
+</title>
+<ellipse fill="none" stroke="black" cx="31.42" cy="-126.16" rx="31.34" ry="18"></ellipse> <text text-anchor="middle" x="31.42" y="-121.96" font-family="Times,serif" font-size="14.00">runbl</text> </g> <!-- intr&#45;&#45;runbl --> <g id="edge2" class="edge">
+<title>
+intr–runbl
+</title>
+<path fill="none" stroke="black" d="M43.64,-77.51C41.25,-87.05 38.3,-98.76 35.91,-108.3"></path> </g> <!-- runbl&#45;&#45;run --> <g id="edge3" class="edge">
+<title>
+runbl–run
+</title>
+<path fill="none" stroke="black" d="M61.01,-119.7C67.11,-118.36 73.48,-116.97 79.43,-115.67"></path> </g> <!-- zombie --> <g id="node5" class="node">
+<title>
+zombie
+</title>
+<ellipse fill="none" stroke="black" cx="168.31" cy="-220.71" rx="39.42" ry="18"></ellipse> <text text-anchor="middle" x="168.31" y="-216.51" font-family="Times,serif" font-size="14.00">zombie</text> </g> <!-- kernel&#45;&#45;zombie --> <g id="edge5" class="edge">
+<title>
+kernel–zombie
+</title>
+<path fill="none" stroke="black" d="M178.21,-155.58C176.09,-169.54 173.17,-188.76 171.05,-202.7"></path> </g> <!-- sleep --> <g id="node6" class="node">
+<title>
+sleep
+</title>
+<ellipse fill="none" stroke="black" cx="253.25" cy="-154.97" rx="30.76" ry="18"></ellipse> <text text-anchor="middle" x="253.25" y="-150.77" font-family="Times,serif" font-size="14.00">sleep</text> </g> <!-- kernel&#45;&#45;sleep --> <g id="edge6" class="edge">
+<title>
+kernel–sleep
+</title>
+<path fill="none" stroke="black" d="M212.87,-145.23C216.81,-146.18 220.81,-147.15 224.69,-148.08"></path> </g> <!-- runmem --> <g id="node7" class="node">
+<title>
+runmem
+</title>
+<ellipse fill="none" stroke="black" cx="240.17" cy="-83.36" rx="43.44" ry="18"></ellipse> <text text-anchor="middle" x="240.17" y="-79.16" font-family="Times,serif" font-size="14.00">runmem</text> </g> <!-- kernel&#45;&#45;runmem --> <g id="edge7" class="edge">
+<title>
+kernel–runmem
+</title>
+<path fill="none" stroke="black" d="M198.4,-121.57C205.9,-114.71 214.67,-106.69 222.23,-99.77"></path> </g> <!-- sleep&#45;&#45;runmem --> <g id="edge13" class="edge">
+<title>
+sleep–runmem
+</title>
+<path fill="none" stroke="black" d="M249.95,-136.9C247.98,-126.13 245.49,-112.49 243.51,-101.67"></path> </g> <!-- swap --> <g id="node8" class="node">
+<title>
+swap
+</title>
+<ellipse fill="none" stroke="black" cx="330.95" cy="-148.25" rx="30.77" ry="18"></ellipse> <text text-anchor="middle" x="330.95" y="-144.05" font-family="Times,serif" font-size="14.00">swap</text> </g> <!-- sleep&#45;&#45;swap --> <g id="edge8" class="edge">
+<title>
+sleep–swap
+</title>
+<path fill="none" stroke="black" d="M283.96,-152.31C289.3,-151.85 294.86,-151.37 300.21,-150.91"></path> </g> <!-- runswap --> <g id="node9" class="node">
+<title>
+runswap
+</title>
+<ellipse fill="none" stroke="black" cx="319.23" cy="-73.46" rx="43.51" ry="18"></ellipse> <text text-anchor="middle" x="319.23" y="-69.26" font-family="Times,serif" font-size="14.00">runswap</text> </g> <!-- swap&#45;&#45;runswap --> <g id="edge9" class="edge">
+<title>
+swap–runswap
+</title>
+<path fill="none" stroke="black" d="M328.11,-130.15C326.28,-118.47 323.91,-103.35 322.08,-91.66"></path> </g> <!-- runswap&#45;&#45;runmem --> <g id="edge11" class="edge">
+<title>
+runswap–runmem
+</title>
+<path fill="none" stroke="black" d="M276.92,-78.76C276.78,-78.77 276.63,-78.79 276.48,-78.81"></path> </g> <!-- new --> <g id="node10" class="node">
+<title>
+new
+</title>
+<ellipse fill="none" stroke="black" cx="278.31" cy="-18" rx="27.25" ry="18"></ellipse> <text text-anchor="middle" x="278.31" y="-13.8" font-family="Times,serif" font-size="14.00">new</text> </g> <!-- runswap&#45;&#45;new --> <g id="edge10" class="edge">
+<title>
+runswap–new
+</title>
+<path fill="none" stroke="black" d="M306.51,-56.21C301.35,-49.22 295.42,-41.18 290.33,-34.29"></path> </g> <!-- new&#45;&#45;runmem --> <g id="edge12" class="edge">
+<title>
+new–runmem
+</title>
+<path fill="none" stroke="black" d="M268.49,-34.83C263.01,-44.21 256.2,-55.89 250.62,-65.44"></path> </g> </g>
+</svg>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;1: This is a simple graphviz graph.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>From a file.</p>
+<div class="cell" data-file="../data/rnaseq_germline_somatic_hlatyping.dot">
+<div class="cell-output-display">
+<div id="rnaseq_variant_calling">
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 2063.00 908.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 904)">
+<title>
+full_workflow
+</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-904 2059,-904 2059,4 -4,4"></polygon> <g id="clust1" class="cluster">
+<title>
+cluster_0
+</title>
+<polygon fill="white" stroke="black" points="8,-8 8,-892 2047,-892 2047,-8 8,-8"></polygon> </g> <!-- CALL_hlatyping_tumour --> <g id="node1" class="node">
+<title>
+CALL_hlatyping_tumour
+</title>
+<ellipse fill="none" stroke="black" cx="137" cy="-558" rx="96.68" ry="18"></ellipse> <ellipse fill="none" stroke="black" cx="137" cy="-558" rx="100.68" ry="22"></ellipse> <text text-anchor="middle" x="137" y="-553.8" font-family="Times,serif" font-size="14.00">call hlatyping_tumour</text> </g> <!-- CALL_adjusted_cn --> <g id="node2" class="node">
+<title>
+CALL_adjusted_cn
+</title>
+<ellipse fill="none" stroke="black" cx="705" cy="-402" rx="73.53" ry="18"></ellipse> <text text-anchor="middle" x="705" y="-397.8" font-family="Times,serif" font-size="14.00">call adjusted_cn</text> </g> <!-- CALL_hlatyping_tumour&#45;&gt;CALL_adjusted_cn --> <g id="edge1" class="edge">
+<title>
+CALL_hlatyping_tumour-&gt;CALL_adjusted_cn
+</title>
+<path fill="none" stroke="black" d="M92.33,-538.08C76.66,-529.01 60.78,-516.46 52,-500 42.8,-482.75 38.66,-470.3 52,-456 91.12,-414.05 509.9,-425.51 567,-420 588.17,-417.96 611.1,-415.31 632.09,-412.71"></path> <polygon fill="black" stroke="black" points="632.73,-416.16 642.22,-411.44 631.86,-409.21 632.73,-416.16"></polygon> </g> <!-- CALL_preprocess_tumour --> <g id="node3" class="node">
+<title>
+CALL_preprocess_tumour
+</title>
+<ellipse fill="none" stroke="black" cx="799" cy="-790" rx="101.31" ry="18"></ellipse> <ellipse fill="none" stroke="black" cx="799" cy="-790" rx="105.31" ry="22"></ellipse> <text text-anchor="middle" x="799" y="-785.8" font-family="Times,serif" font-size="14.00">call preprocess_tumour</text> </g> <!-- CALL_whatshap_phase --> <g id="node4" class="node">
+<title>
+CALL_whatshap_phase
+</title>
+<ellipse fill="none" stroke="black" cx="467" cy="-402" rx="90.86" ry="18"></ellipse> <text text-anchor="middle" x="467" y="-397.8" font-family="Times,serif" font-size="14.00">call whatshap_phase</text> </g> <!-- CALL_preprocess_tumour&#45;&gt;CALL_whatshap_phase --> <g id="edge2" class="edge">
+<title>
+CALL_preprocess_tumour-&gt;CALL_whatshap_phase
+</title>
+<path fill="none" stroke="black" d="M763.77,-769.18C748.64,-759.42 731.58,-746.6 719,-732 681.25,-688.18 705.49,-651.72 660,-616 605.06,-572.86 569.81,-610.57 507,-580 455.82,-555.09 431.66,-551.3 407,-500 398.53,-482.37 398.96,-473.83 407,-456 412.36,-444.1 421.87,-433.8 431.75,-425.53"></path> <polygon fill="black" stroke="black" points="433.95,-428.25 439.68,-419.34 429.65,-422.73 433.95,-428.25"></polygon> </g> <!-- CALL_igv_snapshot --> <g id="node15" class="node">
+<title>
+CALL_igv_snapshot
+</title>
+<ellipse fill="none" stroke="black" cx="592" cy="-114" rx="78.21" ry="18"></ellipse> <text text-anchor="middle" x="592" y="-109.8" font-family="Times,serif" font-size="14.00">call igv_snapshot</text> </g> <!-- CALL_preprocess_tumour&#45;&gt;CALL_igv_snapshot --> <g id="edge10" class="edge">
+<title>
+CALL_preprocess_tumour-&gt;CALL_igv_snapshot
+</title>
+<path fill="none" stroke="black" d="M748.04,-770.68C728.43,-761.56 707.14,-748.81 692,-732 690.84,-730.71 646.36,-617.09 645,-616 568.32,-554.65 503.42,-641.67 427,-580 361.16,-526.88 357,-487.6 357,-403 357,-403 357,-403 357,-257 357,-179.99 450.59,-143.63 519.64,-127.28"></path> <polygon fill="black" stroke="black" points="520.66,-130.63 529.64,-125.01 519.11,-123.81 520.66,-130.63"></polygon> </g> <!-- CALL_somatic_workflow --> <g id="node16" class="node">
+<title>
+CALL_somatic_workflow
+</title>
+<ellipse fill="none" stroke="black" cx="1112" cy="-710" rx="99.61" ry="18"></ellipse> <ellipse fill="none" stroke="black" cx="1112" cy="-710" rx="103.6" ry="22"></ellipse> <text text-anchor="middle" x="1112" y="-705.8" font-family="Times,serif" font-size="14.00">call somatic_workflow</text> </g> <!-- CALL_preprocess_tumour&#45;&gt;CALL_somatic_workflow --> <g id="edge75" class="edge">
+<title>
+CALL_preprocess_tumour-&gt;CALL_somatic_workflow
+</title>
+<path fill="none" stroke="black" d="M864.62,-772.65C914.97,-760.1 984.53,-742.77 1037.07,-729.67"></path> <polygon fill="black" stroke="black" points="1038.15,-733.01 1047.01,-727.2 1036.46,-726.22 1038.15,-733.01"></polygon> </g> <!-- CALL_allelecount_tumour --> <g id="node24" class="node">
+<title>
+CALL_allelecount_tumour
+</title>
+<ellipse fill="none" stroke="black" cx="816" cy="-634" rx="102.45" ry="18"></ellipse> <text text-anchor="middle" x="816" y="-629.8" font-family="Times,serif" font-size="14.00">call allelecount_tumour</text> </g> <!-- CALL_preprocess_tumour&#45;&gt;CALL_allelecount_tumour --> <g id="edge83" class="edge">
+<title>
+CALL_preprocess_tumour-&gt;CALL_allelecount_tumour
+</title>
+<path fill="none" stroke="black" d="M763.65,-769.1C750.55,-759.7 737.15,-747.18 730,-732 721.67,-714.31 720.47,-705.07 730,-688 737.79,-674.06 750.91,-663.33 764.6,-655.29"></path> <polygon fill="black" stroke="black" points="766.5,-658.24 773.62,-650.39 763.16,-652.09 766.5,-658.24"></polygon> </g> <!-- CALL_phaser --> <g id="node28" class="node">
+<title>
+CALL_phaser
+</title>
+<ellipse fill="none" stroke="black" cx="448" cy="-330" rx="52.69" ry="18"></ellipse> <text text-anchor="middle" x="448" y="-325.8" font-family="Times,serif" font-size="14.00">call phaser</text> </g> <!-- CALL_whatshap_phase&#45;&gt;CALL_phaser --> <g id="edge67" class="edge">
+<title>
+CALL_whatshap_phase-&gt;CALL_phaser
+</title>
+<path fill="none" stroke="black" d="M462.3,-383.7C460.19,-375.9 457.64,-366.51 455.28,-357.83"></path> <polygon fill="black" stroke="black" points="458.64,-356.84 452.64,-348.1 451.88,-358.67 458.64,-356.84"></polygon> </g> <!-- CALL_bam_readcount_snvs --> <g id="node5" class="node">
+<title>
+CALL_bam_readcount_snvs
+</title>
+<ellipse fill="none" stroke="black" cx="1282" cy="-402" rx="108.83" ry="18"></ellipse> <text text-anchor="middle" x="1282" y="-397.8" font-family="Times,serif" font-size="14.00">call bam_readcount_snvs</text> </g> <!-- CALL_calc_rna_fraction --> <g id="node6" class="node">
+<title>
+CALL_calc_rna_fraction
+</title>
+<ellipse fill="none" stroke="black" cx="1087" cy="-330" rx="94.89" ry="18"></ellipse> <text text-anchor="middle" x="1087" y="-325.8" font-family="Times,serif" font-size="14.00">call calc_rna_fraction</text> </g> <!-- CALL_bam_readcount_snvs&#45;&gt;CALL_calc_rna_fraction --> <g id="edge3" class="edge">
+<title>
+CALL_bam_readcount_snvs-&gt;CALL_calc_rna_fraction
+</title>
+<path fill="none" stroke="black" d="M1238.72,-385.46C1209.26,-374.89 1170.11,-360.83 1138.96,-349.65"></path> <polygon fill="black" stroke="black" points="1139.75,-346.22 1129.15,-346.13 1137.38,-352.8 1139.75,-346.22"></polygon> </g> <!-- CALL_make_table_data --> <g id="node30" class="node">
+<title>
+CALL_make_table_data
+</title>
+<ellipse fill="none" stroke="black" cx="906" cy="-186" rx="92.62" ry="18"></ellipse> <text text-anchor="middle" x="906" y="-181.8" font-family="Times,serif" font-size="14.00">call make_table_data</text> </g> <!-- CALL_calc_rna_fraction&#45;&gt;CALL_make_table_data --> <g id="edge41" class="edge">
+<title>
+CALL_calc_rna_fraction-&gt;CALL_make_table_data
+</title>
+<path fill="none" stroke="black" d="M1065.88,-312.43C1033.68,-287.17 972.19,-238.93 935.56,-210.19"></path> <polygon fill="black" stroke="black" points="937.29,-207.1 927.26,-203.68 932.97,-212.61 937.29,-207.1"></polygon> </g> <!-- SCATTER_0_VARIABLE_sample --> <g id="node7" class="node">
+<title>
+SCATTER_0_VARIABLE_sample
+</title>
+<polygon fill="none" stroke="black" points="1373.41,-866 1291.21,-884 1126.79,-884 1044.59,-866 1126.79,-848 1291.21,-848 1373.41,-866"></polygon> <text text-anchor="middle" x="1209" y="-861.8" font-family="Times,serif" font-size="14.00">scatter over Array[File] as sample</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_hlatyping_tumour --> <g id="edge20" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_hlatyping_tumour
+</title>
+<path fill="none" stroke="black" d="M1048.57,-865.08C793.08,-863.88 315.94,-855.72 252,-812 176.23,-760.19 149.57,-645.67 140.87,-590.25"></path> <polygon fill="black" stroke="black" points="144.32,-589.69 139.4,-580.31 137.4,-590.71 144.32,-589.69"></polygon> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_adjusted_cn --> <g id="edge37" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_adjusted_cn
+</title>
+<path fill="none" stroke="black" d="M1048.75,-865.08C802.73,-863.8 354.05,-855.45 295,-812 256.37,-783.57 257,-758.96 257,-711 257,-711 257,-711 257,-633 257,-611.33 261.58,-552.03 247,-536 192.11,-475.65 118.72,-563.09 67,-500 54.6,-484.88 53.68,-470.32 67,-456 104.94,-415.22 511.56,-425.41 567,-420 588.16,-417.94 611.1,-415.28 632.09,-412.68"></path> <polygon fill="black" stroke="black" points="632.73,-416.13 642.22,-411.42 631.86,-409.18 632.73,-416.13"></polygon> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_preprocess_tumour --> <g id="edge29" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_preprocess_tumour
+</title>
+<path fill="none" stroke="black" d="M1121.3,-849.17C1052.01,-836.67 955.8,-819.3 886.55,-806.8"></path> <polygon fill="black" stroke="black" points="887,-803.33 876.54,-804.99 885.76,-810.22 887,-803.33"></polygon> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_whatshap_phase --> <g id="edge85" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_whatshap_phase
+</title>
+<path fill="none" stroke="black" d="M1071.81,-859.99C893.02,-852.54 597.91,-836.69 554,-812 515.72,-790.48 516.2,-771 496,-732 486.5,-713.65 495.68,-702.54 481,-688 444.75,-652.1 401.89,-693.35 372,-652 358.63,-633.5 353.09,-527.72 396,-456 403.5,-443.47 415.2,-432.94 426.96,-424.65"></path> <polygon fill="black" stroke="black" points="429.07,-427.46 435.47,-419.02 425.2,-421.62 429.07,-427.46"></polygon> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_bam_readcount_snvs --> <g id="edge24" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_bam_readcount_snvs
+</title>
+<path fill="none" stroke="black" d="M1315.65,-853.28C1362.09,-845.52 1416.23,-832.78 1462,-812 1529.91,-781.17 1596,-785.58 1596,-711 1596,-711 1596,-711 1596,-557 1596,-511.89 1616.7,-489.05 1586,-456 1578.6,-448.03 1458.12,-428.82 1371.09,-415.86"></path> <polygon fill="black" stroke="black" points="1371.59,-412.39 1361.19,-414.39 1370.56,-419.32 1371.59,-412.39"></polygon> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_calc_rna_fraction --> <g id="edge38" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_calc_rna_fraction
+</title>
+<path fill="none" stroke="black" d="M1343.94,-859.51C1499.69,-852.13 1745.86,-836.97 1835,-812 1932.04,-784.82 2038,-811.77 2038,-711 2038,-711 2038,-711 2038,-557 2038,-478.96 2068.74,-432.99 2008,-384 1945.8,-333.84 1420.92,-329.68 1192.5,-330.28"></path> <polygon fill="black" stroke="black" points="1192.17,-326.78 1182.18,-330.31 1192.19,-333.78 1192.17,-326.78"></polygon> </g> <!-- CALL_run_ascat --> <g id="node8" class="node">
+<title>
+CALL_run_ascat
+</title>
+<ellipse fill="none" stroke="black" cx="580" cy="-558" rx="64.28" ry="18"></ellipse> <text text-anchor="middle" x="580" y="-553.8" font-family="Times,serif" font-size="14.00">call run_ascat</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_run_ascat --> <g id="edge4" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_run_ascat
+</title>
+<path fill="none" stroke="black" d="M1073.96,-859.55C928.32,-852.4 713.36,-837.64 685,-812 619.05,-752.37 689.65,-692.88 645,-616 637.1,-602.4 624.77,-590.38 612.97,-580.93"></path> <polygon fill="black" stroke="black" points="615.01,-578.08 604.94,-574.8 610.77,-583.65 615.01,-578.08"></polygon> </g> <!-- CALL_preprocess_normal --> <g id="node9" class="node">
+<title>
+CALL_preprocess_normal
+</title>
+<ellipse fill="none" stroke="black" cx="1085" cy="-790" rx="100.73" ry="18"></ellipse> <ellipse fill="none" stroke="black" cx="1085" cy="-790" rx="104.73" ry="22"></ellipse> <text text-anchor="middle" x="1085" y="-785.8" font-family="Times,serif" font-size="14.00">call preprocess_normal</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_preprocess_normal --> <g id="edge5" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_preprocess_normal
+</title>
+<path fill="none" stroke="black" d="M1180.24,-847.84C1164.52,-838.46 1144.76,-826.66 1127.31,-816.25"></path> <polygon fill="black" stroke="black" points="1128.81,-813.07 1118.43,-810.95 1125.23,-819.08 1128.81,-813.07"></polygon> </g> <!-- CALL_vcf_to_sitelist_insertions --> <g id="node10" class="node">
+<title>
+CALL_vcf_to_sitelist_insertions
+</title>
+<ellipse fill="none" stroke="black" cx="944" cy="-478" rx="124.47" ry="18"></ellipse> <text text-anchor="middle" x="944" y="-473.8" font-family="Times,serif" font-size="14.00">call vcf_to_sitelist_insertions</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_vcf_to_sitelist_insertions --> <g id="edge55" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_vcf_to_sitelist_insertions
+</title>
+<path fill="none" stroke="black" d="M1310.15,-852.14C1335.99,-844.31 1361.63,-831.84 1380,-812 1411.28,-778.22 1403,-757.04 1403,-711 1403,-711 1403,-711 1403,-633 1403,-620.29 1390.83,-622.66 1380,-616 1312.61,-574.56 1295.72,-561.97 1221,-536 1186.3,-523.94 1097.52,-506.5 1029.74,-494.1"></path> <polygon fill="black" stroke="black" points="1030.37,-490.65 1019.9,-492.3 1029.11,-497.54 1030.37,-490.65"></polygon> </g> <!-- CALL_bam_readcount_insertions --> <g id="node11" class="node">
+<title>
+CALL_bam_readcount_insertions
+</title>
+<ellipse fill="none" stroke="black" cx="1006" cy="-402" rx="129.09" ry="18"></ellipse> <text text-anchor="middle" x="1006" y="-397.8" font-family="Times,serif" font-size="14.00">call bam_readcount_insertions</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_bam_readcount_insertions --> <g id="edge35" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_bam_readcount_insertions
+</title>
+<path fill="none" stroke="black" d="M1305.7,-851.16C1353.91,-842.31 1405.42,-829.23 1422,-812 1453.78,-778.96 1443,-756.85 1443,-711 1443,-711 1443,-711 1443,-633 1443,-588.89 1450.95,-569.28 1422,-536 1391.54,-500.99 1358.01,-531.56 1324,-500 1308.25,-485.39 1320.97,-469.17 1304,-456 1288.33,-443.83 1187.41,-427.57 1107.3,-416.29"></path> <polygon fill="black" stroke="black" points="1107.53,-412.78 1097.14,-414.87 1106.56,-419.72 1107.53,-412.78"></polygon> </g> <!-- CALL_rnaseq_variant --> <g id="node12" class="node">
+<title>
+CALL_rnaseq_variant
+</title>
+<ellipse fill="none" stroke="black" cx="384" cy="-710" rx="84.45" ry="18"></ellipse> <ellipse fill="none" stroke="black" cx="384" cy="-710" rx="88.46" ry="22"></ellipse> <text text-anchor="middle" x="384" y="-705.8" font-family="Times,serif" font-size="14.00">call rnaseq_variant</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_rnaseq_variant --> <g id="edge7" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_rnaseq_variant
+</title>
+<path fill="none" stroke="black" d="M1071.33,-860.04C876.39,-852.24 537.73,-835.53 486,-812 451.71,-796.4 422.34,-764.01 404.05,-740.09"></path> <polygon fill="black" stroke="black" points="406.83,-737.96 398.05,-732.03 401.21,-742.14 406.83,-737.96"></polygon> </g> <!-- CALL_allelecount_normal --> <g id="node13" class="node">
+<title>
+CALL_allelecount_normal
+</title>
+<ellipse fill="none" stroke="black" cx="1242" cy="-634" rx="101.87" ry="18"></ellipse> <text text-anchor="middle" x="1242" y="-629.8" font-family="Times,serif" font-size="14.00">call allelecount_normal</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_allelecount_normal --> <g id="edge8" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_allelecount_normal
+</title>
+<path fill="none" stroke="black" d="M1222.09,-847.89C1228.85,-837.99 1236.41,-824.94 1240,-812 1254.28,-760.47 1250.07,-697.22 1245.91,-661.99"></path> <polygon fill="black" stroke="black" points="1249.37,-661.47 1244.64,-651.99 1242.43,-662.36 1249.37,-661.47"></polygon> </g> <!-- CALL_somatic_coding_change --> <g id="node14" class="node">
+<title>
+CALL_somatic_coding_change
+</title>
+<ellipse fill="none" stroke="black" cx="1091" cy="-558" rx="120.92" ry="18"></ellipse> <text text-anchor="middle" x="1091" y="-553.8" font-family="Times,serif" font-size="14.00">call somatic_coding_change</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_somatic_coding_change --> <g id="edge59" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_somatic_coding_change
+</title>
+<path fill="none" stroke="black" d="M1309.35,-851.94C1332.2,-844.05 1353.88,-831.59 1368,-812 1393.47,-776.67 1395.52,-649.76 1368,-616 1347.27,-590.57 1272.7,-576.16 1206.15,-568.19"></path> <polygon fill="black" stroke="black" points="1206.3,-564.68 1195.97,-567.01 1205.5,-571.64 1206.3,-564.68"></polygon> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_somatic_workflow --> <g id="edge27" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_somatic_workflow
+</title>
+<path fill="none" stroke="black" d="M1211.44,-847.84C1213.46,-827.29 1213.96,-792.58 1199,-768 1190.84,-754.59 1178.18,-743.71 1165.03,-735.19"></path> <polygon fill="black" stroke="black" points="1166.72,-732.13 1156.35,-729.94 1163.09,-738.11 1166.72,-732.13"></polygon> </g> <!-- CALL_filter_vcf --> <g id="node17" class="node">
+<title>
+CALL_filter_vcf
+</title>
+<ellipse fill="none" stroke="black" cx="1059" cy="-634" rx="63.13" ry="18"></ellipse> <text text-anchor="middle" x="1059" y="-629.8" font-family="Times,serif" font-size="14.00">call filter_vcf</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_filter_vcf --> <g id="edge12" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_filter_vcf
+</title>
+<path fill="none" stroke="black" d="M1213.36,-847.76C1222.89,-808.35 1243.34,-713.1 1225,-688 1218.16,-678.64 1160.02,-661.49 1114.45,-649.24"></path> <polygon fill="black" stroke="black" points="1115.21,-645.82 1104.65,-646.62 1113.41,-652.58 1115.21,-645.82"></polygon> </g> <!-- CALL_allelecount_tumour_rna --> <g id="node18" class="node">
+<title>
+CALL_allelecount_tumour_rna
+</title>
+<ellipse fill="none" stroke="black" cx="516" cy="-634" rx="119.77" ry="18"></ellipse> <text text-anchor="middle" x="516" y="-629.8" font-family="Times,serif" font-size="14.00">call allelecount_tumour_rna</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_allelecount_tumour_rna --> <g id="edge14" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_allelecount_tumour_rna
+</title>
+<path fill="none" stroke="black" d="M1059.92,-862.57C924.36,-858.17 735.75,-845.93 670,-812 603.48,-777.67 553.11,-701.42 529.98,-661.12"></path> <polygon fill="black" stroke="black" points="532.89,-659.17 524.94,-652.17 526.79,-662.6 532.89,-659.17"></polygon> </g> <!-- CALL_vcf_to_sitelist_deletions --> <g id="node23" class="node">
+<title>
+CALL_vcf_to_sitelist_deletions
+</title>
+<ellipse fill="none" stroke="black" cx="1455" cy="-478" rx="121.6" ry="18"></ellipse> <text text-anchor="middle" x="1455" y="-473.8" font-family="Times,serif" font-size="14.00">call vcf_to_sitelist_deletions</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_vcf_to_sitelist_deletions --> <g id="edge47" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_vcf_to_sitelist_deletions
+</title>
+<path fill="none" stroke="black" d="M1315.56,-853.28C1370.41,-845 1429.57,-831.79 1448,-812 1478.93,-778.8 1463,-756.38 1463,-711 1463,-711 1463,-711 1463,-633 1463,-588.65 1459.65,-537.21 1457.29,-506.43"></path> <polygon fill="black" stroke="black" points="1460.74,-505.77 1456.47,-496.08 1453.77,-506.32 1460.74,-505.77"></polygon> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_allelecount_tumour --> <g id="edge19" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_allelecount_tumour
+</title>
+<path fill="none" stroke="black" d="M1094.38,-855.08C1028.1,-847.14 952.99,-833.67 928,-812 912.39,-798.46 928.44,-781.73 913,-768 855.93,-717.27 793.01,-791.38 745,-732 732.71,-716.79 736.23,-705.48 745,-688 751.38,-675.28 762.43,-664.83 773.93,-656.67"></path> <polygon fill="black" stroke="black" points="775.9,-659.56 782.33,-651.13 772.05,-653.71 775.9,-659.56"></polygon> </g> <!-- CALL_germline_workflow --> <g id="node25" class="node">
+<title>
+CALL_germline_workflow
+</title>
+<ellipse fill="none" stroke="black" cx="862" cy="-710" rx="104.17" ry="18"></ellipse> <ellipse fill="none" stroke="black" cx="862" cy="-710" rx="108.18" ry="22"></ellipse> <text text-anchor="middle" x="862" y="-705.8" font-family="Times,serif" font-size="14.00">call germline_workflow</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_germline_workflow --> <g id="edge48" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_germline_workflow
+</title>
+<path fill="none" stroke="black" d="M1099.1,-854.06C1057.08,-846.48 1009.93,-833.67 971,-812 947.11,-798.7 947.92,-786.73 928,-768 917.35,-757.99 905.34,-747.42 894.52,-738.13"></path> <polygon fill="black" stroke="black" points="896.77,-735.45 886.88,-731.63 892.23,-740.78 896.77,-735.45"></polygon> </g> <!-- CALL_germline_coding_change --> <g id="node26" class="node">
+<title>
+CALL_germline_coding_change
+</title>
+<ellipse fill="none" stroke="black" cx="787" cy="-558" rx="124.99" ry="18"></ellipse> <text text-anchor="middle" x="787" y="-553.8" font-family="Times,serif" font-size="14.00">call germline_coding_change</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_germline_coding_change --> <g id="edge30" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_germline_coding_change
+</title>
+<path fill="none" stroke="black" d="M1224.39,-847.88C1268.23,-798.16 1388.42,-654.83 1353,-616 1323.52,-583.69 1004.49,-584.62 961,-580 937.3,-577.48 911.82,-574.54 887.87,-571.67"></path> <polygon fill="black" stroke="black" points="888.05,-568.17 877.7,-570.44 887.21,-575.11 888.05,-568.17"></polygon> </g> <!-- CALL_merge_germline_somatic_vcf --> <g id="node27" class="node">
+<title>
+CALL_merge_germline_somatic_vcf
+</title>
+<ellipse fill="none" stroke="black" cx="559" cy="-478" rx="142.89" ry="18"></ellipse> <text text-anchor="middle" x="559" y="-473.8" font-family="Times,serif" font-size="14.00">call merge_germline_somatic_vcf</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_merge_germline_somatic_vcf --> <g id="edge87" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_merge_germline_somatic_vcf
+</title>
+<path fill="none" stroke="black" d="M1053.02,-864.14C901.16,-861.03 682.52,-849.82 607,-812 540.86,-778.88 557.88,-728.52 496,-688 453.32,-660.05 416.89,-693.35 387,-652 342.48,-590.41 444.86,-530.17 510.09,-499.65"></path> <polygon fill="black" stroke="black" points="511.79,-502.71 519.42,-495.36 508.87,-496.35 511.79,-502.71"></polygon> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_phaser --> <g id="edge68" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_phaser
+</title>
+<path fill="none" stroke="black" d="M1048.49,-865.08C805.94,-863.76 358.01,-855.28 204,-812 113.06,-786.45 17,-805.46 17,-711 17,-711 17,-711 17,-477 17,-399.27 271.62,-354.78 389.45,-338.35"></path> <polygon fill="black" stroke="black" points="389.97,-341.81 399.4,-336.98 389.01,-334.88 389.97,-341.81"></polygon> </g> <!-- CALL_rnaseq_quant --> <g id="node29" class="node">
+<title>
+CALL_rnaseq_quant
+</title>
+<ellipse fill="none" stroke="black" cx="1698" cy="-478" rx="78.76" ry="18"></ellipse> <ellipse fill="none" stroke="black" cx="1698" cy="-478" rx="82.75" ry="22"></ellipse> <text text-anchor="middle" x="1698" y="-473.8" font-family="Times,serif" font-size="14.00">call rnaseq_quant</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_rnaseq_quant --> <g id="edge50" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_rnaseq_quant
+</title>
+<path fill="none" stroke="black" d="M1344,-859.53C1440.42,-853.27 1560.03,-839.99 1601,-812 1643.38,-783.04 1657,-762.33 1657,-711 1657,-711 1657,-711 1657,-633 1657,-589 1672.82,-540.24 1684.81,-509.61"></path> <polygon fill="black" stroke="black" points="1688.21,-510.54 1688.7,-499.95 1681.71,-507.92 1688.21,-510.54"></polygon> </g> <!-- CALL_vcf_to_sitelist_snvs --> <g id="node32" class="node">
+<title>
+CALL_vcf_to_sitelist_snvs
+</title>
+<ellipse fill="none" stroke="black" cx="1191" cy="-478" rx="104.21" ry="18"></ellipse> <text text-anchor="middle" x="1191" y="-473.8" font-family="Times,serif" font-size="14.00">call vcf_to_sitelist_snvs</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_vcf_to_sitelist_snvs --> <g id="edge52" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_vcf_to_sitelist_snvs
+</title>
+<path fill="none" stroke="black" d="M1301.93,-850.34C1346.46,-841.38 1393.29,-828.47 1408,-812 1438.23,-778.15 1423,-756.38 1423,-711 1423,-711 1423,-711 1423,-633 1423,-589.38 1437.21,-568.4 1408,-536 1398.15,-525.08 1324.41,-507.21 1265.59,-494.39"></path> <polygon fill="black" stroke="black" points="1266.05,-490.91 1255.54,-492.21 1264.58,-497.75 1266.05,-490.91"></polygon> </g> <!-- CALL_hlatyping_normal --> <g id="node33" class="node">
+<title>
+CALL_hlatyping_normal
+</title>
+<ellipse fill="none" stroke="black" cx="1919" cy="-478" rx="96.1" ry="18"></ellipse> <ellipse fill="none" stroke="black" cx="1919" cy="-478" rx="100.1" ry="22"></ellipse> <text text-anchor="middle" x="1919" y="-473.8" font-family="Times,serif" font-size="14.00">call hlatyping_normal</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_hlatyping_normal --> <g id="edge64" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_hlatyping_normal
+</title>
+<path fill="none" stroke="black" d="M1343.16,-859.32C1506.82,-851.43 1766.55,-835.43 1805,-812 1850.38,-784.34 1869,-764.14 1869,-711 1869,-711 1869,-711 1869,-633 1869,-588.36 1888.24,-539.84 1902.85,-509.43"></path> <polygon fill="black" stroke="black" points="1906.11,-510.74 1907.4,-500.22 1899.83,-507.64 1906.11,-510.74"></polygon> </g> <!-- CALL_rnaseq_variant_depth --> <g id="node34" class="node">
+<title>
+CALL_rnaseq_variant_depth
+</title>
+<ellipse fill="none" stroke="black" cx="187" cy="-478" rx="110.53" ry="18"></ellipse> <text text-anchor="middle" x="187" y="-473.8" font-family="Times,serif" font-size="14.00">call rnaseq_variant_depth</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_rnaseq_variant_depth --> <g id="edge66" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_rnaseq_variant_depth
+</title>
+<path fill="none" stroke="black" d="M1058.53,-862.86C865.01,-858.73 540.23,-846.7 426,-812 349.45,-788.75 277,-791 277,-711 277,-711 277,-711 277,-633 277,-589.38 284.32,-573.48 262,-536 253.62,-521.94 240.34,-510.16 227.25,-501.03"></path> <polygon fill="black" stroke="black" points="229.02,-498 218.74,-495.41 225.16,-503.84 229.02,-498"></polygon> </g> <!-- CALL_bam_readcount_deletions --> <g id="node35" class="node">
+<title>
+CALL_bam_readcount_deletions
+</title>
+<ellipse fill="none" stroke="black" cx="1536" cy="-402" rx="126.72" ry="18"></ellipse> <text text-anchor="middle" x="1536" y="-397.8" font-family="Times,serif" font-size="14.00">call bam_readcount_deletions</text> </g> <!-- SCATTER_0_VARIABLE_sample&#45;&gt;CALL_bam_readcount_deletions --> <g id="edge88" class="edge">
+<title>
+SCATTER_0_VARIABLE_sample-&gt;CALL_bam_readcount_deletions
+</title>
+<path fill="none" stroke="black" d="M1335.06,-857.51C1508.63,-843.69 1800,-806.29 1800,-711 1800,-711 1800,-711 1800,-557 1800,-511.89 1820.14,-489.56 1790,-456 1770.9,-434.74 1708.31,-421.53 1650.05,-413.62"></path> <polygon fill="black" stroke="black" points="1650.36,-410.13 1639.99,-412.3 1649.45,-417.07 1650.36,-410.13"></polygon> </g> <!-- CALL_preprocess_normal&#45;&gt;CALL_allelecount_normal --> <g id="edge43" class="edge">
+<title>
+CALL_preprocess_normal-&gt;CALL_allelecount_normal
+</title>
+<path fill="none" stroke="black" d="M1158.52,-774.3C1183.06,-765.85 1208.36,-752.63 1225,-732 1240.8,-712.42 1244.05,-683.3 1243.96,-662.08"></path> <polygon fill="black" stroke="black" points="1247.46,-661.98 1243.67,-652.08 1240.46,-662.18 1247.46,-661.98"></polygon> </g> <!-- CALL_preprocess_normal&#45;&gt;CALL_igv_snapshot --> <g id="edge57" class="edge">
+<title>
+CALL_preprocess_normal-&gt;CALL_igv_snapshot
+</title>
+<path fill="none" stroke="black" d="M1045.72,-769.57C1029.57,-760.03 1011.71,-747.29 999,-732 993.16,-724.97 939.18,-588.57 936,-580 928.8,-560.63 936.57,-549.58 921,-536 857.87,-480.94 804.02,-548.88 736,-500 717.74,-486.87 727.92,-470.82 711,-456 678.9,-427.89 651.26,-451.05 622,-420 593.37,-389.62 592,-372.74 592,-331 592,-331 592,-331 592,-257 592,-217 592,-170.65 592,-142.08"></path> <polygon fill="black" stroke="black" points="595.5,-142.05 592,-132.05 588.5,-142.05 595.5,-142.05"></polygon> </g> <!-- CALL_preprocess_normal&#45;&gt;CALL_somatic_workflow --> <g id="edge78" class="edge">
+<title>
+CALL_preprocess_normal-&gt;CALL_somatic_workflow
+</title>
+<path fill="none" stroke="black" d="M1092.38,-767.69C1095.17,-759.62 1098.4,-750.28 1101.43,-741.54"></path> <polygon fill="black" stroke="black" points="1104.76,-742.61 1104.72,-732.02 1098.15,-740.32 1104.76,-742.61"></polygon> </g> <!-- CALL_preprocess_normal&#45;&gt;CALL_germline_workflow --> <g id="edge53" class="edge">
+<title>
+CALL_preprocess_normal-&gt;CALL_germline_workflow
+</title>
+<path fill="none" stroke="black" d="M1033,-770.81C1000.41,-759.41 958.24,-744.66 923.93,-732.66"></path> <polygon fill="black" stroke="black" points="925.07,-729.35 914.47,-729.35 922.75,-735.96 925.07,-729.35"></polygon> </g> <!-- CALL_vcf_to_sitelist_insertions&#45;&gt;CALL_calc_rna_fraction --> <g id="edge25" class="edge">
+<title>
+CALL_vcf_to_sitelist_insertions-&gt;CALL_calc_rna_fraction
+</title>
+<path fill="none" stroke="black" d="M900.57,-461C882.46,-451.93 863.29,-438.59 853,-420 845.25,-406 843.01,-396.5 853,-384 870.81,-361.7 936.59,-348.09 993.89,-340.25"></path> <polygon fill="black" stroke="black" points="994.65,-343.68 1004.11,-338.9 993.74,-336.74 994.65,-343.68"></polygon> </g> <!-- CALL_vcf_to_sitelist_insertions&#45;&gt;CALL_bam_readcount_insertions --> <g id="edge6" class="edge">
+<title>
+CALL_vcf_to_sitelist_insertions-&gt;CALL_bam_readcount_insertions
+</title>
+<path fill="none" stroke="black" d="M958.38,-459.84C966.36,-450.31 976.43,-438.29 985.25,-427.76"></path> <polygon fill="black" stroke="black" points="987.96,-429.98 991.7,-420.07 982.59,-425.49 987.96,-429.98"></polygon> </g> <!-- CALL_bam_readcount_insertions&#45;&gt;CALL_calc_rna_fraction --> <g id="edge22" class="edge">
+<title>
+CALL_bam_readcount_insertions-&gt;CALL_calc_rna_fraction
+</title>
+<path fill="none" stroke="black" d="M1025.61,-384.05C1035.86,-375.2 1048.56,-364.22 1059.75,-354.55"></path> <polygon fill="black" stroke="black" points="1062.3,-356.98 1067.57,-347.79 1057.72,-351.68 1062.3,-356.98"></polygon> </g> <!-- CALL_rnaseq_variant&#45;&gt;CALL_igv_snapshot --> <g id="edge65" class="edge">
+<title>
+CALL_rnaseq_variant-&gt;CALL_igv_snapshot
+</title>
+<path fill="none" stroke="black" d="M363.02,-688.52C353.74,-678.35 343.48,-665.39 337,-652 318.58,-613.94 317,-601.28 317,-559 317,-559 317,-559 317,-257 317,-214.5 319.68,-195.6 352,-168 376.13,-147.4 453.22,-132.84 513.6,-124.27"></path> <polygon fill="black" stroke="black" points="514.09,-127.73 523.51,-122.89 513.13,-120.8 514.09,-127.73"></polygon> </g> <!-- CALL_rnaseq_variant&#45;&gt;CALL_allelecount_tumour_rna --> <g id="edge74" class="edge">
+<title>
+CALL_rnaseq_variant-&gt;CALL_allelecount_tumour_rna
+</title>
+<path fill="none" stroke="black" d="M418.68,-689.56C436.8,-679.4 459.02,-666.95 477.65,-656.5"></path> <polygon fill="black" stroke="black" points="479.46,-659.5 486.47,-651.56 476.03,-653.39 479.46,-659.5"></polygon> </g> <!-- CALL_rnaseq_variant&#45;&gt;CALL_phaser --> <g id="edge58" class="edge">
+<title>
+CALL_rnaseq_variant-&gt;CALL_phaser
+</title>
+<path fill="none" stroke="black" d="M369.98,-688.19C363.56,-677.74 356.41,-664.64 352,-652 338.21,-612.47 337,-600.87 337,-559 337,-559 337,-559 337,-477 337,-433.57 340.66,-418.53 367,-384 377.8,-369.84 393.55,-358.32 408.29,-349.68"></path> <polygon fill="black" stroke="black" points="410.25,-352.59 417.29,-344.67 406.85,-346.48 410.25,-352.59"></polygon> </g> <!-- CALL_rnaseq_variant&#45;&gt;CALL_rnaseq_variant_depth --> <g id="edge62" class="edge">
+<title>
+CALL_rnaseq_variant-&gt;CALL_rnaseq_variant_depth
+</title>
+<path fill="none" stroke="black" d="M350.53,-689.39C336.74,-679.74 321.74,-666.96 312,-652 282.95,-607.37 313.88,-578.66 282,-536 270.44,-520.53 253.33,-508.43 236.81,-499.43"></path> <polygon fill="black" stroke="black" points="238.22,-496.22 227.73,-494.75 235.02,-502.44 238.22,-496.22"></polygon> </g> <!-- CALL_allelecount_normal&#45;&gt;CALL_run_ascat --> <g id="edge72" class="edge">
+<title>
+CALL_allelecount_normal-&gt;CALL_run_ascat
+</title>
+<path fill="none" stroke="black" d="M1170.16,-621.17C1157.15,-619.27 1143.69,-617.45 1131,-616 919.33,-591.86 862.69,-617.65 653,-580 645.51,-578.66 637.69,-576.85 630.06,-574.86"></path> <polygon fill="black" stroke="black" points="630.76,-571.42 620.19,-572.16 628.92,-578.17 630.76,-571.42"></polygon> </g> <!-- CALL_somatic_coding_change&#45;&gt;CALL_vcf_to_sitelist_insertions --> <g id="edge9" class="edge">
+<title>
+CALL_somatic_coding_change-&gt;CALL_vcf_to_sitelist_insertions
+</title>
+<path fill="none" stroke="black" d="M1059.83,-540.46C1037.8,-528.77 1008.09,-513.01 984.27,-500.37"></path> <polygon fill="black" stroke="black" points="985.6,-497.11 975.13,-495.52 982.32,-503.3 985.6,-497.11"></polygon> </g> <!-- CALL_merge_germline_somatic_fa --> <g id="node19" class="node">
+<title>
+CALL_merge_germline_somatic_fa
+</title>
+<ellipse fill="none" stroke="black" cx="749" cy="-330" rx="137.73" ry="18"></ellipse> <text text-anchor="middle" x="749" y="-325.8" font-family="Times,serif" font-size="14.00">call merge_germline_somatic_fa</text> </g> <!-- CALL_somatic_coding_change&#45;&gt;CALL_merge_germline_somatic_fa --> <g id="edge73" class="edge">
+<title>
+CALL_somatic_coding_change-&gt;CALL_merge_germline_somatic_fa
+</title>
+<path fill="none" stroke="black" d="M1012.58,-544.27C927.67,-530.12 803.25,-508.19 796,-500 761.75,-461.3 805.8,-432.52 788,-384 784.34,-374.03 778.19,-364.3 771.85,-355.97"></path> <polygon fill="black" stroke="black" points="774.53,-353.71 765.52,-348.13 769.08,-358.11 774.53,-353.71"></polygon> </g> <!-- CALL_somatic_coding_change&#45;&gt;CALL_vcf_to_sitelist_deletions --> <g id="edge18" class="edge">
+<title>
+CALL_somatic_coding_change-&gt;CALL_vcf_to_sitelist_deletions
+</title>
+<path fill="none" stroke="black" d="M1156.92,-542.87C1219.47,-529.47 1313.42,-509.34 1379.08,-495.27"></path> <polygon fill="black" stroke="black" points="1379.91,-498.67 1388.96,-493.15 1378.45,-491.82 1379.91,-498.67"></polygon> </g> <!-- CALL_somatic_coding_change&#45;&gt;CALL_merge_germline_somatic_vcf --> <g id="edge76" class="edge">
+<title>
+CALL_somatic_coding_change-&gt;CALL_merge_germline_somatic_vcf
+</title>
+<path fill="none" stroke="black" d="M1008.17,-544.86C913.63,-530.99 759.08,-508.33 658.19,-493.54"></path> <polygon fill="black" stroke="black" points="658.7,-490.08 648.3,-492.09 657.69,-497.01 658.7,-490.08"></polygon> </g> <!-- CALL_somatic_coding_change&#45;&gt;CALL_make_table_data --> <g id="edge39" class="edge">
+<title>
+CALL_somatic_coding_change-&gt;CALL_make_table_data
+</title>
+<path fill="none" stroke="black" d="M1015.02,-543.97C934.36,-529.77 817.54,-508.01 811,-500 777.24,-458.67 807.84,-425 842,-384 860.46,-361.84 881.61,-373 896,-348 919.96,-306.39 916.31,-248.3 911.29,-214.47"></path> <polygon fill="black" stroke="black" points="914.71,-213.7 909.64,-204.39 907.8,-214.82 914.71,-213.7"></polygon> </g> <!-- CALL_somatic_coding_change&#45;&gt;CALL_vcf_to_sitelist_snvs --> <g id="edge42" class="edge">
+<title>
+CALL_somatic_coding_change-&gt;CALL_vcf_to_sitelist_snvs
+</title>
+<path fill="none" stroke="black" d="M1112.7,-540.08C1126.95,-528.96 1145.77,-514.28 1161.39,-502.1"></path> <polygon fill="black" stroke="black" points="1163.95,-504.53 1169.69,-495.62 1159.65,-499.01 1163.95,-504.53"></polygon> </g> <!-- CALL_somatic_coding_change&#45;&gt;CALL_rnaseq_variant_depth --> <g id="edge79" class="edge">
+<title>
+CALL_somatic_coding_change-&gt;CALL_rnaseq_variant_depth
+</title>
+<path fill="none" stroke="black" d="M1004.18,-545.38C977.52,-542.05 948.08,-538.62 921,-536 693.06,-513.95 635.22,-518.88 407,-500 368.29,-496.8 325.79,-492.84 288.56,-489.23"></path> <polygon fill="black" stroke="black" points="288.5,-485.71 278.2,-488.23 287.82,-492.68 288.5,-485.71"></polygon> </g> <!-- CALL_somatic_workflow&#45;&gt;CALL_adjusted_cn --> <g id="edge13" class="edge">
+<title>
+CALL_somatic_workflow-&gt;CALL_adjusted_cn
+</title>
+<path fill="none" stroke="black" d="M1052.15,-691.89C1029.47,-682.99 1004.84,-670.08 987,-652 967.22,-631.95 957.71,-553.93 936,-536 880.47,-490.14 838.45,-539.16 778,-500 763.6,-490.67 737.99,-453.98 721.25,-428.5"></path> <polygon fill="black" stroke="black" points="724.12,-426.49 715.74,-420.02 718.26,-430.31 724.12,-426.49"></polygon> </g> <!-- CALL_somatic_workflow&#45;&gt;CALL_filter_vcf --> <g id="edge11" class="edge">
+<title>
+CALL_somatic_workflow-&gt;CALL_filter_vcf
+</title>
+<path fill="none" stroke="black" d="M1096.95,-687.99C1090.74,-679.31 1083.48,-669.18 1076.99,-660.12"></path> <polygon fill="black" stroke="black" points="1079.72,-657.92 1071.06,-651.83 1074.03,-662 1079.72,-657.92"></polygon> </g> <!-- CALL_filter_vcf&#45;&gt;CALL_somatic_coding_change --> <g id="edge71" class="edge">
+<title>
+CALL_filter_vcf-&gt;CALL_somatic_coding_change
+</title>
+<path fill="none" stroke="black" d="M1066.42,-615.84C1070.34,-606.78 1075.23,-595.47 1079.62,-585.32"></path> <polygon fill="black" stroke="black" points="1082.86,-586.64 1083.62,-576.07 1076.44,-583.86 1082.86,-586.64"></polygon> </g> <!-- CALL_self_match --> <g id="node20" class="node">
+<title>
+CALL_self_match
+</title>
+<ellipse fill="none" stroke="black" cx="906" cy="-114" rx="69.51" ry="18"></ellipse> <text text-anchor="middle" x="906" y="-109.8" font-family="Times,serif" font-size="14.00">call self_match</text> </g> <!-- CALL_merge_germline_somatic_fa&#45;&gt;CALL_self_match --> <g id="edge15" class="edge">
+<title>
+CALL_merge_germline_somatic_fa-&gt;CALL_self_match
+</title>
+<path fill="none" stroke="black" d="M734.54,-311.91C721.02,-293.72 704.5,-264.27 716,-240 742.34,-184.42 806.97,-150.2 853.54,-131.92"></path> <polygon fill="black" stroke="black" points="854.79,-135.19 862.89,-128.37 852.3,-128.65 854.79,-135.19"></polygon> </g> <!-- CALL_fix_haplotype --> <g id="node21" class="node">
+<title>
+CALL_fix_haplotype
+</title>
+<ellipse fill="none" stroke="black" cx="806" cy="-258" rx="81.05" ry="18"></ellipse> <text text-anchor="middle" x="806" y="-253.8" font-family="Times,serif" font-size="14.00">call fix_haplotype</text> </g> <!-- CALL_merge_germline_somatic_fa&#45;&gt;CALL_fix_haplotype --> <g id="edge16" class="edge">
+<title>
+CALL_merge_germline_somatic_fa-&gt;CALL_fix_haplotype
+</title>
+<path fill="none" stroke="black" d="M762.8,-312.05C769.73,-303.54 778.26,-293.07 785.9,-283.68"></path> <polygon fill="black" stroke="black" points="788.73,-285.75 792.33,-275.79 783.3,-281.33 788.73,-285.75"></polygon> </g> <!-- CALL_prediction --> <g id="node22" class="node">
+<title>
+CALL_prediction
+</title>
+<ellipse fill="none" stroke="black" cx="1437" cy="-38" rx="66.58" ry="18"></ellipse> <ellipse fill="none" stroke="black" cx="1437" cy="-38" rx="70.58" ry="22"></ellipse> <text text-anchor="middle" x="1437" y="-33.8" font-family="Times,serif" font-size="14.00">call prediction</text> </g> <!-- CALL_self_match&#45;&gt;CALL_prediction --> <g id="edge17" class="edge">
+<title>
+CALL_self_match-&gt;CALL_prediction
+</title>
+<path fill="none" stroke="black" d="M965.88,-104.66C1063.76,-91.02 1257.69,-63.99 1363.66,-49.22"></path> <polygon fill="black" stroke="black" points="1364.22,-52.68 1373.64,-47.83 1363.25,-45.74 1364.22,-52.68"></polygon> </g> <!-- CALL_fix_haplotype&#45;&gt;CALL_make_table_data --> <g id="edge40" class="edge">
+<title>
+CALL_fix_haplotype-&gt;CALL_make_table_data
+</title>
+<path fill="none" stroke="black" d="M829.45,-240.59C842.76,-231.26 859.63,-219.46 874.13,-209.31"></path> <polygon fill="black" stroke="black" points="876.17,-212.15 882.35,-203.55 872.16,-206.42 876.17,-212.15"></polygon> </g> <!-- CALL_vcf_to_sitelist_deletions&#45;&gt;CALL_calc_rna_fraction --> <g id="edge51" class="edge">
+<title>
+CALL_vcf_to_sitelist_deletions-&gt;CALL_calc_rna_fraction
+</title>
+<path fill="none" stroke="black" d="M1373.3,-464.61C1293.26,-451.89 1180.89,-432.28 1164,-420 1149.19,-409.24 1155.29,-398.41 1144,-384 1135.72,-373.42 1125.27,-363.07 1115.59,-354.36"></path> <polygon fill="black" stroke="black" points="1117.88,-351.71 1108.05,-347.75 1113.26,-356.97 1117.88,-351.71"></polygon> </g> <!-- CALL_vcf_to_sitelist_deletions&#45;&gt;CALL_bam_readcount_deletions --> <g id="edge84" class="edge">
+<title>
+CALL_vcf_to_sitelist_deletions-&gt;CALL_bam_readcount_deletions
+</title>
+<path fill="none" stroke="black" d="M1473.79,-459.84C1484.6,-449.96 1498.34,-437.41 1510.16,-426.61"></path> <polygon fill="black" stroke="black" points="1512.57,-429.14 1517.59,-419.81 1507.85,-423.98 1512.57,-429.14"></polygon> </g> <!-- CALL_allelecount_tumour&#45;&gt;CALL_run_ascat --> <g id="edge77" class="edge">
+<title>
+CALL_allelecount_tumour-&gt;CALL_run_ascat
+</title>
+<path fill="none" stroke="black" d="M768.24,-618.02C728.42,-605.54 671.83,-587.79 631.11,-575.03"></path> <polygon fill="black" stroke="black" points="631.97,-571.63 621.38,-571.97 629.87,-578.31 631.97,-571.63"></polygon> </g> <!-- CALL_germline_workflow&#45;&gt;CALL_allelecount_normal --> <g id="edge61" class="edge">
+<title>
+CALL_germline_workflow-&gt;CALL_allelecount_normal
+</title>
+<path fill="none" stroke="black" d="M937.99,-694.2C1004.32,-681.28 1100.08,-662.64 1166.33,-649.74"></path> <polygon fill="black" stroke="black" points="1167.14,-653.14 1176.29,-647.8 1165.8,-646.27 1167.14,-653.14"></polygon> </g> <!-- CALL_germline_workflow&#45;&gt;CALL_filter_vcf --> <g id="edge82" class="edge">
+<title>
+CALL_germline_workflow-&gt;CALL_filter_vcf
+</title>
+<path fill="none" stroke="black" d="M911.46,-690.42C942.52,-678.76 982.31,-663.81 1012.74,-652.38"></path> <polygon fill="black" stroke="black" points="1014.14,-655.59 1022.27,-648.8 1011.68,-649.04 1014.14,-655.59"></polygon> </g> <!-- CALL_germline_workflow&#45;&gt;CALL_allelecount_tumour_rna --> <g id="edge28" class="edge">
+<title>
+CALL_germline_workflow-&gt;CALL_allelecount_tumour_rna
+</title>
+<path fill="none" stroke="black" d="M789.89,-693.58C731.94,-681.18 650.79,-663.83 591.87,-651.23"></path> <polygon fill="black" stroke="black" points="592.39,-647.76 581.87,-649.09 590.92,-654.6 592.39,-647.76"></polygon> </g> <!-- CALL_germline_workflow&#45;&gt;CALL_allelecount_tumour --> <g id="edge86" class="edge">
+<title>
+CALL_germline_workflow-&gt;CALL_allelecount_tumour
+</title>
+<path fill="none" stroke="black" d="M848.94,-687.99C843.74,-679.62 837.69,-669.89 832.21,-661.08"></path> <polygon fill="black" stroke="black" points="835.02,-658.96 826.76,-652.31 829.07,-662.66 835.02,-658.96"></polygon> </g> <!-- CALL_germline_workflow&#45;&gt;CALL_germline_coding_change --> <g id="edge21" class="edge">
+<title>
+CALL_germline_workflow-&gt;CALL_germline_coding_change
+</title>
+<path fill="none" stroke="black" d="M895,-688.94C907.46,-679.45 920.25,-666.9 927,-652 933.6,-637.43 935.93,-629.28 927,-616 914.18,-596.94 893.75,-584.25 872.43,-575.8"></path> <polygon fill="black" stroke="black" points="873.51,-572.47 862.92,-572.32 871.11,-579.04 873.51,-572.47"></polygon> </g> <!-- CALL_germline_coding_change&#45;&gt;CALL_merge_germline_somatic_fa --> <g id="edge34" class="edge">
+<title>
+CALL_germline_coding_change-&gt;CALL_merge_germline_somatic_fa
+</title>
+<path fill="none" stroke="black" d="M777.92,-539.71C765.51,-517.56 741.28,-479.26 711,-456 677.16,-430.01 645.85,-455.38 622,-420 613.06,-406.73 613.13,-397.32 622,-384 632.51,-368.23 648.69,-357.15 666.03,-349.35"></path> <polygon fill="black" stroke="black" points="667.84,-352.4 675.75,-345.36 665.17,-345.92 667.84,-352.4"></polygon> </g> <!-- CALL_germline_coding_change&#45;&gt;CALL_merge_germline_somatic_vcf --> <g id="edge23" class="edge">
+<title>
+CALL_germline_coding_change-&gt;CALL_merge_germline_somatic_vcf
+</title>
+<path fill="none" stroke="black" d="M740.86,-541.22C704.63,-528.82 654.03,-511.51 615.4,-498.3"></path> <polygon fill="black" stroke="black" points="616.45,-494.95 605.85,-495.03 614.18,-501.58 616.45,-494.95"></polygon> </g> <!-- CALL_merge_germline_somatic_vcf&#45;&gt;CALL_whatshap_phase --> <g id="edge69" class="edge">
+<title>
+CALL_merge_germline_somatic_vcf-&gt;CALL_whatshap_phase
+</title>
+<path fill="none" stroke="black" d="M537.66,-459.84C525.18,-449.8 509.25,-436.99 495.68,-426.07"></path> <polygon fill="black" stroke="black" points="497.58,-423.1 487.59,-419.56 493.19,-428.56 497.58,-423.1"></polygon> </g> <!-- CALL_phaser&#45;&gt;CALL_fix_haplotype --> <g id="edge26" class="edge">
+<title>
+CALL_phaser-&gt;CALL_fix_haplotype
+</title>
+<path fill="none" stroke="black" d="M492.62,-320.28C554.11,-308.25 665.47,-286.48 737.54,-272.39"></path> <polygon fill="black" stroke="black" points="738.29,-275.81 747.44,-270.45 736.95,-268.94 738.29,-275.81"></polygon> </g> <!-- CALL_rnaseq_quant&#45;&gt;CALL_adjusted_cn --> <g id="edge45" class="edge">
+<title>
+CALL_rnaseq_quant-&gt;CALL_adjusted_cn
+</title>
+<path fill="none" stroke="black" d="M1634.85,-463.62C1618.97,-460.68 1601.91,-457.88 1586,-456 1268.7,-418.47 1186.57,-444.58 868,-420 839.2,-417.78 807.6,-414.64 779.96,-411.67"></path> <polygon fill="black" stroke="black" points="780.29,-408.19 769.97,-410.59 779.53,-415.15 780.29,-408.19"></polygon> </g> <!-- CALL_rnaseq_quant&#45;&gt;CALL_bam_readcount_snvs --> <g id="edge46" class="edge">
+<title>
+CALL_rnaseq_quant-&gt;CALL_bam_readcount_snvs
+</title>
+<path fill="none" stroke="black" d="M1636.52,-463.22C1624.75,-460.71 1612.51,-458.2 1601,-456 1522.88,-441.06 1433.53,-426.43 1369.3,-416.33"></path> <polygon fill="black" stroke="black" points="1369.64,-412.84 1359.21,-414.75 1368.55,-419.76 1369.64,-412.84"></polygon> </g> <!-- CALL_rnaseq_quant&#45;&gt;CALL_bam_readcount_insertions --> <g id="edge33" class="edge">
+<title>
+CALL_rnaseq_quant-&gt;CALL_bam_readcount_insertions
+</title>
+<path fill="none" stroke="black" d="M1634.21,-463.9C1618.5,-460.98 1601.68,-458.13 1586,-456 1399.48,-430.62 1351.37,-438.07 1164,-420 1147.85,-418.44 1130.79,-416.7 1114.08,-414.95"></path> <polygon fill="black" stroke="black" points="1114.05,-411.43 1103.73,-413.86 1113.31,-418.39 1114.05,-411.43"></polygon> </g> <!-- CALL_rnaseq_quant&#45;&gt;CALL_igv_snapshot --> <g id="edge31" class="edge">
+<title>
+CALL_rnaseq_quant-&gt;CALL_igv_snapshot
+</title>
+<path fill="none" stroke="black" d="M1698.95,-455.73C1700.13,-427.31 1702,-375.37 1702,-331 1702,-331 1702,-331 1702,-257 1702,-205.27 933.36,-141.3 675.33,-121.29"></path> <polygon fill="black" stroke="black" points="675.5,-117.79 665.26,-120.51 674.96,-124.77 675.5,-117.79"></polygon> </g> <!-- CALL_rnaseq_quant&#45;&gt;CALL_make_table_data --> <g id="edge32" class="edge">
+<title>
+CALL_rnaseq_quant-&gt;CALL_make_table_data
+</title>
+<path fill="none" stroke="black" d="M1697.88,-455.89C1696.6,-434.8 1691.28,-402.89 1672,-384 1574.86,-288.87 1169.64,-223.03 991.1,-198.1"></path> <polygon fill="black" stroke="black" points="991.35,-194.6 980.96,-196.69 990.39,-201.53 991.35,-194.6"></polygon> </g> <!-- CALL_hisatgenotype_cmp_arcashla --> <g id="node31" class="node">
+<title>
+CALL_hisatgenotype_cmp_arcashla
+</title>
+<ellipse fill="none" stroke="black" cx="1860" cy="-402" rx="138.88" ry="18"></ellipse> <text text-anchor="middle" x="1860" y="-397.8" font-family="Times,serif" font-size="14.00">call hisatgenotype_cmp_arcashla</text> </g> <!-- CALL_rnaseq_quant&#45;&gt;CALL_hisatgenotype_cmp_arcashla --> <g id="edge36" class="edge">
+<title>
+CALL_rnaseq_quant-&gt;CALL_hisatgenotype_cmp_arcashla
+</title>
+<path fill="none" stroke="black" d="M1738.04,-458.71C1761.29,-448.09 1790.64,-434.68 1814.72,-423.68"></path> <polygon fill="black" stroke="black" points="1816.36,-426.78 1824,-419.44 1813.45,-420.41 1816.36,-426.78"></polygon> </g> <!-- CALL_rnaseq_quant&#45;&gt;CALL_bam_readcount_deletions --> <g id="edge63" class="edge">
+<title>
+CALL_rnaseq_quant-&gt;CALL_bam_readcount_deletions
+</title>
+<path fill="none" stroke="black" d="M1657.96,-458.71C1634.63,-448.05 1605.15,-434.59 1581.02,-423.57"></path> <polygon fill="black" stroke="black" points="1582.27,-420.29 1571.72,-419.32 1579.37,-426.66 1582.27,-420.29"></polygon> </g> <!-- CALL_make_table_data&#45;&gt;CALL_igv_snapshot --> <g id="edge70" class="edge">
+<title>
+CALL_make_table_data-&gt;CALL_igv_snapshot
+</title>
+<path fill="none" stroke="black" d="M847.67,-172C793.22,-159.86 712.12,-141.78 655.92,-129.25"></path> <polygon fill="black" stroke="black" points="656.6,-125.82 646.08,-127.06 655.08,-132.65 656.6,-125.82"></polygon> </g> <!-- CALL_make_table_data&#45;&gt;CALL_self_match --> <g id="edge56" class="edge">
+<title>
+CALL_make_table_data-&gt;CALL_self_match
+</title>
+<path fill="none" stroke="black" d="M906,-167.7C906,-159.98 906,-150.71 906,-142.11"></path> <polygon fill="black" stroke="black" points="909.5,-142.1 906,-132.1 902.5,-142.1 909.5,-142.1"></polygon> </g> <!-- CALL_vcf_to_sitelist_snvs&#45;&gt;CALL_bam_readcount_snvs --> <g id="edge54" class="edge">
+<title>
+CALL_vcf_to_sitelist_snvs-&gt;CALL_bam_readcount_snvs
+</title>
+<path fill="none" stroke="black" d="M1211.65,-460.21C1223.98,-450.18 1239.83,-437.29 1253.36,-426.29"></path> <polygon fill="black" stroke="black" points="1255.88,-428.75 1261.43,-419.73 1251.47,-423.32 1255.88,-428.75"></polygon> </g> <!-- CALL_vcf_to_sitelist_snvs&#45;&gt;CALL_calc_rna_fraction --> <g id="edge44" class="edge">
+<title>
+CALL_vcf_to_sitelist_snvs-&gt;CALL_calc_rna_fraction
+</title>
+<path fill="none" stroke="black" d="M1122.91,-464.32C1107.8,-461.55 1091.86,-458.65 1077,-456 1030.6,-447.73 898.36,-456.04 868,-420 827.26,-371.64 914.89,-349.25 991.13,-339.09"></path> <polygon fill="black" stroke="black" points="991.84,-342.53 1001.32,-337.8 990.96,-335.59 991.84,-342.53"></polygon> </g> <!-- CALL_hlatyping_normal&#45;&gt;CALL_adjusted_cn --> <g id="edge80" class="edge">
+<title>
+CALL_hlatyping_normal-&gt;CALL_adjusted_cn
+</title>
+<path fill="none" stroke="black" d="M1844.51,-463.28C1826.71,-460.45 1807.72,-457.78 1790,-456 1381.97,-414.98 1277.04,-449.29 868,-420 839.06,-417.93 807.31,-414.81 779.58,-411.81"></path> <polygon fill="black" stroke="black" points="779.89,-408.32 769.56,-410.71 779.12,-415.28 779.89,-408.32"></polygon> </g> <!-- CALL_hlatyping_normal&#45;&gt;CALL_prediction --> <g id="edge60" class="edge">
+<title>
+CALL_hlatyping_normal-&gt;CALL_prediction
+</title>
+<path fill="none" stroke="black" d="M1961.16,-457.79C1977.73,-448.43 1995.69,-435.76 2008,-420 2033.7,-387.1 2038,-372.74 2038,-331 2038,-331 2038,-331 2038,-185 2038,-78.97 1680.33,-49.65 1516.83,-41.78"></path> <polygon fill="black" stroke="black" points="1516.98,-38.28 1506.82,-41.31 1516.65,-45.27 1516.98,-38.28"></polygon> </g> <!-- CALL_hlatyping_normal&#45;&gt;CALL_hisatgenotype_cmp_arcashla --> <g id="edge49" class="edge">
+<title>
+CALL_hlatyping_normal-&gt;CALL_hisatgenotype_cmp_arcashla
+</title>
+<path fill="none" stroke="black" d="M1902.25,-455.99C1895.36,-447.36 1887.33,-437.28 1880.13,-428.25"></path> <polygon fill="black" stroke="black" points="1882.78,-425.95 1873.8,-420.31 1877.3,-430.32 1882.78,-425.95"></polygon> </g> <!-- CALL_bam_readcount_deletions&#45;&gt;CALL_calc_rna_fraction --> <g id="edge81" class="edge">
+<title>
+CALL_bam_readcount_deletions-&gt;CALL_calc_rna_fraction
+</title>
+<path fill="none" stroke="black" d="M1454.17,-388.24C1372.91,-375.57 1249.07,-356.27 1168.07,-343.64"></path> <polygon fill="black" stroke="black" points="1168.34,-340.14 1157.92,-342.06 1167.26,-347.06 1168.34,-340.14"></polygon> </g> </g>
+</svg>
+</div>
+<p>RNA-seq variant calling</p>
+</div>
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
