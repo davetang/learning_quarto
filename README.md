@@ -1,3 +1,10 @@
+## Table of Contents
+
+- [Quarto](#quarto)
+- [Quarto CLI](#quarto-cli)
+- [Notebooks](#notebooks)
+- [Useful links](#useful-links)
+
 # Quarto
 
 Quarto is an open-source scientific and technical publishing system that
