@@ -6,11 +6,25 @@ format:
     theme: league
     mermaid:
       theme: dark
+revealjs-plugins:
+  - pointer
 ---
 
 ## Quarto
 
 Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+## Pointer
+
+In the root directory of the presentation install the [pointer extension](https://github.com/quarto-ext/pointer):
+
+```
+quarto add quarto-ext/pointer
+```
+
+This will install the extension under the `_extensions` subdirectory. If you're using version control, you will want to check in this directory.
+
+Press `q` (default) to activate the pointer.
 
 ## Bullets
 

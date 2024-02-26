@@ -99,6 +99,7 @@
   <link href="sandbox_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="sandbox_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="sandbox_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="sandbox_files/libs/revealjs/plugin/reveal-pointer/pointer.css" rel="stylesheet">
   <link href="sandbox_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -409,6 +410,13 @@ Dave Tang
 <h2>Quarto</h2>
 <p>Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <a href="https://quarto.org/docs/presentations/" class="uri">https://quarto.org/docs/presentations/</a>.</p>
 </section>
+<section id="pointer" class="slide level2">
+<h2>Pointer</h2>
+<p>In the root directory of the presentation install the <a href="https://github.com/quarto-ext/pointer">pointer extension</a>:</p>
+<pre><code>quarto add quarto-ext/pointer</code></pre>
+<p>This will install the extension under the <code>_extensions</code> subdirectory. If you’re using version control, you will want to check in this directory.</p>
+<p>Press <code>q</code> (default) to activate the pointer.</p>
+</section>
 <section id="bullets" class="slide level2">
 <h2>Bullets</h2>
 <p>When you click the <strong>Render</strong> button a document will be generated that includes:</p>
@@ -507,32 +515,32 @@ Dave Tang
 </section>
 <section id="code-animation" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Code animation</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a href="#cb2-1"></a><span class="co"># Fill in the spot we created for a plot</span></span>
-<span id="cb2-2" class="hljs-ln-code"><a href="#cb2-2"></a>output<span class="sc">$</span>phonePlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb2-3" class="hljs-ln-code"><a href="#cb2-3"></a>  <span class="co"># Render a barplot</span></span>
-<span id="cb2-4" class="hljs-ln-code"><a href="#cb2-4"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="code-animation-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Code animation</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a href="#cb3-1"></a><span class="co"># Fill in the spot we created for a plot</span></span>
 <span id="cb3-2" class="hljs-ln-code"><a href="#cb3-2"></a>output<span class="sc">$</span>phonePlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
 <span id="cb3-3" class="hljs-ln-code"><a href="#cb3-3"></a>  <span class="co"># Render a barplot</span></span>
-<span id="cb3-4" class="hljs-ln-code"><a href="#cb3-4"></a>  <span class="fu">barplot</span>(WorldPhones[,input<span class="sc">$</span>region]<span class="sc">*</span><span class="dv">1000</span>, </span>
-<span id="cb3-5" class="hljs-ln-code"><a href="#cb3-5"></a>          <span class="at">main=</span>input<span class="sc">$</span>region,</span>
-<span id="cb3-6" class="hljs-ln-code"><a href="#cb3-6"></a>          <span class="at">ylab=</span><span class="st">"Number of Telephones"</span>,</span>
-<span id="cb3-7" class="hljs-ln-code"><a href="#cb3-7"></a>          <span class="at">xlab=</span><span class="st">"Year"</span>)</span>
-<span id="cb3-8" class="hljs-ln-code"><a href="#cb3-8"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4" class="hljs-ln-code"><a href="#cb3-4"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="code-animation-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Code animation</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a href="#cb4-1"></a><span class="co"># Fill in the spot we created for a plot</span></span>
+<span id="cb4-2" class="hljs-ln-code"><a href="#cb4-2"></a>output<span class="sc">$</span>phonePlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb4-3" class="hljs-ln-code"><a href="#cb4-3"></a>  <span class="co"># Render a barplot</span></span>
+<span id="cb4-4" class="hljs-ln-code"><a href="#cb4-4"></a>  <span class="fu">barplot</span>(WorldPhones[,input<span class="sc">$</span>region]<span class="sc">*</span><span class="dv">1000</span>, </span>
+<span id="cb4-5" class="hljs-ln-code"><a href="#cb4-5"></a>          <span class="at">main=</span>input<span class="sc">$</span>region,</span>
+<span id="cb4-6" class="hljs-ln-code"><a href="#cb4-6"></a>          <span class="at">ylab=</span><span class="st">"Number of Telephones"</span>,</span>
+<span id="cb4-7" class="hljs-ln-code"><a href="#cb4-7"></a>          <span class="at">xlab=</span><span class="st">"Year"</span>)</span>
+<span id="cb4-8" class="hljs-ln-code"><a href="#cb4-8"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="code-animation-2" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Code animation</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Fill in the spot we created for a plot</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>output<span class="sc">$</span>phonePlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="co"># Render a barplot</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">barplot</span>(WorldPhones[,input<span class="sc">$</span>region]<span class="sc">*</span><span class="dv">1000</span>, </span>
-<span id="cb5-2"><a href="#cb5-2"></a>        <span class="at">main=</span>input<span class="sc">$</span>region,</span>
-<span id="cb5-3"><a href="#cb5-3"></a>        <span class="at">ylab=</span><span class="st">"Number of Telephones"</span>,</span>
-<span id="cb5-4"><a href="#cb5-4"></a>        <span class="at">xlab=</span><span class="st">"Year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Fill in the spot we created for a plot</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>output<span class="sc">$</span>phonePlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="co"># Render a barplot</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">barplot</span>(WorldPhones[,input<span class="sc">$</span>region]<span class="sc">*</span><span class="dv">1000</span>, </span>
+<span id="cb6-2"><a href="#cb6-2"></a>        <span class="at">main=</span>input<span class="sc">$</span>region,</span>
+<span id="cb6-3"><a href="#cb6-3"></a>        <span class="at">ylab=</span><span class="st">"Number of Telephones"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>        <span class="at">xlab=</span><span class="st">"Year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="movement-animation" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Movement animation</h2>
@@ -689,6 +697,7 @@ Dave Tang
   <script src="sandbox_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="sandbox_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="sandbox_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="sandbox_files/libs/revealjs/plugin/reveal-pointer/pointer.js"></script>
   <script src="sandbox_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -711,6 +720,7 @@ Dave Tang
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'pointer': {"key":"q","color":"red","pointerSize":16,"alwaysVisible":false},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -881,7 +891,7 @@ Dave Tang
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealPointer, QuartoSupport,
 
           RevealMath,
           RevealNotes,
