@@ -447,6 +447,48 @@ Dave Tang
 </div>
 </div>
 </section>
+<section id="gantt-diagram" class="slide level2">
+<h2>Gantt diagram</h2>
+<div class="cell" data-reveal="true">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">gantt
+    dateFormat  YYYY-MM-DD
+    title       Adding GANTT diagram functionality to mermaid
+    excludes    weekends
+    %% (`excludes` accepts specific dates in YYYY-MM-DD format, days of the week ("sunday") or "weekends", but not the word "weekdays".)
+
+    section A section
+    Completed task            :done,    des1, 2024-01-06,2024-01-08
+    Active task               :active,  des2, 2024-01-09, 3d
+    Future task               :         des3, after des2, 5d
+    Future task2              :         des4, after des3, 5d
+
+    section Critical tasks
+    Completed task in the critical line :crit, done, 2024-01-06,24h
+    Implement parser and json          :crit, done, after des1, 2d
+    Create tests for parser             :crit, active, 3d
+    Future task in critical line        :crit, 5d
+    Create tests for renderer           :2d
+    Add to mermaid                      :1d
+    Functionality added                 :milestone, 2024-01-25, 0d
+
+    section Documentation
+    Describe Gantt syntax               :active, a1, after des1, 3d
+    Add Gantt diagram to demo page      :after a1  , 20h
+    Add another diagram to demo page    :doc1, after a1  , 48h
+
+    section Last section
+    Describe Gantt syntax               :after doc1, 3d
+    Add Gantt diagram to demo page      :20h
+    Add another diagram to demo page    :48h
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="auto-animate" class="slide level2">
 <h2>Auto animate</h2>
 <p>Revealjs can automatically animate elements across slides. All you need to do is add the <code>auto-animate</code> attribute to two adjacent slides and Auto-Animate will animate all matching elements between the two.</p>
@@ -480,6 +522,17 @@ Dave Tang
 <span id="cb3-6" class="hljs-ln-code"><a href="#cb3-6"></a>          <span class="at">ylab=</span><span class="st">"Number of Telephones"</span>,</span>
 <span id="cb3-7" class="hljs-ln-code"><a href="#cb3-7"></a>          <span class="at">xlab=</span><span class="st">"Year"</span>)</span>
 <span id="cb3-8" class="hljs-ln-code"><a href="#cb3-8"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="code-animation-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Code animation</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Fill in the spot we created for a plot</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>output<span class="sc">$</span>phonePlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="co"># Render a barplot</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">barplot</span>(WorldPhones[,input<span class="sc">$</span>region]<span class="sc">*</span><span class="dv">1000</span>, </span>
+<span id="cb5-2"><a href="#cb5-2"></a>        <span class="at">main=</span>input<span class="sc">$</span>region,</span>
+<span id="cb5-3"><a href="#cb5-3"></a>        <span class="at">ylab=</span><span class="st">"Number of Telephones"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4"></a>        <span class="at">xlab=</span><span class="st">"Year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="movement-animation" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Movement animation</h2>
