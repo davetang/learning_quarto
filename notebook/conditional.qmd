@@ -13,6 +13,7 @@ format:
       df-print: paged
 params:
    hide_content: false
+   show_code: false
 ---
 
 Access parameter using `params$show_content`.
@@ -26,6 +27,19 @@ params$hide_content
 This will be hidden if `params$hide_content` is true
 
 `r if (params$hide_content) ":::"`
+
+Use `params$show_code` to control whether code is included in the output. Will be follow code snippet be shown with the output? `r params$show_code`
+
+```{r echo=params$show_code}
+20 + 22
+```
+
+The code snippet below will always be shown with the output.
+
+```{r}
+#| echo: true
+1980 + 4
+```
 
 ## Session info.
 
