@@ -1,0 +1,35 @@
+---
+title: "Conditional notebooks"
+date: '`r format(Sys.Date(), "%Y-%m-%d")`'
+date-format: "YYYY-MM-DD"
+execute:
+   echo: true
+   cache: false
+format:
+   html:
+      code-fold: true
+      code-tools: true
+      code-link: true
+      df-print: paged
+params:
+   hide_content: false
+---
+
+Access parameter using `params$show_content`.
+
+```{r}
+params$hide_content
+```
+
+`r if (params$hide_content) "::: {.content-hidden}"`
+
+This will be hidden if `params$hide_content` is true
+
+`r if (params$hide_content) ":::"`
+
+## Session info.
+
+```{r}
+#| label: session_info
+sessionInfo()
+```
