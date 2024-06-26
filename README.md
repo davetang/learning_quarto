@@ -3,6 +3,7 @@
 - [Quarto](#quarto)
 - [Quarto CLI](#quarto-cli)
 - [Notebooks](#notebooks)
+- [Tips](#tips)
 - [Useful links](#useful-links)
 
 # Quarto
@@ -167,6 +168,20 @@ Output created: hello.html
 
 [ 2023/08/15 09:26:06 ] Work complete
 0 minutes and 6 seconds elapsed.
+```
+
+# Tips
+
+[Automatically](https://github.com/quarto-dev/quarto-cli/issues/4530) fit title text using `.r-fit-text`. For example:
+
+```
+---
+format: revealjs
+---
+
+## [This is a veeeeeeeeeeeeeeeeerrrrryyyy loooooooooooooooooooooooooooonnnnngggggg title]{.r-fit-text}
+
+- Hi
 ```
 
 # Useful links
