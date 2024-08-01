@@ -192,6 +192,8 @@ version: 1.2
 
 and use `{{< var version >}}` to reference it within the document.
 
+Use [template partials](https://quarto.org/docs/journals/templates.html#including-partials) to customise your output.
+
 # Useful links
 
 * [Extensions for Quarto](https://github.com/quarto-ext#extensions-for-quarto)
