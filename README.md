@@ -184,6 +184,14 @@ format: revealjs
 - Hi
 ```
 
+Using [dynamic variables](https://quarto.org/docs/authoring/variables.html) within a document. For example, specify the following in the YAML header:
+
+```
+version: 1.2
+```
+
+and use `{{< var version >}}` to reference it within the document.
+
 # Useful links
 
 * [Extensions for Quarto](https://github.com/quarto-ext#extensions-for-quarto)
