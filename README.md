@@ -196,6 +196,7 @@ Use [template partials](https://quarto.org/docs/journals/templates.html#includin
 
 # Useful links
 
+* [Automating Quarto reports with parameters](https://posit.co/blog/parameterized-quarto/)
 * [Extensions for Quarto](https://github.com/quarto-ext#extensions-for-quarto)
 * [FAQ for R Markdown Users](https://quarto.org/docs/faq/rmarkdown.html)
 * [awesome-quarto](https://github.com/mcanouil/awesome-quarto)
