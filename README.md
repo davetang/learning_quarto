@@ -206,3 +206,4 @@ Use [template partials](https://quarto.org/docs/journals/templates.html#includin
     Quarto](https://rstudio-conf-2022.github.io/rmd-to-quarto/)
     * [I'm an R user: Quarto or R
     Markdown](https://www.jumpingrivers.com/blog/quarto-rmarkdown-comparison/)
+* [Quarto tricks](https://github.com/holtzy/quarto-tricks)
