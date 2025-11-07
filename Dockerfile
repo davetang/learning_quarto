@@ -46,4 +46,4 @@ RUN python3 -m venv /home/rstudio/venv && \
     . /home/rstudio/venv/bin/activate && \
     pip install --no-cache-dir marimo jupyter
 
-ENTRYPOINT ["quarto"]
+USER root
