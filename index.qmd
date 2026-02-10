@@ -30,9 +30,10 @@ format:
 
 | | Topic | Description |
 |---|-------|-------------|
-| 1 | [Extensions](presentation/extensions.html) | Some useful Quarto extensions |
-| 2 | [Features](presentation/features.html) | RevealJS presentation features |
-| 3 | [Sandbox](presentation/sandbox.html) | Experimental slides and testing |
+| 1 | [Clean Theme](presentation/clean_theme.html) | Minimalist academic presentation theme |
+| 2 | [Extensions](presentation/extensions.html) | Some useful Quarto extensions |
+| 3 | [Features](presentation/features.html) | RevealJS presentation features |
+| 4 | [Sandbox](presentation/sandbox.html) | Experimental slides and testing |
 
 :::
 

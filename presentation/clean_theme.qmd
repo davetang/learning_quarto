@@ -1,0 +1,267 @@
+---
+title: "Clean Theme"
+subtitle: "A minimalist and elegant presentation theme for Quarto"
+format:
+  clean-revealjs:
+    footer: "Clean Theme Demo"
+    logo: https://quarto.org/quarto.png
+author:
+  - name: Dave Tang
+    email: me@davetang.org
+    affiliations: Learning Quarto
+date: last-modified
+---
+
+## What is Clean?
+
+### A minimalist RevealJS theme by Grant McDermott
+
+The [clean](https://github.com/grantmcdermott/quarto-revealjs-clean) theme provides an elegant, academic-friendly design with:
+
+- Light background with Roboto font family
+- Teal accent colour for links and list markers
+- Left-aligned title slide with author affiliations
+- Slide numbers and navigation menu built in
+- MathJax 4 with Asana Math font
+
+Install:
+
+```bash
+quarto add grantmcdermott/quarto-revealjs-clean
+```
+
+## Usage
+
+### Set `clean-revealjs` as the format
+
+```yaml
+---
+title: "My Presentation"
+subtitle: "A subtitle"
+format: clean-revealjs
+author:
+  - name: Your Name
+    email: alias@email.com
+    affiliations: Your Institution
+date: last-modified
+---
+```
+
+The theme uses `clean-revealjs` instead of `revealjs` as the format.
+
+## Title Slide Metadata
+
+### Rich author information
+
+The clean theme supports structured author metadata:
+
+```yaml
+author:
+  - name: Jane Doe
+    orcid: 0000-0000-0000-0000
+    email: jane@example.com
+    affiliations: University of Example
+```
+
+This renders a left-aligned title slide with the author name, email in italics, and institutional affiliation — similar to an academic paper header.
+
+## Emphasis Classes
+
+### Special classes for drawing attention
+
+The clean theme provides three custom classes for inline emphasis:
+
+- `.alert` for default emphasis: [this is an alert]{.alert}
+- `.fg` for custom foreground colour: [custom colour]{.fg style="--col: #e64173"}
+- `.bg` for custom background colour: [highlighted]{.bg style="--col: #e64173"}
+
+Syntax:
+
+```markdown
+[important note]{.alert}
+[custom colour]{.fg style="--col: #e64173"}
+[highlighted text]{.bg style="--col: #e64173"}
+```
+
+## Alert Class
+
+### Default emphasis with `.alert`
+
+The `.alert` class uses the theme's secondary accent colour (dark red) to make text stand out:
+
+- The results were [statistically significant]{.alert}
+- Please note the [breaking change]{.alert} in version 2.0
+- This is a [key finding]{.alert} from our analysis
+
+The alert colour is defined as `$accent2: #9a2515` in the theme SCSS.
+
+## Custom Colours with .fg and .bg
+
+### Fine-grained control over colour
+
+Use `.fg` to change text colour with any CSS colour value:
+
+- [Positive result]{.fg style="--col: #3fb618"}
+- [Negative result]{.fg style="--col: #e64173"}
+- [Neutral result]{.fg style="--col: #107895"}
+
+Use `.bg` to add a coloured background:
+
+- [Success]{.bg style="--col: #3fb618"} with green background
+- [Warning]{.bg style="--col: #fd7e14"} with orange background
+- [Error]{.bg style="--col: #e64173"} with pink background
+
+## Button Links
+
+### Beamer-style navigation buttons
+
+The `.button` class creates a clickable navigation button, similar to Beamer presentations:
+
+[[Back to title]{.button}](#/clean-theme)
+[[Jump to summary]{.button}](#sec-summary)
+
+Syntax:
+
+```markdown
+[[Button text]{.button}](#target-slide-id)
+```
+
+Buttons use the teal accent colour and include a play icon prefix.
+
+## Heading Hierarchy
+
+### How the theme styles headings
+
+The theme uses a clear visual hierarchy:
+
+## H2 headings are large and light weight
+
+### H3 headings are teal and italic
+
+#### H4 headings are dark red and normal weight
+
+This makes it easy to structure slides with a title (H2), subtitle (H3), and sub-sections (H4).
+
+## Lists
+
+### Styled markers and nested arrows
+
+Unordered list items use teal-tinted markers:
+
+- First level item
+- Another first level item
+    - Nested items use arrow markers
+    - Like this one
+
+Ordered lists also use teal numbering:
+
+1. First item
+2. Second item
+3. Third item
+
+## Tables
+
+### Clean, minimal table styling
+
+The theme strips internal borders and uses light font weights:
+
+| Method | Accuracy | Speed |
+|--------|----------|-------|
+| Linear regression | 0.85 | Fast |
+| Random forest | 0.92 | Medium |
+| Neural network | 0.95 | Slow |
+
+: Model comparison results
+
+Tables have bottom borders on the header and last row, with small-caps captions.
+
+## Mathematics
+
+### MathJax 4 with Asana Math font
+
+The clean theme configures MathJax 4 with the Asana Math font for elegant typesetting.
+
+Inline: The estimator $\hat{\beta} = (X'X)^{-1}X'y$ is unbiased.
+
+Display:
+
+$$
+Y_i = \alpha + \beta_1 X_{1i} + \beta_2 X_{2i} + \varepsilon_i, \quad \varepsilon_i \sim N(0, \sigma^2)
+$$
+
+## Column Width Helpers
+
+### Custom classes for output-location
+
+The theme provides helper classes to adjust column widths when using `output-location: column`:
+
+| Class | Left | Right |
+|-------|------|-------|
+| `columns3070` | 30% | 70% |
+| `columns7030` | 70% | 30% |
+| `columns4060` | 40% | 60% |
+| `columns6040` | 60% | 40% |
+
+Usage:
+
+````markdown
+```{{r}}
+#| output-location: column
+#| classes: columns3070
+plot(1:10)
+```
+````
+
+## Code Example
+
+```{r}
+#| echo: true
+#| output-location: column
+# The clean theme works
+# with executable code
+x <- seq(0, 2*pi, length=100)
+y <- sin(x)
+plot(
+  x, y,
+  type = "l",
+  col = "#107895",
+  lwd = 2,
+  main = "Sine wave",
+  xlab = "x",
+  ylab = "sin(x)"
+)
+```
+
+## Logo and Navigation
+
+### Built-in UI elements
+
+The theme positions UI elements consistently:
+
+- **Logo** — bottom-left corner (max 150px wide, 50px tall)
+- **Slide numbers** — bottom-right corner
+- **Menu button** — top-right corner (hamburger icon)
+- **Chalkboard buttons** — top-right, offset from the menu
+
+Enable the logo in YAML:
+
+```yaml
+format:
+  clean-revealjs:
+    logo: path/to/logo.png
+```
+
+## Summary {#sec-summary}
+
+### A clean, professional theme for academic presentations
+
+| Feature | Details |
+|---------|---------|
+| Format | `clean-revealjs` |
+| Font | Roboto (imported from Google Fonts) |
+| Accent colours | Teal (`#107895`) and dark red (`#9a2515`) |
+| Custom classes | `.alert`, `.fg`, `.bg`, `.button` |
+| Column helpers | `columns3070`, `columns7030`, `columns4060`, `columns6040` |
+| Math | MathJax 4 with Asana Math font |
+
+[[Back to start]{.button}](#/clean-theme)
