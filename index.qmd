@@ -1,21 +1,41 @@
 ---
-title: "Home"
-format: html
+title: "Learning Quarto"
+subtitle: "Notebooks and presentations for learning [Quarto](https://quarto.org)"
+format:
+  html:
+    page-layout: full
+    toc: false
 ---
 
-## Learning Quarto
+::: {.column-page}
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+:::: {.columns}
 
-## Notebooks
+::: {.column width="50%"}
 
-* [Hello World](notebook/hello.html)
-* [GraphViz](notebook/graphviz.html)
-* [Authoring](notebook/authoring.html)
-* [Computations](notebook/computations.html)
+### Notebooks
 
-## Presentations
+| | Topic | Description |
+|---|-------|-------------|
+| 1 | [Hello, Quarto](notebook/hello.html) | Getting started with Quarto basics |
+| 2 | [Graphviz](notebook/graphviz.html) | Creating diagrams with Graphviz |
+| 3 | [Authoring](notebook/authoring.html) | Markdown authoring and housing prices |
+| 4 | [Computations](notebook/computations.html) | Executable code and computation options |
 
-* [Extensions](presentation/extensions.html)
-* [Features](presentation/features.html)
-* [Sandbox](presentation/sandbox.html)
+:::
+
+::: {.column width="50%"}
+
+### Presentations
+
+| | Topic | Description |
+|---|-------|-------------|
+| 1 | [Extensions](presentation/extensions.html) | Some useful Quarto extensions |
+| 2 | [Features](presentation/features.html) | RevealJS presentation features |
+| 3 | [Sandbox](presentation/sandbox.html) | Experimental slides and testing |
+
+:::
+
+::::
+
+:::
