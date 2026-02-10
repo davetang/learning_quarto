@@ -16,4 +16,5 @@ Quarto enables you to weave together content and executable code into a finished
 
 ## Presentations
 
+* [Features](presentation/features.html)
 * [Sandbox](presentation/sandbox.html)

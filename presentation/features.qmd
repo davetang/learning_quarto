@@ -1,0 +1,433 @@
+---
+title: "Quarto RevealJS Features"
+subtitle: "A tour of the most useful presentation features"
+author: "Dave Tang"
+date: last-modified
+date-format: "YYYY-MM-DD"
+format:
+  revealjs:
+    theme: dark
+    slide-number: true
+    code-line-numbers: true
+    code-copy: true
+    highlight-style: monokai
+    footer: "Quarto RevealJS Features"
+    logo: https://quarto.org/quarto.png
+    transition: slide
+    transition-speed: default
+    mermaid:
+      theme: dark
+revealjs-plugins:
+  - pointer
+---
+
+## Overview {.smaller}
+
+This presentation demonstrates the most useful features of Quarto RevealJS presentations.
+
+Use the following keyboard shortcuts to navigate:
+
+| Key | Action |
+|-----|--------|
+| `→` / `Space` | Next slide |
+| `←` | Previous slide |
+| `Esc` / `o` | Slide overview |
+| `s` | Speaker notes |
+| `f` | Fullscreen |
+| `q` | Toggle pointer |
+| `?` | Keyboard help |
+
+::: {.notes}
+These are speaker notes. Press `s` to open the speaker view in a separate window. Speaker notes support **markdown formatting** and are not visible to the audience.
+:::
+
+# Slide Layouts {background-color="#2780e3"}
+
+## Incremental Lists
+
+Use `. . .` to create pauses between content, or set lists to reveal one item at a time.
+
+::: {.incremental}
+- First point appears
+- Then the second
+- And finally the third
+:::
+
+## Non-Incremental Override
+
+When incremental is on globally, override for a specific list:
+
+::: {.nonincremental}
+- All items
+- Appear at
+- The same time
+:::
+
+## Columns
+
+:::: {.columns}
+::: {.column width="50%"}
+### Left Column
+
+Content can be split into multiple columns for side-by-side layouts.
+
+- Supports markdown
+- Including lists
+- And other elements
+:::
+
+::: {.column width="50%"}
+### Right Column
+
+```r
+# And code blocks
+library(ggplot2)
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point()
+```
+:::
+::::
+
+## Smaller Text {.smaller}
+
+The `.smaller` class reduces text size for content-heavy slides. This is useful when you need to fit more information on a single slide.
+
+| Feature | Description |
+|---------|-------------|
+| `.smaller` | Reduces font size for the slide |
+| `.scrollable` | Adds a scrollbar for overflow |
+| `.center` | Vertically centers content |
+| `.nostretch` | Prevents images from stretching |
+
+## Scrollable Slide {.scrollable}
+
+Adding `.scrollable` to a slide allows content to overflow with a scrollbar.
+
+```{r}
+#| echo: true
+#| eval: false
+# This slide has a lot of content
+head(mtcars, 20)
+summary(mtcars)
+str(mtcars)
+pairs(mtcars[, 1:4])
+cor(mtcars[, 1:4])
+```
+
+More content below...
+
+- Item 1
+- Item 2
+- Item 3
+- Item 4
+- Item 5
+- Item 6
+- Item 7
+- Item 8
+
+# Fragments & Animation {background-color="#3fb618"}
+
+## Fragment Types
+
+::: {.fragment}
+Fade in (default)
+:::
+
+::: {.fragment .fade-out}
+Fade out
+:::
+
+::: {.fragment .highlight-red}
+Highlight red
+:::
+
+::: {.fragment .fade-in-then-out}
+Fade in, then out
+:::
+
+::: {.fragment .fade-up}
+Slide up while fading in
+:::
+
+## Ordered Fragments
+
+Control the order fragments appear using the `fragment-index` attribute:
+
+::: {.fragment fragment-index=3}
+Third to appear
+:::
+
+::: {.fragment fragment-index=1}
+First to appear
+:::
+
+::: {.fragment fragment-index=2}
+Second to appear
+:::
+
+## Auto-Animate {auto-animate=true}
+
+```r
+output$plot <- renderPlot({
+})
+```
+
+## Auto-Animate {auto-animate=true}
+
+```r
+output$plot <- renderPlot({
+  ggplot(data(), aes(x, y)) +
+    geom_point(colour = "steelblue", size = 3) +
+    theme_minimal()
+})
+```
+
+## Animated Elements {auto-animate=true auto-animate-easing="ease-in-out"}
+
+::: {.r-hstack}
+::: {data-id="box1" style="background: #2780e3; width: 200px; height: 150px; margin: 10px;"}
+:::
+
+::: {data-id="box2" style="background: #3fb618; width: 200px; height: 150px; margin: 10px;"}
+:::
+
+::: {data-id="box3" style="background: #e83e8c; width: 200px; height: 150px; margin: 10px;"}
+:::
+:::
+
+## Animated Elements {auto-animate=true auto-animate-easing="ease-in-out"}
+
+::: {.r-stack}
+::: {data-id="box1" style="background: #2780e3; width: 350px; height: 350px; border-radius: 200px;"}
+:::
+
+::: {data-id="box2" style="background: #3fb618; width: 250px; height: 250px; border-radius: 200px;"}
+:::
+
+::: {data-id="box3" style="background: #e83e8c; width: 150px; height: 150px; border-radius: 200px;"}
+:::
+:::
+
+# Code Features {background-color="#e83e8c"}
+
+## Code Highlighting
+
+Use `code-line-numbers` to highlight specific lines. Lines 2-3 are highlighted below:
+
+```{.r code-line-numbers="2-3"}
+library(dplyr)
+mtcars |>
+  filter(mpg > 20) |>
+  group_by(cyl) |>
+  summarise(mean_hp = mean(hp))
+```
+
+## Step-Through Code Highlighting {auto-animate="true"}
+
+Highlight different lines in sequence with `|` separators:
+
+```{.r code-line-numbers="|1|3-4|5"}
+library(dplyr)
+
+mtcars |>
+  filter(mpg > 20) |>
+  summarise(n = n(), mean_hp = mean(hp))
+```
+
+## Executable R Code
+
+```{r}
+#| echo: true
+#| output-location: fragment
+summary(cars)
+```
+
+## Code Fold
+
+Use `code-fold` to let viewers expand/collapse code:
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
+library(knitr)
+kable(head(mtcars[, 1:5], 5), caption = "Motor Trend Cars")
+```
+
+## Output Locations
+
+Control where output appears relative to code using `output-location`:
+
+- `fragment` — output appears as a fragment (click to reveal)
+- `slide` — output appears on the next slide
+- `column` — output appears in an adjacent column
+- `column-fragment` — column output as a fragment
+
+## Output in Column
+
+```{r}
+#| echo: true
+#| output-location: column
+seq(1, 10) |>
+  rev()
+```
+
+# Backgrounds {background-color="#6f42c1"}
+
+## Coloured Background {background-color="#ff6347"}
+
+Set `background-color` on any slide heading.
+
+## Gradient Background {background-gradient="linear-gradient(to bottom, #2780e3, #0d1117)"}
+
+Use `background-gradient` for gradient backgrounds with CSS gradient syntax.
+
+## Background Image {background-image="https://quarto.org/docs/presentations/revealjs/demo/images/milky-way.jpeg" background-size="cover" background-opacity="0.4"}
+
+### Transparent Overlay
+
+Set `background-opacity` to make text readable over images.
+
+# Content Types {background-color="#fd7e14"}
+
+## Callout Blocks
+
+::: {.callout-note}
+This is a note callout — good for supplementary information.
+:::
+
+::: {.callout-warning}
+This is a warning callout — draws attention to potential issues.
+:::
+
+::: {.callout-tip}
+## Pro Tip
+Callout blocks can have custom titles.
+:::
+
+## Tabsets
+
+::: {.panel-tabset}
+### R Code
+
+```r
+plot(pressure)
+```
+
+### Python Code
+
+```python
+import matplotlib.pyplot as plt
+plt.plot([1, 2, 3], [1, 4, 9])
+plt.show()
+```
+
+### Julia Code
+
+```julia
+using Plots
+plot(1:10, (1:10).^2)
+```
+:::
+
+## Mermaid Diagrams
+
+```{mermaid}
+%%| fig-width: 9
+flowchart LR
+    A[Raw Data] --> B(Clean)
+    B --> C{Explore}
+    C --> D[Model]
+    C --> E[Visualise]
+    D --> F[Report]
+    E --> F
+```
+
+## Math with LaTeX
+
+Inline math: $E = mc^2$
+
+Display math:
+
+$$
+\hat{\beta} = (X^TX)^{-1}X^Ty
+$$
+
+Aligned equations:
+
+$$
+\begin{aligned}
+\bar{x} &= \frac{1}{n}\sum_{i=1}^{n} x_i \\
+s^2 &= \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2
+\end{aligned}
+$$
+
+## Footnotes
+
+Quarto supports footnotes in presentations[^1], which appear at the bottom of the slide[^2].
+
+[^1]: This is the first footnote.
+[^2]: Footnotes are great for citations and asides.
+
+# Advanced Features {background-color="#20c997"}
+
+## Fit Text {.center}
+
+::: {.r-fit-text}
+Big Idea
+:::
+
+## Stack Layout
+
+Use `.r-stack` to layer elements on top of each other with fragments:
+
+::: {.r-stack}
+![](https://quarto.org/quarto.png){.fragment width="400"}
+
+![](https://quarto.org/quarto.png){.fragment width="300"}
+
+![](https://quarto.org/quarto.png){.fragment width="200"}
+:::
+
+## Aside Content
+
+Quarto supports aside content that appears in the slide margin.
+
+This is the main content of the slide.
+
+::: aside
+This content appears in the margin — useful for references or minor notes.
+:::
+
+## Custom CSS Styling
+
+Apply custom styles with fenced divs:
+
+::: {style="background: linear-gradient(135deg, #2780e3, #6f42c1); color: white; padding: 30px; border-radius: 10px; text-align: center; font-size: 1.5em;"}
+Styled content block
+:::
+
+<br>
+
+::: {style="border-left: 4px solid #3fb618; padding-left: 20px; font-style: italic;"}
+> "The purpose of computing is insight, not numbers."
+> — Richard Hamming
+:::
+
+## Keyboard Shortcuts Recap
+
+| Shortcut | Action |
+|----------|--------|
+| `Esc` / `o` | Slide overview |
+| `s` | Speaker view |
+| `f` | Fullscreen |
+| `b` / `.` | Pause (black screen) |
+| `Alt + click` | Zoom into element |
+| `q` | Toggle pointer |
+
+## Resources
+
+- [Quarto RevealJS Docs](https://quarto.org/docs/presentations/revealjs/)
+- [RevealJS Advanced Features](https://quarto.org/docs/presentations/revealjs/advanced.html)
+- [Quarto Extensions](https://github.com/quarto-ext)
+- [RevealJS Themes](https://quarto.org/docs/presentations/revealjs/themes.html)
