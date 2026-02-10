@@ -33,7 +33,8 @@ format:
 | 1 | [Clean Theme](presentation/clean_theme.html) | Minimalist academic presentation theme |
 | 2 | [Extensions](presentation/extensions.html) | Some useful Quarto extensions |
 | 3 | [Features](presentation/features.html) | RevealJS presentation features |
-| 4 | [Sandbox](presentation/sandbox.html) | Experimental slides and testing |
+| 4 | [LLMs & Science](presentation/journal_club_llm_science.html) | Journal club: LLMs and scientific production |
+| 5 | [Sandbox](presentation/sandbox.html) | Experimental slides and testing |
 
 :::
 

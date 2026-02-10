@@ -1,0 +1,270 @@
+---
+title: "Scientific production in the era of Large Language Models"
+subtitle: "Journal Club"
+format:
+  clean-revealjs:
+    slide-number: true
+    footer: "Kusumegi, Yang et al. (2025) *Science* | DOI: 10.1126/science.adw3000"
+author:
+  - name: Dave Tang
+date: last-modified
+date-format: "YYYY-MM-DD"
+---
+
+## Paper Overview
+
+### Kusumegi K, Yang X, Ginsparg P, de Vaan M, Stuart T, Yin Y (2025)
+
+- **Published:** *Science*, 18 Dec 2025
+- **Affiliations:** Cornell University & UC Berkeley
+- **Pre-print:** [arXiv:2601.13187](https://arxiv.org/abs/2601.13187)
+- **DOI:** [10.1126/science.adw3000](https://doi.org/10.1126/science.adw3000)
+
+. . .
+
+**Central question:** What is the macro-level impact of LLMs on the scientific enterprise?
+
+## Motivation
+
+- Technology has always reshaped science: microscope, computing, next-gen sequencing
+- Generative AI is now recasting scientific production across [all academic disciplines]{.alert}
+- Despite growing excitement (and concern), empirical evidence is fragmented
+- Prior work focused on specific domains (protein structure, materials discovery)
+- No large-scale, cross-disciplinary study of LLM impact on scientific productivity
+
+## Three Key Findings
+
+::: {.incremental}
+1. LLM adopters show a [large increase in paper production]{.alert} (23.7--89.3%), varying by field and author background
+2. LLM use has [reversed]{.alert} the relationship between writing complexity and paper quality
+3. LLM adopters access and cite [more diverse prior work]{.alert}, including books and younger, less-cited documents
+:::
+
+# Data & Methods {background-color="#107895"}
+
+## Data Sources {.smaller}
+
+Three preprint repositories (Jan 2018 -- June 2024):
+
+| Repository | Preprints | Fields |
+|------------|-----------|--------|
+| arXiv | 1.2M | Maths, physics, CS, EE, quant bio, stats, econ |
+| bioRxiv | 221K | Biology and life sciences |
+| SSRN | 676K | Social sciences, law, humanities |
+
+Additional data:
+
+- **28K peer review reports** from ICLR-2024 (7,243 submissions)
+- **246M online accesses** to arXiv documents (with user ID, referral source)
+- **101.6M citations** to prior works via OpenAlex and Semantic Scholar
+- **168,553 authors** tracked for productivity analysis
+
+## LLM Detection Method {.smaller}
+
+### Text-based AI detection algorithm
+
+1. Estimate token (word) distribution of human-written text from pre-2023 abstracts
+2. Use GPT-3.5turbo to rewrite those abstracts to get LLM token distribution
+3. Compare distributions to identify probable LLM-assisted abstracts post-ChatGPT
+
+. . .
+
+#### Limitations of detection
+
+- Relies on [abstracts only]{.fg style="--col: #9a2515"}, not full text
+- Cannot identify which co-author used an LLM
+- Fails to detect use when authors heavily edit LLM-assisted text
+
+## Study Design: Productivity
+
+### Author-level fixed effects event models
+
+- Identify each author's first LLM-assisted manuscript ($m_i$)
+- Compare submission rates [before and after]{.alert} adoption
+- Stacked difference-in-difference regression
+- Exclude manuscripts in core AI subdisciplines to isolate general productivity effects
+
+## Study Design: Writing Quality
+
+### Flesch Reading Ease Score (inverted)
+
+- Composite of average sentence length and syllables per word
+- Higher score = more complex text
+- Binary quality outcome: published in peer-reviewed venue by June 2024
+- Independent validation with ICLR-2024 peer review scores
+
+## Study Design: Citation Behaviour
+
+### Two complementary approaches
+
+**AI-assisted search (Bing Chat release, Feb 2023):**
+
+- Differences-in-differences comparing Bing vs Google referrals to arXiv
+- 246M views/downloads with user ID and referral source
+
+**Author citation patterns:**
+
+- Event study around LLM adoption (same as productivity analysis)
+- Three outcomes: book citations, reference age, citation impact
+
+# Results {background-color="#107895"}
+
+## Finding 1: Productivity Boost
+
+### LLM adoption is associated with significantly more output
+
+Productivity increases (stacked diff-in-diff):
+
+| Repository | Productivity gain |
+|------------|------------------|
+| arXiv | +36.2% |
+| bioRxiv | +52.9% |
+| SSRN | +59.8% |
+
+- Effect is robust across detection methods and thresholds
+- Flat pre-trends, then a sharp jump post-adoption (Fig. 1)
+
+## Heterogeneity by Author Background {.smaller}
+
+### Non-native English speakers benefit most
+
+Productivity gains for scholars with [Asian names at Asian institutions]{.fg style="--col: #107895"}:
+
+- arXiv: **37.7%** | bioRxiv: **89.3%** | SSRN: **88.9%**
+
+Productivity gains for [Caucasian names at English-speaking institutions]{.fg style="--col: #9a2515"}:
+
+- arXiv: **23.7%** | bioRxiv: **40.0%** | SSRN: **46.2%**
+
+. . .
+
+> LLMs mitigate disparities in English fluency, asymmetrically reducing the cost of writing across scientists' linguistic backgrounds.
+
+## Finding 2: Writing Complexity Reversal {.smaller}
+
+### Three patterns emerge from Flesch score analysis
+
+::: {.incremental}
+1. **LLM-assisted papers are more linguistically complex** than human-written papers ($P < 0.001$ across all three archives and ICLR)
+2. **For non-LLM papers**, writing complexity positively correlates with quality (publication probability and peer review scores)
+3. **For LLM-assisted papers**, the relationship [reverses]{.alert} --- greater writing complexity correlates with [lower]{.alert} manuscript quality
+:::
+
+## The Quality Signal Erosion {style="font-size: 95%;"}
+
+### Writing quality used to signal scientific merit
+
+- Complex, polished prose was hard to produce and reflected deep expertise
+- LLMs can effortlessly produce complex language on any topic
+- The positive correlation between linguistic complexity and scientific merit [not only disappears but inverts]{.alert} for LLM-assisted work
+
+. . .
+
+> Complex LLM-generated language often disguises weak scientific contributions... creating a risk for the scientific enterprise, as a deluge of superficially convincing but scientifically underwhelming research could saturate the literature.
+
+## ICLR-2024 Validation {style="font-size: 95%;"}
+
+### Independent replication with peer review scores
+
+- 7,243 submissions with 28K referee reports
+- Peer review scores used as an alternative quality measure
+- Results replicate with [remarkable consistency]{.alert} (Fig. 3D, 3H)
+- Robustness confirmed across additional linguistic dimensions:
+  - Lexical complexity (syllables per word)
+  - Morphological complexity (participial clauses)
+  - Promotional language
+
+## Finding 3: Diversified Citations
+
+### LLM adopters cite a broader knowledge base
+
+| Metric | Change | Direction |
+|--------|--------|-----------|
+| Book citations | +11.9% overall | More books |
+| Reference age | --0.379 years | More recent |
+| Citation impact | --2.34% | Less-cited works |
+
+- AI-powered search (Bing Chat) also shifts reading toward more books (+26.3%), more recent works, and less-cited documents
+- Contrary to concerns, LLMs do [not]{.alert} reinforce citation of canonical high-impact papers
+
+## AI Search Behaviour (Bing Chat)
+
+### Natural experiment: Bing Chat launch (Feb 2023)
+
+Comparing Bing vs Google users accessing arXiv:
+
+::: {.incremental}
+- Post-Bing Chat users access [books at 26.3% higher rate]{.fg style="--col: #107895"} ($P < 0.001$)
+- Median age of accessed manuscripts decreased by 0.18 years
+- No increase in access to well-cited works
+- Users uncovered references with [fewer existing citations]{.fg style="--col: #107895"}
+:::
+
+# Discussion {background-color="#107895"}
+
+## Implications for the Scientific Enterprise {style="font-size: 95%;"}
+
+### A double-edged sword
+
+**Democratisation:**
+
+- Reduces barriers for non-native English speakers
+- Broadens literature discovery beyond disciplinary silos
+- May level the playing field for researchers at less-resourced institutions
+
+**Risks:**
+
+- Writing characteristics becoming uninformative quality signals
+- Editors may increasingly rely on author pedigree and institutional affiliation
+- Ironically counteracting LLMs' democratising effects
+
+## The Reviewer Problem {style="font-size: 85%;"}
+
+### Traditional heuristics are breaking down
+
+- Writing quality no longer reliably signals scientific merit
+- The quantity of scientific communication is surging
+- Editors and reviewers need new evaluation approaches
+
+. . .
+
+One proposed response: specialised "reviewer agents" that flag methodological inconsistencies, verify claims, and assess novelty
+
+. . .
+
+> Whether this scalable approach will help editors and reviewers focus on substance over surface-level signals or introduce new and unforeseen challenges to the scientific process is a critical uncertainty.
+
+## Limitations {style="font-size: 95%;"}
+
+1. **No causal identification** --- observational study; adoption is non-random and may be endogenous to productivity
+2. **Detection imperfections** --- abstract-only analysis; cannot detect heavily edited LLM text; cannot identify which co-author used an LLM
+3. **Snapshot in time** --- data pre-dates advanced reasoning models (o1, Claude 3.5, etc.); effects will likely be amplified with newer models
+4. **Confounders** --- publication outcomes influenced by many factors beyond writing quality; controls for preprint month and field of study included
+
+## Future Directions
+
+- More nuanced exploration of how LLMs impact scientific practice
+- LLMs as "invisible colleges" --- scalable substitute for informal knowledge
+- Potential for LLMs to transcend disciplinary boundaries and reduce jargon barriers
+- Continuous tracking as AI models improve and become more deeply integrated
+- Evolving quality assessment frameworks for journals, funders, and tenure committees
+
+## Key Takeaways
+
+::: {.incremental}
+1. LLMs are [already reshaping scientific production]{.alert} at a massive scale
+2. Productivity gains are real but [largest for non-native English speakers]{.fg style="--col: #107895"}
+3. Linguistic complexity is [no longer a reliable quality signal]{.fg style="--col: #9a2515"} for LLM-assisted work
+4. Citation patterns are diversifying, [not narrowing]{.fg style="--col: #107895"}
+5. Scientific institutions will need to adapt evaluation criteria
+:::
+
+## Discussion Questions
+
+1. How should journals and reviewers adapt their evaluation criteria in response to these findings?
+
+2. Is the productivity boost genuine scientific advancement or an increase in low-quality output?
+
+3. Should LLM use in scientific writing be disclosed, regulated, or encouraged?
+
+4. Will LLM-powered "reviewer agents" solve the quality signal problem or create new issues?
