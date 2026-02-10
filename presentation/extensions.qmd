@@ -1,0 +1,383 @@
+---
+title: "Quarto Extensions"
+author: "Dave Tang"
+date: last-modified
+date-format: "YYYY-MM-DD"
+format:
+  revealjs:
+    theme: dark
+    slide-number: true
+    code-line-numbers: true
+    code-copy: true
+    highlight-style: monokai
+    transition: slide
+    footer: "Quarto Extensions Demo"
+    mermaid:
+      theme: dark
+    lightbox: true
+header: "Extensions Demo"
+header-logo: https://quarto.org/quarto.png
+hide-from-titleSlide: all
+filters:
+  - reveal-header
+  - include-code-files
+revealjs-plugins:
+  - pointer
+  - attribution
+---
+
+## Overview {.smaller}
+
+| Extension | Type | Source |
+|-----------|------|--------|
+| **Pointer** | RevealJS plugin | `quarto-ext/pointer` |
+| **Attribution** | RevealJS plugin | `quarto-ext/attribution` |
+| **Font Awesome** | Shortcode | `quarto-ext/fontawesome` |
+| **Lightbox** | Filter | `quarto-ext/lightbox` |
+| **Include Code Files** | Filter | `quarto-ext/include-code-files` |
+| **Clean** | Format/theme | `grantmcdermott/clean` |
+| **Reveal Header** | Filter | `shafayetShafee/reveal-header` |
+
+# Pointer {background-color="#2780e3"}
+
+## Pointer Extension {.smaller}
+
+The **pointer** extension switches your cursor to a pointer style while presenting.
+
+Install:
+
+```bash
+quarto add quarto-ext/pointer
+```
+
+Enable in YAML:
+
+```yaml
+revealjs-plugins:
+  - pointer
+```
+
+**Try it now:** press `q` to toggle the pointer on this slide.
+
+The pointer is red by default and 16px in size. These can be customised:
+
+```yaml
+pointer:
+  key: "q"
+  color: "#ff0000"
+  pointerSize: 16
+  alwaysVisible: false
+```
+
+# Attribution {background-color="#3fb618"}
+
+## Attribution Extension {.center}
+
+The **attribution** extension displays text sideways along the right edge of slides — useful for image credits and sources.
+
+::: {.attribution}
+Photo by [Unsplash](https://unsplash.com)
+:::
+
+## Attribution Usage
+
+Install:
+
+```bash
+quarto add quarto-ext/attribution
+```
+
+Enable in YAML:
+
+```yaml
+revealjs-plugins:
+  - attribution
+```
+
+Add to any slide with a fenced div:
+
+```markdown
+::: {.attribution}
+Photo by [Author](https://example.com)
+:::
+```
+
+The text rotates 180 degrees and sticks to the right edge of the viewport, even when resizing or toggling fullscreen.
+
+# Font Awesome {background-color="#e83e8c"}
+
+## Font Awesome Extension {.smaller}
+
+The **fontawesome** extension lets you use [Font Awesome 6](https://fontawesome.com/icons) icons via shortcodes.
+
+Install:
+
+```bash
+quarto add quarto-ext/fontawesome
+```
+
+### Solid Icons (default)
+
+{{< fa thumbs-up >}} `thumbs-up` | {{< fa heart >}} `heart` | {{< fa star >}} `star` | {{< fa check >}} `check`
+
+### Brand Icons
+
+{{< fa brands github >}} `brands github` | {{< fa brands r-project >}} `brands r-project` | {{< fa brands python >}} `brands python`
+
+### With Size
+
+{{< fa brands github size=large >}} `size=large` | {{< fa brands github size=Large >}} `size=Large` | {{< fa brands github size=huge >}} `size=huge`
+
+## Font Awesome Syntax
+
+Basic usage:
+
+```markdown
+{{</* fa icon-name */>}}
+```
+
+With icon group (solid, regular, brands):
+
+```markdown
+{{</* fa brands github */>}}
+{{</* fa regular heart */>}}
+```
+
+With optional size:
+
+```markdown
+{{</* fa star size=large */>}}
+```
+
+Available sizes: `tiny`, `scriptsize`, `footnotesize`, `small`, `normalsize`, `large`, `Large`, `LARGE`, `huge`, `Huge`.
+
+## Font Awesome in Practice {.smaller}
+
+Use icons inline with text for visual cues:
+
+- {{< fa brands github >}} Source code on GitHub
+- {{< fa envelope >}} Contact via email
+- {{< fa chart-line >}} Data visualisation
+- {{< fa database >}} Data storage
+- {{< fa terminal >}} Command line tools
+- {{< fa book >}} Documentation
+- {{< fa users >}} Team collaboration
+- {{< fa bug >}} Bug reports
+
+# Lightbox {background-color="#6f42c1"}
+
+## Lightbox Extension
+
+The **lightbox** extension adds click-to-zoom functionality to images. Click any image below to open it in a lightbox overlay.
+
+Install:
+
+```bash
+quarto add quarto-ext/lightbox
+```
+
+Enable in YAML:
+
+```yaml
+format:
+  revealjs:
+    lightbox: true
+```
+
+## Lightbox Demo
+
+Click on any image to zoom in. Press `Esc` or click outside to close.
+
+::: {layout-ncol=3}
+![Quarto Logo](https://quarto.org/quarto.png){group="demo"}
+
+![Quarto Logo](https://quarto.org/quarto.png){group="demo"}
+
+![Quarto Logo](https://quarto.org/quarto.png){group="demo"}
+:::
+
+Images with the same `group` attribute can be navigated as a gallery in the lightbox view.
+
+## Lightbox Syntax
+
+Add `.lightbox` class or set `lightbox: true` globally:
+
+```markdown
+![Caption](image.png)
+```
+
+Group images into a gallery:
+
+```markdown
+![Image A](a.png){group="my-gallery"}
+![Image B](b.png){group="my-gallery"}
+```
+
+# Include Code Files {background-color="#fd7e14"}
+
+## Include Code Files Extension
+
+The **include-code-files** extension lets you include code from external source files directly into your slides.
+
+Install:
+
+```bash
+quarto add quarto-ext/include-code-files
+```
+
+Enable in YAML:
+
+```yaml
+filters:
+  - include-code-files
+```
+
+## Including an Entire File
+
+Reference an external file with the `include` attribute on a code block:
+
+````markdown
+```{.python include="script.py"}
+```
+````
+
+The file contents replace the empty code block at render time.
+
+## Including Specific Lines
+
+Use `start-line` and `end-line` to include a range:
+
+````markdown
+```{.r include="analysis.R" start-line=5 end-line=15}
+```
+````
+
+## Including Snippets
+
+Mark regions in your source file with comments:
+
+```python
+# start snippet my-function
+def hello(name):
+    return f"Hello, {name}!"
+# end snippet my-function
+```
+
+Then reference the snippet by name:
+
+````markdown
+```{.python include="script.py" snippet="my-function"}
+```
+````
+
+Supported comment styles: `#` (Python/R), `//` (JS/CSS), `--` (Lua), `<!-- -->` (HTML).
+
+# Clean Theme {background-color="#20c997"}
+
+## Clean Theme Extension
+
+The **clean** theme by Grant McDermott provides a minimalist, elegant look for academic and professional presentations.
+
+Install:
+
+```bash
+quarto add grantmcdermott/quarto-revealjs-clean
+```
+
+Use as the format:
+
+```yaml
+format:
+  clean-revealjs:
+    slide-number: true
+```
+
+## Clean Theme Features {.smaller}
+
+The theme provides:
+
+- Minimalist design with clean typography
+- Slide numbers enabled by default
+- Left-side navigation menu
+- MathJax 4 with custom configuration
+- Long date format
+- Custom SCSS styling
+
+To use it, change the format from `revealjs` to `clean-revealjs`. Since this presentation uses `revealjs` with the `dark` theme, the clean theme is not active here — it is an alternative format.
+
+# Reveal Header {background-color="#e83e8c"}
+
+## Reveal Header Extension
+
+The **reveal-header** extension adds a persistent header with text and/or a logo across all slides.
+
+Install:
+
+```bash
+quarto add shafayetShafee/reveal-header
+```
+
+**Look at the top of this slide** — the Quarto logo and "Extensions Demo" text are rendered by this extension.
+
+## Reveal Header Configuration {.smaller}
+
+Enable in YAML:
+
+```yaml
+filters:
+  - reveal-header
+header: "My Presentation"
+header-logo: https://quarto.org/quarto.png
+```
+
+### Additional Options
+
+```yaml
+# Use the document title as header text
+title-as-header: true
+
+# Use the subtitle instead
+subtitle-as-header: true
+
+# Hide header from title slide
+hide-from-titleSlide: all   # or "text" or "logo"
+
+# Make the logo a clickable link
+header-logo-link: "https://example.com"
+```
+
+## Reveal Header on This Presentation
+
+This presentation uses the following configuration:
+
+```yaml
+header: "Extensions Demo"
+header-logo: https://quarto.org/quarto.png
+hide-from-titleSlide: all
+filters:
+  - reveal-header
+```
+
+The header and logo appear on every slide except the title slide.
+
+# Summary {background-color="#343a40"}
+
+## Extension Summary {.smaller}
+
+| Extension | Type | Key Feature |
+|-----------|------|-------------|
+| **Pointer** | Plugin | Press `q` for a laser pointer |
+| **Attribution** | Plugin | Sideways credit text on slide edge |
+| **Font Awesome** | Shortcode | `{{</* fa icon-name */>}}` for icons |
+| **Lightbox** | Filter | Click-to-zoom images |
+| **Include Code Files** | Filter | Embed external source files |
+| **Clean** | Format | Minimalist academic theme |
+| **Reveal Header** | Filter | Persistent header logo and text |
+
+## Resources
+
+- {{< fa book >}} [Quarto Extensions Guide](https://quarto.org/docs/extensions/)
+- {{< fa puzzle-piece >}} [RevealJS Plugins](https://quarto.org/docs/extensions/revealjs.html)
+- {{< fa list >}} [Extension Listing](https://quarto.org/docs/extensions/listing-revealjs.html)
+- {{< fa brands github >}} [quarto-ext on GitHub](https://github.com/quarto-ext)
+- {{< fa globe >}} [Community Extensions](https://m.canouil.dev/quarto-extensions/)

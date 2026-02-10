@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="extensions_files/libs/clipboard/clipboard.min.js"></script>
+<script src="extensions_files/libs/quarto-html/tabby.min.js"></script>
+<script src="extensions_files/libs/quarto-html/popper.min.js"></script>
+<script src="extensions_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="extensions_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="extensions_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="extensions_files/libs/quarto-html/quarto-syntax-highlighting-dark-4c7b890cc350be7067044af900615741.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="extensions_files/libs/quarto-contrib/reveal-header-1.0.0/add_header.js" defer="true"></script>
+<link href="extensions_files/libs/quarto-contrib/reveal-header-1.0.0/add_header.css" rel="stylesheet">
+<link href="extensions_files/libs/quarto-contrib/grid-htext-1.0.0/grid_htext.css" rel="stylesheet">
+<link href="extensions_files/libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
+<link href="extensions_files/libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
+<script src="extensions_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="extensions_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="extensions_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
+
+  <meta name="author" content="Dave Tang">
+  <meta name="dcterms.date" content="2026-02-10">
+  <title>Quarto Extensions</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="extensions_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="extensions_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2; background-color: #2e3440; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #75715e; } /* Annotation */
+    code span.at { color: #f92672; } /* Attribute */
+    code span.bn { color: #ae81ff; } /* BaseN */
+    code span.bu { color: #66d9ef; } /* BuiltIn */
+    code span.cf { color: #f92672; } /* ControlFlow */
+    code span.ch { color: #e6db74; } /* Char */
+    code span.cn { color: #ae81ff; } /* Constant */
+    code span.co { color: #75715e; } /* Comment */
+    code span.cv { color: #75715e; } /* CommentVar */
+    code span.do { color: #75715e; } /* Documentation */
+    code span.dt { color: #66d9ef; font-style: italic; } /* DataType */
+    code span.dv { color: #ae81ff; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #a6e22e; font-weight: bold; } /* Extension */
+    code span.fl { color: #ae81ff; } /* Float */
+    code span.fu { color: #a6e22e; } /* Function */
+    code span.im { color: #f92672; } /* Import */
+    code span.in { color: #f1fa8c; } /* Information */
+    code span.kw { color: #f92672; } /* Keyword */
+    code span.op { color: #f8f8f2; } /* Operator */
+    code span.ot { color: #a6e22e; } /* Other */
+    code span.pp { color: #f92672; } /* Preprocessor */
+    code span.re { color: #75715e; } /* RegionMarker */
+    code span.sc { color: #ae81ff; } /* SpecialChar */
+    code span.ss { color: #e6db74; } /* SpecialString */
+    code span.st { color: #e6db74; } /* String */
+    code span.va { color: #f8f8f2; } /* Variable */
+    code span.vs { color: #e6db74; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="extensions_files/libs/revealjs/dist/theme/quarto-24a3dd8a71577492fd0b8151dd5a32ce.css">
+  <link href="extensions_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="extensions_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="extensions_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="extensions_files/libs/revealjs/plugin/reveal-pointer/pointer.css" rel="stylesheet">
+  <link href="extensions_files/libs/revealjs/plugin/reveal-attribution/attribution.css" rel="stylesheet">
+  <link href="extensions_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Quarto Extensions</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Dave Tang 
+</div>
+</div>
+</div>
+
+  <p class="date">2026-02-10</p>
+</section>
+<section id="overview" class="slide level2 smaller">
+<h2>Overview</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Extension</th>
+<th>Type</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Pointer</strong></td>
+<td>RevealJS plugin</td>
+<td><code>quarto-ext/pointer</code></td>
+</tr>
+<tr class="even">
+<td><strong>Attribution</strong></td>
+<td>RevealJS plugin</td>
+<td><code>quarto-ext/attribution</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Font Awesome</strong></td>
+<td>Shortcode</td>
+<td><code>quarto-ext/fontawesome</code></td>
+</tr>
+<tr class="even">
+<td><strong>Lightbox</strong></td>
+<td>Filter</td>
+<td><code>quarto-ext/lightbox</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Include Code Files</strong></td>
+<td>Filter</td>
+<td><code>quarto-ext/include-code-files</code></td>
+</tr>
+<tr class="even">
+<td><strong>Clean</strong></td>
+<td>Format/theme</td>
+<td><code>grantmcdermott/clean</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Reveal Header</strong></td>
+<td>Filter</td>
+<td><code>shafayetShafee/reveal-header</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section>
+<section id="pointer" class="title-slide slide level1 center" data-background-color="#2780e3">
+<h1>Pointer</h1>
+
+</section>
+<section id="pointer-extension" class="slide level2 smaller">
+<h2>Pointer Extension</h2>
+<p>The <strong>pointer</strong> extension switches your cursor to a pointer style while presenting.</p>
+<p>Install:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="ex">quarto</span> add quarto-ext/pointer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Enable in YAML:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href=""></a><span class="fu">revealjs-plugins</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href=""></a><span class="at">  </span><span class="kw">-</span><span class="at"> pointer</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it now:</strong> press <code>q</code> to toggle the pointer on this slide.</p>
+<p>The pointer is red by default and 16px in size. These can be customised:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href=""></a><span class="fu">pointer</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href=""></a><span class="at">  </span><span class="fu">key</span><span class="kw">:</span><span class="at"> </span><span class="st">"q"</span></span>
+<span id="cb3-3"><a href=""></a><span class="at">  </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">"#ff0000"</span></span>
+<span id="cb3-4"><a href=""></a><span class="at">  </span><span class="fu">pointerSize</span><span class="kw">:</span><span class="at"> </span><span class="dv">16</span></span>
+<span id="cb3-5"><a href=""></a><span class="at">  </span><span class="fu">alwaysVisible</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section></section>
+<section>
+<section id="attribution" class="title-slide slide level1 center" data-background-color="#3fb618">
+<h1>Attribution</h1>
+
+</section>
+<section id="attribution-extension" class="slide level2 center">
+<h2>Attribution Extension</h2>
+<p>The <strong>attribution</strong> extension displays text sideways along the right edge of slides — useful for image credits and sources.</p>
+<div class="attribution">
+<p>Photo by <a href="https://unsplash.com">Unsplash</a></p>
+</div>
+</section>
+<section id="attribution-usage" class="slide level2">
+<h2>Attribution Usage</h2>
+<p>Install:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="ex">quarto</span> add quarto-ext/attribution</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Enable in YAML:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href=""></a><span class="fu">revealjs-plugins</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href=""></a><span class="at">  </span><span class="kw">-</span><span class="at"> attribution</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Add to any slide with a fenced div:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href=""></a>::: {.attribution}</span>
+<span id="cb6-2"><a href=""></a>Photo by <span class="co">[</span><span class="ot">Author</span><span class="co">](https://example.com)</span></span>
+<span id="cb6-3"><a href=""></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The text rotates 180 degrees and sticks to the right edge of the viewport, even when resizing or toggling fullscreen.</p>
+</section></section>
+<section>
+<section id="font-awesome" class="title-slide slide level1 center" data-background-color="#e83e8c">
+<h1>Font Awesome</h1>
+
+</section>
+<section id="font-awesome-extension" class="slide level2 smaller">
+<h2>Font Awesome Extension</h2>
+<p>The <strong>fontawesome</strong> extension lets you use <a href="https://fontawesome.com/icons">Font Awesome 6</a> icons via shortcodes.</p>
+<p>Install:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="ex">quarto</span> add quarto-ext/fontawesome</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="solid-icons-default">Solid Icons (default)</h3>
+<p><i class="fa-solid fa-thumbs-up" aria-label="thumbs-up"></i> <code>thumbs-up</code> | <i class="fa-solid fa-heart" aria-label="heart"></i> <code>heart</code> | <i class="fa-solid fa-star" aria-label="star"></i> <code>star</code> | <i class="fa-solid fa-check" aria-label="check"></i> <code>check</code></p>
+<h3 id="brand-icons">Brand Icons</h3>
+<p><i class="fa-brands fa-github" aria-label="github"></i> <code>brands github</code> | <i class="fa-brands fa-r-project" aria-label="r-project"></i> <code>brands r-project</code> | <i class="fa-brands fa-python" aria-label="python"></i> <code>brands python</code></p>
+<h3 id="with-size">With Size</h3>
+<p><i class="fa-brands fa-github fa-large" aria-label="github"></i> <code>size=large</code> | <i class="fa-brands fa-github fa-Large" aria-label="github"></i> <code>size=Large</code> | <i class="fa-brands fa-github fa-huge" aria-label="github"></i> <code>size=huge</code></p>
+</section>
+<section id="font-awesome-syntax" class="slide level2">
+<h2>Font Awesome Syntax</h2>
+<p>Basic usage:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href=""></a>{{&lt; fa icon-name &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>With icon group (solid, regular, brands):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href=""></a>{{&lt; fa brands github &gt;}}</span>
+<span id="cb9-2"><a href=""></a>{{&lt; fa regular heart &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>With optional size:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href=""></a>{{&lt; fa star size=large &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Available sizes: <code>tiny</code>, <code>scriptsize</code>, <code>footnotesize</code>, <code>small</code>, <code>normalsize</code>, <code>large</code>, <code>Large</code>, <code>LARGE</code>, <code>huge</code>, <code>Huge</code>.</p>
+</section>
+<section id="font-awesome-in-practice" class="slide level2 smaller">
+<h2>Font Awesome in Practice</h2>
+<p>Use icons inline with text for visual cues:</p>
+<ul>
+<li><i class="fa-brands fa-github" aria-label="github"></i> Source code on GitHub</li>
+<li><i class="fa-solid fa-envelope" aria-label="envelope"></i> Contact via email</li>
+<li><i class="fa-solid fa-chart-line" aria-label="chart-line"></i> Data visualisation</li>
+<li><i class="fa-solid fa-database" aria-label="database"></i> Data storage</li>
+<li><i class="fa-solid fa-terminal" aria-label="terminal"></i> Command line tools</li>
+<li><i class="fa-solid fa-book" aria-label="book"></i> Documentation</li>
+<li><i class="fa-solid fa-users" aria-label="users"></i> Team collaboration</li>
+<li><i class="fa-solid fa-bug" aria-label="bug"></i> Bug reports</li>
+</ul>
+</section></section>
+<section>
+<section id="lightbox" class="title-slide slide level1 center" data-background-color="#6f42c1">
+<h1>Lightbox</h1>
+
+</section>
+<section id="lightbox-extension" class="slide level2">
+<h2>Lightbox Extension</h2>
+<p>The <strong>lightbox</strong> extension adds click-to-zoom functionality to images. Click any image below to open it in a lightbox overlay.</p>
+<p>Install:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="ex">quarto</span> add quarto-ext/lightbox</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Enable in YAML:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href=""></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb12-2"><a href=""></a><span class="at">  </span><span class="fu">revealjs</span><span class="kw">:</span></span>
+<span id="cb12-3"><a href=""></a><span class="at">    </span><span class="fu">lightbox</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="lightbox-demo" class="slide level2">
+<h2>Lightbox Demo</h2>
+<p>Click on any image to zoom in. Press <code>Esc</code> or click outside to close.</p>
+<div class="quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://quarto.org/quarto.png" class="lightbox" data-gallery="demo" title="Quarto Logo"><img data-src="https://quarto.org/quarto.png" alt="Quarto Logo"></a></p>
+<figcaption>Quarto Logo</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://quarto.org/quarto.png" class="lightbox" data-gallery="demo" title="Quarto Logo"><img data-src="https://quarto.org/quarto.png" alt="Quarto Logo"></a></p>
+<figcaption>Quarto Logo</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://quarto.org/quarto.png" class="lightbox" data-gallery="demo" title="Quarto Logo"><img data-src="https://quarto.org/quarto.png" alt="Quarto Logo"></a></p>
+<figcaption>Quarto Logo</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Images with the same <code>group</code> attribute can be navigated as a gallery in the lightbox view.</p>
+</section>
+<section id="lightbox-syntax" class="slide level2">
+<h2>Lightbox Syntax</h2>
+<p>Add <code>.lightbox</code> class or set <code>lightbox: true</code> globally:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href=""></a><span class="al">![Caption](image.png)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Group images into a gallery:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href=""></a><span class="al">![Image A](a.png)</span>{group="my-gallery"}</span>
+<span id="cb14-2"><a href=""></a><span class="al">![Image B](b.png)</span>{group="my-gallery"}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section></section>
+<section>
+<section id="include-code-files" class="title-slide slide level1 center" data-background-color="#fd7e14">
+<h1>Include Code Files</h1>
+
+</section>
+<section id="include-code-files-extension" class="slide level2">
+<h2>Include Code Files Extension</h2>
+<p>The <strong>include-code-files</strong> extension lets you include code from external source files directly into your slides.</p>
+<p>Install:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="ex">quarto</span> add quarto-ext/include-code-files</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Enable in YAML:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a href=""></a><span class="fu">filters</span><span class="kw">:</span></span>
+<span id="cb16-2"><a href=""></a><span class="at">  </span><span class="kw">-</span><span class="at"> include-code-files</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="including-an-entire-file" class="slide level2">
+<h2>Including an Entire File</h2>
+<p>Reference an external file with the <code>include</code> attribute on a code block:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href=""></a><span class="in">```{.python include="script.py"}</span></span>
+<span id="cb17-2"><a href=""></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The file contents replace the empty code block at render time.</p>
+</section>
+<section id="including-specific-lines" class="slide level2">
+<h2>Including Specific Lines</h2>
+<p>Use <code>start-line</code> and <code>end-line</code> to include a range:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href=""></a><span class="in">```{.r include="analysis.R" start-line=5 end-line=15}</span></span>
+<span id="cb18-2"><a href=""></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="including-snippets" class="slide level2">
+<h2>Including Snippets</h2>
+<p>Mark regions in your source file with comments:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="co"># start snippet my-function</span></span>
+<span id="cb19-2"><a href=""></a><span class="kw">def</span> hello(name):</span>
+<span id="cb19-3"><a href=""></a>    <span class="cf">return</span> <span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span>
+<span id="cb19-4"><a href=""></a><span class="co"># end snippet my-function</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then reference the snippet by name:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href=""></a><span class="in">```{.python include="script.py" snippet="my-function"}</span></span>
+<span id="cb20-2"><a href=""></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Supported comment styles: <code>#</code> (Python/R), <code>//</code> (JS/CSS), <code>--</code> (Lua), <code>&lt;!-- --&gt;</code> (HTML).</p>
+</section></section>
+<section>
+<section id="clean-theme" class="title-slide slide level1 center" data-background-color="#20c997">
+<h1>Clean Theme</h1>
+
+</section>
+<section id="clean-theme-extension" class="slide level2">
+<h2>Clean Theme Extension</h2>
+<p>The <strong>clean</strong> theme by Grant McDermott provides a minimalist, elegant look for academic and professional presentations.</p>
+<p>Install:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href=""></a><span class="ex">quarto</span> add grantmcdermott/quarto-revealjs-clean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use as the format:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb22-1"><a href=""></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb22-2"><a href=""></a><span class="at">  </span><span class="fu">clean-revealjs</span><span class="kw">:</span></span>
+<span id="cb22-3"><a href=""></a><span class="at">    </span><span class="fu">slide-number</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="clean-theme-features" class="slide level2 smaller">
+<h2>Clean Theme Features</h2>
+<p>The theme provides:</p>
+<ul>
+<li>Minimalist design with clean typography</li>
+<li>Slide numbers enabled by default</li>
+<li>Left-side navigation menu</li>
+<li>MathJax 4 with custom configuration</li>
+<li>Long date format</li>
+<li>Custom SCSS styling</li>
+</ul>
+<p>To use it, change the format from <code>revealjs</code> to <code>clean-revealjs</code>. Since this presentation uses <code>revealjs</code> with the <code>dark</code> theme, the clean theme is not active here — it is an alternative format.</p>
+</section></section>
+<section>
+<section id="reveal-header" class="title-slide slide level1 center" data-background-color="#e83e8c">
+<h1>Reveal Header</h1>
+
+</section>
+<section id="reveal-header-extension" class="slide level2">
+<h2>Reveal Header Extension</h2>
+<p>The <strong>reveal-header</strong> extension adds a persistent header with text and/or a logo across all slides.</p>
+<p>Install:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href=""></a><span class="ex">quarto</span> add shafayetShafee/reveal-header</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Look at the top of this slide</strong> — the Quarto logo and “Extensions Demo” text are rendered by this extension.</p>
+</section>
+<section id="reveal-header-configuration" class="slide level2 smaller">
+<h2>Reveal Header Configuration</h2>
+<p>Enable in YAML:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb24-1"><a href=""></a><span class="fu">filters</span><span class="kw">:</span></span>
+<span id="cb24-2"><a href=""></a><span class="at">  </span><span class="kw">-</span><span class="at"> reveal-header</span></span>
+<span id="cb24-3"><a href=""></a><span class="fu">header</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Presentation"</span></span>
+<span id="cb24-4"><a href=""></a><span class="fu">header-logo</span><span class="kw">:</span><span class="at"> https://quarto.org/quarto.png</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="additional-options">Additional Options</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb25-1"><a href=""></a><span class="co"># Use the document title as header text</span></span>
+<span id="cb25-2"><a href=""></a><span class="fu">title-as-header</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb25-3"><a href=""></a></span>
+<span id="cb25-4"><a href=""></a><span class="co"># Use the subtitle instead</span></span>
+<span id="cb25-5"><a href=""></a><span class="fu">subtitle-as-header</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb25-6"><a href=""></a></span>
+<span id="cb25-7"><a href=""></a><span class="co"># Hide header from title slide</span></span>
+<span id="cb25-8"><a href=""></a><span class="fu">hide-from-titleSlide</span><span class="kw">:</span><span class="at"> all</span><span class="co">   # or "text" or "logo"</span></span>
+<span id="cb25-9"><a href=""></a></span>
+<span id="cb25-10"><a href=""></a><span class="co"># Make the logo a clickable link</span></span>
+<span id="cb25-11"><a href=""></a><span class="fu">header-logo-link</span><span class="kw">:</span><span class="at"> </span><span class="st">"https://example.com"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="reveal-header-on-this-presentation" class="slide level2">
+<h2>Reveal Header on This Presentation</h2>
+<p>This presentation uses the following configuration:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb26-1"><a href=""></a><span class="fu">header</span><span class="kw">:</span><span class="at"> </span><span class="st">"Extensions Demo"</span></span>
+<span id="cb26-2"><a href=""></a><span class="fu">header-logo</span><span class="kw">:</span><span class="at"> https://quarto.org/quarto.png</span></span>
+<span id="cb26-3"><a href=""></a><span class="fu">hide-from-titleSlide</span><span class="kw">:</span><span class="at"> all</span></span>
+<span id="cb26-4"><a href=""></a><span class="fu">filters</span><span class="kw">:</span></span>
+<span id="cb26-5"><a href=""></a><span class="at">  </span><span class="kw">-</span><span class="at"> reveal-header</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The header and logo appear on every slide except the title slide.</p>
+</section></section>
+<section>
+<section id="summary" class="title-slide slide level1 center" data-background-color="#343a40">
+<h1>Summary</h1>
+
+</section>
+<section id="extension-summary" class="slide level2 smaller">
+<h2>Extension Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 20%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Extension</th>
+<th>Type</th>
+<th>Key Feature</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Pointer</strong></td>
+<td>Plugin</td>
+<td>Press <code>q</code> for a laser pointer</td>
+</tr>
+<tr class="even">
+<td><strong>Attribution</strong></td>
+<td>Plugin</td>
+<td>Sideways credit text on slide edge</td>
+</tr>
+<tr class="odd">
+<td><strong>Font Awesome</strong></td>
+<td>Shortcode</td>
+<td><code>{{&lt; fa icon-name &gt;}}</code> for icons</td>
+</tr>
+<tr class="even">
+<td><strong>Lightbox</strong></td>
+<td>Filter</td>
+<td>Click-to-zoom images</td>
+</tr>
+<tr class="odd">
+<td><strong>Include Code Files</strong></td>
+<td>Filter</td>
+<td>Embed external source files</td>
+</tr>
+<tr class="even">
+<td><strong>Clean</strong></td>
+<td>Format</td>
+<td>Minimalist academic theme</td>
+</tr>
+<tr class="odd">
+<td><strong>Reveal Header</strong></td>
+<td>Filter</td>
+<td>Persistent header logo and text</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<ul>
+<li><i class="fa-solid fa-book" aria-label="book"></i> <a href="https://quarto.org/docs/extensions/">Quarto Extensions Guide</a></li>
+<li><i class="fa-solid fa-puzzle-piece" aria-label="puzzle-piece"></i> <a href="https://quarto.org/docs/extensions/revealjs.html">RevealJS Plugins</a></li>
+<li><i class="fa-solid fa-list" aria-label="list"></i> <a href="https://quarto.org/docs/extensions/listing-revealjs.html">Extension Listing</a></li>
+<li><i class="fa-brands fa-github" aria-label="github"></i> <a href="https://github.com/quarto-ext">quarto-ext on GitHub</a></li>
+<li><i class="fa-solid fa-globe" aria-label="globe"></i> <a href="https://m.canouil.dev/quarto-extensions/">Community Extensions</a></li>
+</ul>
+
+<div class="reveal-header">
+<div class="header-logo" data-hide-from-titleslide="true">
+<img data-src="https://quarto.org/quarto.png">
+</div>
+<div class="sc-title">
+<p> </p>
+</div>
+<div class="header-text" data-hide-from-titleslide="true">
+<p>Extensions Demo</p>
+</div>
+<div class="sb-title">
+<p> </p>
+</div>
+</div>
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Quarto Extensions Demo</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="extensions_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="extensions_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="extensions_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="extensions_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="extensions_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="extensions_files/libs/revealjs/plugin/reveal-pointer/pointer.js"></script>
+  <script src="extensions_files/libs/revealjs/plugin/reveal-attribution/attribution.js"></script>
+  <script src="extensions_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="extensions_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="extensions_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="extensions_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="extensions_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'pointer': {"key":"q","color":"red","pointerSize":16,"alwaysVisible":false},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealPointer, RevealAttribution, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+</body></html>
