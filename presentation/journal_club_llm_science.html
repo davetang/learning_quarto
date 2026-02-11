@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Dave Tang">
-  <meta name="dcterms.date" content="2026-02-10">
+  <meta name="dcterms.date" content="2026-02-11">
   <title>Scientific production in the era of Large Language Models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -140,7 +140,7 @@ Dave Tang
 </div>
 </div>
 
-  <p class="date">2026-02-10</p>
+  <p class="date">2026-02-11</p>
 </section>
 <section id="paper-overview" class="slide level2">
 <h2>Paper Overview</h2>
@@ -219,7 +219,7 @@ Dave Tang
 <h3 id="text-based-ai-detection-algorithm">Text-based AI detection algorithm</h3>
 <ol type="1">
 <li>Estimate token (word) distribution of human-written text from pre-2023 abstracts</li>
-<li>Use GPT-3.5turbo to rewrite those abstracts to get LLM token distribution</li>
+<li>Use GPT-3.5turbo0125 to rewrite those abstracts to get LLM token distribution</li>
 <li>Compare distributions to identify probable LLM-assisted abstracts post-ChatGPT</li>
 </ol>
 <p>. . .</p>
@@ -230,7 +230,7 @@ Dave Tang
 <li>Fails to detect use when authors heavily edit LLM-assisted text</li>
 </ul>
 </section>
-<section id="study-design-productivity" class="slide level2">
+<section id="study-design-productivity" class="slide level2" style="font-size: 95%;">
 <h2>Study Design: Productivity</h2>
 <h3 id="author-level-fixed-effects-event-models">Author-level fixed effects event models</h3>
 <ul>
@@ -238,6 +238,36 @@ Dave Tang
 <li>Compare submission rates <span class="alert">before and after</span> adoption</li>
 <li>Stacked difference-in-difference regression</li>
 <li>Exclude manuscripts in core AI subdisciplines to isolate general productivity effects</li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>What is difference-in-difference?</strong></p>
+</div>
+<div class="callout-content">
+<p>“Compare two groups over time: authors who adopted LLMs (”treated”) vs.&nbsp;those who did not (“control”). The key idea is to subtract the control group’s trend from the treated group’s trend, removing shared time effects (e.g., growing preprint culture). “Stacked” means we handle authors adopting at different times by creating separate comparison datasets for each adoption cohort (e.g., 2023 adopters vs.&nbsp;never-adopters, 2024 adopters vs.&nbsp;never-adopters) and stacking them together. This ensures each adopter group is only compared to clean never-adopters, not to authors who adopted at different times.”</p>
+</div>
+</div>
+</div>
+</section>
+<section id="study-design-productivity-cont." class="slide level2 smaller">
+<h2>Study Design: Productivity (cont.)</h2>
+<h3 id="why-exclude-core-ai-subdisciplines">Why exclude core AI subdisciplines?</h3>
+<ul>
+<li>Researchers in AI/ML fields were <span class="alert">early adopters</span> and may have different productivity dynamics</li>
+<li>Their output growth could reflect the AI field’s rapid expansion, not LLM-assisted writing per se</li>
+<li>Including them would conflate “writing more <em>about</em> LLMs” with “writing more <em>using</em> LLMs”</li>
+<li>Removal isolates the general-purpose productivity effect of LLM adoption across disciplines</li>
+</ul>
+<h3 id="how-were-races-and-ethnicities-predicted">How were races and ethnicities predicted?</h3>
+<ul>
+<li>Author names were classified using established name-ethnicity algorithms (e.g., surname dictionaries and probabilistic models)</li>
+<li>Institutional affiliations provided geographic context (e.g., Asian institution vs.&nbsp;English-speaking institution)</li>
+<li>This proxy enabled the study to examine <span class="alert">language-barrier effects</span> — non-native English speakers benefit most from LLM writing assistance</li>
+<li>Caveat: name-based ethnicity prediction is imperfect and may misclassify individuals</li>
 </ul>
 </section>
 <section id="study-design-writing-quality" class="slide level2">
@@ -368,7 +398,7 @@ Dave Tang
 <tr class="odd">
 <td>Book citations</td>
 <td>+11.9% overall</td>
-<td>More books</td>
+<td>More books (not sig. in SSRN)</td>
 </tr>
 <tr class="even">
 <td>Reference age</td>
@@ -389,7 +419,7 @@ Dave Tang
 </section>
 <section id="ai-search-behaviour-bing-chat" class="slide level2">
 <h2>AI Search Behaviour (Bing Chat)</h2>
-<h3 id="natural-experiment-bing-chat-launch-feb-2023">Natural experiment: Bing Chat launch (Feb 2023)</h3>
+<h3 id="natural-experiment-bing-chat-gpt-4-launch-feb-2023">Natural experiment: Bing Chat (GPT-4) launch (Feb 2023)</h3>
 <p>Comparing Bing vs Google users accessing arXiv:</p>
 <ul>
 <li class="fragment">Post-Bing Chat users access <span class="fg" style="--col: #107895">books at 26.3% higher rate</span> (<span class="math inline">\(P &lt; 0.001\)</span>)</li>
@@ -437,7 +467,7 @@ Dave Tang
 <section id="limitations" class="slide level2" style="font-size: 95%;">
 <h2>Limitations</h2>
 <ol type="1">
-<li><strong>No causal identification</strong> — observational study; adoption is non-random and may be endogenous to productivity</li>
+<li><strong>No causal identification</strong> — observational study; adoption is non-random and may be endogenous to productivity (i.e., <span class="alert">already-productive researchers</span> may be more likely to adopt LLMs — they may be more tech-savvy, more motivated to optimise their workflow, or under greater pressure to publish — so the observed productivity boost could partly reflect <em>who</em> adopts rather than a pure <em>effect</em> of adoption)</li>
 <li><strong>Detection imperfections</strong> — abstract-only analysis; cannot detect heavily edited LLM text; cannot identify which co-author used an LLM</li>
 <li><strong>Snapshot in time</strong> — data pre-dates advanced reasoning models (o1, Claude 3.5, etc.); effects will likely be amplified with newer models</li>
 <li><strong>Confounders</strong> — publication outcomes influenced by many factors beyond writing quality; controls for preprint month and field of study included</li>

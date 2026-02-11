@@ -64,7 +64,7 @@ Additional data:
 ### Text-based AI detection algorithm
 
 1. Estimate token (word) distribution of human-written text from pre-2023 abstracts
-2. Use GPT-3.5turbo to rewrite those abstracts to get LLM token distribution
+2. Use GPT-3.5turbo0125 to rewrite those abstracts to get LLM token distribution
 3. Compare distributions to identify probable LLM-assisted abstracts post-ChatGPT
 
 . . .
@@ -75,7 +75,7 @@ Additional data:
 - Cannot identify which co-author used an LLM
 - Fails to detect use when authors heavily edit LLM-assisted text
 
-## Study Design: Productivity
+## Study Design: Productivity {style="font-size: 95%;"}
 
 ### Author-level fixed effects event models
 
@@ -83,6 +83,27 @@ Additional data:
 - Compare submission rates [before and after]{.alert} adoption
 - Stacked difference-in-difference regression
 - Exclude manuscripts in core AI subdisciplines to isolate general productivity effects
+
+::: {.callout-note}
+## What is difference-in-difference?
+"Compare two groups over time: authors who adopted LLMs ("treated") vs. those who did not ("control"). The key idea is to subtract the control group's trend from the treated group's trend, removing shared time effects (e.g., growing preprint culture). "Stacked" means we handle authors adopting at different times by creating separate comparison datasets for each adoption cohort (e.g., 2023 adopters vs. never-adopters, 2024 adopters vs. never-adopters) and stacking them together. This ensures each adopter group is only compared to clean never-adopters, not to authors who adopted at different times."
+:::
+
+## Study Design: Productivity (cont.) {.smaller}
+
+### Why exclude core AI subdisciplines?
+
+- Researchers in AI/ML fields were [early adopters]{.alert} and may have different productivity dynamics
+- Their output growth could reflect the AI field's rapid expansion, not LLM-assisted writing per se
+- Including them would conflate "writing more *about* LLMs" with "writing more *using* LLMs"
+- Removal isolates the general-purpose productivity effect of LLM adoption across disciplines
+
+### How were races and ethnicities predicted?
+
+- Author names were classified using established name-ethnicity algorithms (e.g., surname dictionaries and probabilistic models)
+- Institutional affiliations provided geographic context (e.g., Asian institution vs. English-speaking institution)
+- This proxy enabled the study to examine [language-barrier effects]{.alert} --- non-native English speakers benefit most from LLM writing assistance
+- Caveat: name-based ethnicity prediction is imperfect and may misclassify individuals
 
 ## Study Design: Writing Quality
 
@@ -180,7 +201,7 @@ Productivity gains for [Caucasian names at English-speaking institutions]{.fg st
 
 | Metric | Change | Direction |
 |--------|--------|-----------|
-| Book citations | +11.9% overall | More books |
+| Book citations | +11.9% overall | More books (not sig. in SSRN) |
 | Reference age | --0.379 years | More recent |
 | Citation impact | --2.34% | Less-cited works |
 
@@ -189,7 +210,7 @@ Productivity gains for [Caucasian names at English-speaking institutions]{.fg st
 
 ## AI Search Behaviour (Bing Chat)
 
-### Natural experiment: Bing Chat launch (Feb 2023)
+### Natural experiment: Bing Chat (GPT-4) launch (Feb 2023)
 
 Comparing Bing vs Google users accessing arXiv:
 
@@ -236,7 +257,7 @@ One proposed response: specialised "reviewer agents" that flag methodological in
 
 ## Limitations {style="font-size: 95%;"}
 
-1. **No causal identification** --- observational study; adoption is non-random and may be endogenous to productivity
+1. **No causal identification** --- observational study; adoption is non-random and may be endogenous to productivity (i.e., [already-productive researchers]{.alert} may be more likely to adopt LLMs --- they may be more tech-savvy, more motivated to optimise their workflow, or under greater pressure to publish --- so the observed productivity boost could partly reflect *who* adopts rather than a pure *effect* of adoption)
 2. **Detection imperfections** --- abstract-only analysis; cannot detect heavily edited LLM text; cannot identify which co-author used an LLM
 3. **Snapshot in time** --- data pre-dates advanced reasoning models (o1, Claude 3.5, etc.); effects will likely be amplified with newer models
 4. **Confounders** --- publication outcomes influenced by many factors beyond writing quality; controls for preprint month and field of study included
