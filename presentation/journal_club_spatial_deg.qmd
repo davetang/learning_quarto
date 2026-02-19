@@ -1,0 +1,311 @@
+---
+title: "A Comparative Study of Statistical Methods for Identifying Differentially Expressed Genes in Spatial Transcriptomics"
+subtitle: "Journal Club"
+format:
+  clean-revealjs:
+    slide-number: true
+    footer: "Wang et al. (2026) *PLOS Comput Biol* | DOI: 10.1371/journal.pcbi.1013956"
+author:
+  - name: Dave Tang
+date: last-modified
+date-format: "YYYY-MM-DD"
+---
+
+## Paper Overview
+
+### Wang Y, Zang C, Li Z, Guo CC, Lai D, Wei P (2026)
+
+- **Published:** *PLOS Computational Biology*, 11 Feb 2026
+- **Affiliations:** UT MD Anderson Cancer Center & UTHealth Houston
+- **DOI:** [10.1371/journal.pcbi.1013956](https://doi.org/10.1371/journal.pcbi.1013956)
+
+. . .
+
+**Central question:** Which statistical method best identifies differentially expressed genes (DEGs) in spatial transcriptomics while properly accounting for spatial correlation?
+
+## Motivation
+
+- Spatial transcriptomics (ST) captures gene expression while preserving [tissue architecture]{.alert}
+- Critical for understanding heterogeneous tissues: tumour microenvironments, tissue niches
+- Identifying DEGs between spatial regions is a fundamental analytical step
+- Seurat — the dominant ST analysis tool — uses the Wilcoxon rank-sum test by default
+- The Wilcoxon test [ignores spatial correlations]{.alert} inherent in ST data, leading to inflated false positive rates
+
+## Three Key Contributions
+
+::: {.incremental}
+1. Systematic [benchmarking]{.alert} of six statistical approaches for spatial DEG analysis
+2. A [Generalised Estimating Equations (GEE) framework]{.alert} that accounts for spatial dependencies using K-means–based working clusters
+3. Demonstration that [Independent GEE]{.alert} consistently controls Type I error across spatial correlation scenarios, where competing methods fail
+:::
+
+# Background {background-color="#107895"}
+
+## What is Spatial Transcriptomics? {style="font-size:80%;"}
+
+Two broad technology families — this paper focuses on **sequencing-based** ST:
+
+| Approach | How it works | Examples |
+|----------|-------------|---------|
+| **Sequencing-based** | Spatially barcoded capture array + NGS; each spot captures a small tissue region (~1–10 cells) | 10× Visium, Slide-seq, HDST |
+| **Imaging-based** | Fluorescence in situ hybridisation; single-molecule resolution but limited gene panel | MERFISH, seqFISH+, Xenium |
+
+. . .
+
+Both approaches preserve the [spatial context]{.alert} lost in bulk or single-cell RNA-seq, but differ in gene throughput, resolution, and the statistical challenges they pose.
+
+**Why spatial context matters for this paper:**
+
+- Cancer tissues have complex spatial architectures (tumour, stroma, immune infiltrates)
+- Neighbouring spots share similar expression profiles due to cellular proximity
+- This [spatial correlation violates the independence assumption]{.alert} of standard statistical tests
+
+## The Problem with Current Practice {style="font-size: 85%;"}
+
+### Seurat's default: Wilcoxon rank-sum test
+
+- Nonparametric test comparing two groups (e.g., tumour vs. fibrous tissue regions)
+- Assumes all observations are [independent]{.fg style="--col: #9a2515"}
+- In ST data, nearby spots have correlated expression — this assumption is [violated]{.fg style="--col: #9a2515"}
+
+. . .
+
+**Consequence:** Inflated Type I error rates — more false positives than expected at any significance threshold
+
+::: {.callout-note}
+## What is Type I error?
+A Type I error occurs when you reject the null hypothesis (no differential expression) when it is actually true — a false positive. If a test nominally controls Type I error at α = 0.01, we expect 1% of truly non-DE genes to be flagged. Spatial correlation can cause this rate to far exceed 1%.
+:::
+
+# Methods {background-color="#107895"}
+
+## Statistical Methods Compared {style="font-size: 90%;"}
+
+Six candidate methods evaluated:
+
+| Method | Key characteristic |
+|--------|-------------------|
+| Wilcoxon rank-sum | Nonparametric, assumes independence (Seurat default) |
+| Two-sample Z-test | Normal approximation, assumes independence |
+| GLMM | Exponential spatial covariance; [excluded]{.fg style="--col: #9a2515"} — convergence failures |
+| GEE + Robust Wald | Sandwich standard errors; requires full model fit |
+| GEE + Generalised Score Test (GST) | Requires null model only; more conservative |
+| Independent GEE | Treats each location as unique cluster |
+
+- All GEE approaches use a log-link Poisson-like model for count data
+- GLMM was dropped from comparisons due to numerical instability with zero-inflated ST data
+
+## The GEE Framework {style="font-size: 85%;"}
+
+### Handling spatial dependence via working clusters
+
+1. Divide tissue into **K spatial clusters** using K-means on spot coordinates
+2. Treat each cluster as a working "subject" in the GEE framework
+3. Use an [independent working correlation matrix]{.alert} within clusters
+4. Estimate standard errors via the **sandwich (robust) estimator** — valid even if the working correlation structure is misspecified
+
+. . .
+
+**Why K-means clusters rather than biological regions?**
+
+- Avoids circularity: biological regions are often defined by expression itself
+- Provides a spatially contiguous grouping structure that captures local correlation
+- Clusters are a technical device, not biological units
+
+## Independent GEE: The Special Case {style="font-size: 75%;"}
+
+### Treating every spot as its own cluster (K = N)
+
+- Each spatial location is its own "cluster" of size 1
+- Working correlation matrix is trivially independent
+- Standard errors still computed with robust sandwich estimator
+
+. . .
+
+**Why does this work?**
+
+- The sandwich estimator corrects for any residual spatial structure without explicitly modelling it
+- Bypasses the need to choose K (number of clusters)
+- Computationally simple and numerically stable
+
+::: {.callout-note}
+## Sandwich estimator intuition
+The sandwich estimator computes standard errors empirically from the data rather than assuming a specific correlation model. Even if you get the covariance structure wrong, the standard errors remain asymptotically valid — making them robust to misspecification.
+:::
+
+## Simulation Design {style="font-size: 80%;"}
+
+### Generating realistic ST data
+
+Parameters estimated from a 10× Genomics Visium breast cancer dataset:
+
+- **Spatial correlation:** Three scenarios based on empirical data quantiles
+  - Weak (25th percentile), Moderate (median), Strong (95th percentile)
+- **Cluster configurations:** K = 25 or K = 100 working clusters
+- **Replicates:** 100,000 for Type I error; 1,000 for power evaluation
+- **Significance levels:** α = 0.01, 0.001, 0.0001
+
+. . .
+
+**Two evaluations:**
+
+1. **Type I error:** Simulate null genes (no true DE) — how often is the null incorrectly rejected?
+2. **Power:** Simulate truly DE genes — how often is true DE detected?
+
+# Results {background-color="#107895"}
+
+## Type I Error Control {style="font-size: 95%;"}
+
+### Independent GEE is the only consistently well-calibrated test
+
+- **Weak spatial correlation:** All methods control Type I error adequately
+- **Moderate spatial correlation:** Z-test begins to inflate; Wilcoxon starts to fail
+- **Strong spatial correlation:** Wilcoxon and Z-test show [severely inflated]{.fg style="--col: #9a2515"} Type I error rates; GEE with GST also fails; [only Independent GEE maintains control]{.fg style="--col: #107895"}
+
+. . .
+
+> "The Independent GEE achieved consistently satisfactory control of the Type I error rates across spatial correlation scenarios, even under the strong spatial correlations where all other tests failed."
+
+## Type I Error: Effect of Cluster Number {style="font-size: 95%;"}
+
+### More clusters improve GEE-based tests
+
+- GEE with Robust Wald and GEE with GST both improve substantially with K = 100 vs. K = 25
+- At K = 100, GEE methods approach Independent GEE performance
+- [Independent GEE is insensitive to K]{.alert} — always well-calibrated
+
+. . .
+
+**Practical implication:** If using GEE with explicit clusters, choose a large K to reduce Type I error inflation. When in doubt, use Independent GEE.
+
+## Statistical Power Comparisons {style="font-size: 95%;"}
+
+### Methods are broadly comparable in power
+
+| Scenario | Observation |
+|----------|-------------|
+| Weak correlation, K = 100 | All methods similar |
+| Moderate correlation, K = 100 | All methods similar |
+| Strong correlation, K = 100 | All methods similar |
+| K = 25 | GEE with GST shows [reduced power]{.fg style="--col: #9a2515"} |
+
+. . .
+
+**Key message:** The methods differ primarily in Type I error control, not in power. Choosing Independent GEE costs [nothing in power]{.alert} while gaining superior false positive control.
+
+## Real Data: Breast Cancer {style="font-size: 75%;"}
+
+### 10× Genomics Visium breast cancer dataset
+
+- **3,798 spots**, **24,923 genes** (top 3,000 most variable used)
+- **Zero-inflation:** Median 95.5% zeros per gene (range: 68.0%–99.6%)
+- **Comparisons:**
+  - Ductal carcinoma in situ (DCIS) vs. fibrous tissue
+  - Invasive carcinoma (IC) vs. fibrous tissue
+  - Fibrous tissue subregion 1 vs. 2 (FT1 vs. FT2; no true DE expected — used to estimate empirical FPR)
+
+. . .
+
+**FT1 vs. FT2 as a negative control:**
+
+- Two fibrous tissue subregions should not differ in expression
+- Wilcoxon test returned many significant genes in this control comparison
+- Independent GEE returned far fewer — [consistent with its better-calibrated FPR]{.alert}
+
+## Real Data: QQ Plot Analysis {style="font-size: 90%;"}
+
+### Quantile-quantile plots reveal calibration differences
+
+- QQ plots compare observed p-value distributions to the expected uniform distribution under the null
+- A well-calibrated test follows the diagonal line
+- **Wilcoxon:** [Most severe deviation]{.fg style="--col: #9a2515"} from diagonal — concentrated in genes with 0–50% zeros, where spatial correlations are strongest
+- **Independent GEE:** Closest to diagonal — best-calibrated p-values
+
+. . .
+
+> "The Wilcoxon rank-sum test showed the most deviation from the identical line, which might indicate poor calibration of the p-values and possible inflated false positive rates."
+
+## Real Data: Pathway Enrichment {style="font-size: 90%;"}
+
+### Biological validation via KEGG pathways
+
+Significant KEGG pathways identified in DCIS vs. fibrous tissue:
+
+- PI3K–Akt signalling
+- Focal adhesion
+- Extracellular matrix–receptor interactions
+
+. . .
+
+- All methods recovered cancer-relevant pathways, supporting biological plausibility
+- [GEE with GST was most conservative]{.fg style="--col: #9a2515"} — fewest significant genes
+- Wilcoxon and Independent GEE showed substantial overlap in significant genes
+- Divergence more apparent in genes near the significance threshold
+
+## Real Data: Prostate Cancer {style="font-size: 95%;"}
+
+### Replication on an independent dataset
+
+- 10× Genomics Visium prostate cancer tissue
+- Comparisons between pathologically annotated regions
+- Results [replicated]{.alert} the breast cancer findings:
+  - Wilcoxon exhibited higher rates of significant genes than GEE-based tests
+  - Independent GEE showed the most conservative, well-calibrated behaviour
+  - Pathway-level biological conclusions were consistent across methods
+
+# Discussion {background-color="#107895"}
+
+## Why Spatial Correlation Matters Here {style="font-size: 90%;"}
+
+### Violation of independence has real consequences
+
+- Spatial correlations inflate the effective sample size assumed by independence-based tests
+- Standard errors are underestimated → test statistics inflated → p-values too small
+- Effect is [strongest for genes expressed in spatially contiguous patterns]{.alert}
+- Genes with 0–50% zeros are most affected (expression not swamped by structural zeros)
+
+. . .
+
+**The GLMM paradox:** While GLMM explicitly models spatial covariance, it failed due to convergence issues with zero-inflated count data — illustrating that a more complex model is not always better in practice.
+
+## Recommendations {style="font-size: 95%;"}
+
+### What practitioners should do
+
+1. **Do not rely solely on Wilcoxon** for ST DEG analysis — especially in tissues with strong spatial structure (e.g., tumour vs. stroma comparisons)
+2. **Use Independent GEE as a complement** — controls Type I error without requiring explicit spatial modelling
+3. **Cross-validate with pathway analysis** — biological plausibility should inform interpretation alongside statistical significance
+4. **Be cautious of genes near significance thresholds** — these are most sensitive to method choice
+
+## Limitations {style="font-size: 95%;"}
+
+1. **Asymptotic validity:** GEE relies on large-sample theory; performance with very few spots per region is unknown
+2. **K-means clustering is heuristic:** The number of working clusters K affects GEE performance; no principled selection criterion is provided
+3. **Single-platform focus:** All real data from 10× Genomics Visium; results may differ for other ST platforms (Slide-seq, MERFISH, Xenium)
+4. **Zero-inflation not explicitly modelled:** Counts analysed using a log-link model; dedicated zero-inflated models were not evaluated
+5. **Simulation realism:** Although parameters come from real data, simulated spatial correlation structures may not fully capture complex tissue geometries
+
+## The SpatialGEE R Package {style="font-size: 85%;"}
+
+### Open-source implementation
+
+- R package **SpatialGEE** available on GitHub
+- Implements all GEE-based methods described in the paper
+- Designed to integrate with standard ST analysis workflows (e.g., Seurat, SpatialExperiment)
+- Enables practitioners to apply Independent GEE without needing to understand the full GEE theory
+
+. . .
+
+**Computational considerations:**
+
+- GEE is substantially faster than GLMM
+- Independent GEE is the fastest variant — no cluster optimisation required
+- Scalable to typical Visium datasets (thousands of spots, thousands of genes)
+
+## Key Takeaways
+
+1. The Wilcoxon rank-sum test [inflates false positives]{.fg style="--col: #9a2515"} in spatial transcriptomics by ignoring spatial correlation
+2. [Independent GEE]{.alert} provides the best Type I error control across all simulated spatial correlation strengths
+3. Power differences between methods are [minimal]{.fg style="--col: #107895"} — choosing Independent GEE is essentially free in terms of sensitivity
+4. Real data applications confirm that Wilcoxon over-detects significant genes even in negative control comparisons
+5. The [SpatialGEE]{.alert} R package makes the recommended approach accessible to practitioners

@@ -34,7 +34,8 @@ format:
 | 2 | [Extensions](presentation/extensions.html) | Some useful Quarto extensions |
 | 3 | [Features](presentation/features.html) | RevealJS presentation features |
 | 4 | [LLMs & Science](presentation/journal_club_llm_science.html) | Journal club: LLMs and scientific production |
-| 5 | [Sandbox](presentation/sandbox.html) | Experimental slides and testing |
+| 5 | [Spatial DEG Methods](presentation/journal_club_spatial_deg.html) | Journal club: DEG methods in spatial transcriptomics |
+| 6 | [Sandbox](presentation/sandbox.html) | Experimental slides and testing |
 
 :::
 
