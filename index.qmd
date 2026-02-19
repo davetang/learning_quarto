@@ -35,7 +35,8 @@ format:
 | 3 | [Features](presentation/features.html) | RevealJS presentation features |
 | 4 | [LLMs & Science](presentation/journal_club_llm_science.html) | Journal club: LLMs and scientific production |
 | 5 | [Spatial DEG Methods](presentation/journal_club_spatial_deg.html) | Journal club: DEG methods in spatial transcriptomics |
-| 6 | [Sandbox](presentation/sandbox.html) | Experimental slides and testing |
+| 6 | [scRNA-seq DE](presentation/journal_club_scde.html) | Journal club: false discoveries in single-cell DE |
+| 7 | [Sandbox](presentation/sandbox.html) | Experimental slides and testing |
 
 :::
 

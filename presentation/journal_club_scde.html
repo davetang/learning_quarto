@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="journal_club_scde_files/libs/clipboard/clipboard.min.js"></script>
+<script src="journal_club_scde_files/libs/quarto-html/tabby.min.js"></script>
+<script src="journal_club_scde_files/libs/quarto-html/popper.min.js"></script>
+<script src="journal_club_scde_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="journal_club_scde_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="journal_club_scde_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="journal_club_scde_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
+
+  <meta name="author" content="Dave Tang">
+  <meta name="dcterms.date" content="2026-02-19">
+  <title>Confronting False Discoveries in Single-Cell Differential Expression</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="journal_club_scde_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="journal_club_scde_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="journal_club_scde_files/libs/revealjs/dist/theme/quarto-5ae9c59b2727fcd5357d4f034d95f9e0.css">
+  <link href="journal_club_scde_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="journal_club_scde_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="journal_club_scde_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="journal_club_scde_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+<script src="mathjax-config.js"></script>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Confronting False Discoveries in Single-Cell Differential Expression</h1>
+  <p class="subtitle">Journal Club</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Dave Tang 
+</div>
+</div>
+</div>
+
+  <p class="date">2026-02-19</p>
+</section>
+<section id="paper-overview" class="slide level2">
+<h2>Paper Overview</h2>
+<h3 id="squair-jw-gautier-m-kathe-c-skinnider-ma-courtine-g-2021">Squair JW, Gautier M, Kathe C, …, Skinnider MA, Courtine G (2021)</h3>
+<ul>
+<li><strong>Published:</strong> <em>Nature Communications</em> 12:5692 (2021)</li>
+<li><strong>Affiliations:</strong> EPFL, CHUV/UNIL (Lausanne), University of British Columbia, NIH</li>
+<li><strong>DOI:</strong> <a href="https://doi.org/10.1038/s41467-021-25960-2">10.1038/s41467-021-25960-2</a></li>
+</ul>
+<p>. . .</p>
+<p><strong>Central question:</strong> What distinguishes accurate from inaccurate statistical methods for single-cell differential expression, and how widespread are false discoveries in published analyses?</p>
+</section>
+<section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<ul>
+<li>scRNA-seq enables cell-type-specific dissection of responses to disease, trauma, and perturbation</li>
+<li>Many statistical methods exist, but their relative performance was poorly understood</li>
+<li>Prior benchmarks relied on <span class="alert">simulated data</span> — results depended heavily on the simulation model chosen, leading to contradictory conclusions</li>
+<li>The most widely used methods cover 86.1% of recent scRNA-seq studies</li>
+<li>No large-scale evaluation against an <span class="alert">experimental ground truth</span> had been performed</li>
+</ul>
+</section>
+<section id="three-key-findings" class="slide level2">
+<h2>Three Key Findings</h2>
+<ol type="1">
+<li class="fragment"><span class="alert">Pseudobulk methods</span> — which aggregate cells within biological replicates before testing — consistently and substantially outperform single-cell DE methods</li>
+<li class="fragment">Single-cell DE methods are systematically <span class="alert">biased towards highly expressed genes</span>, causing both false positives and false negatives</li>
+<li class="fragment">Failing to account for <span class="alert">between-replicate variation</span> produces hundreds of false discoveries — even in the complete absence of any biological difference</li>
+</ol>
+</section>
+<section>
+<section id="background" class="title-slide slide level1 center" data-background-color="#107895">
+<h1>Background</h1>
+
+</section>
+<section id="from-bulk-to-single-cell-rna-seq" class="slide level2" style="font-size: 80%;">
+<h2>From Bulk to Single-Cell RNA-seq</h2>
+<ul>
+<li><strong>Bulk RNA-seq</strong> measures average expression across all cells in a tissue — changes are confounded by cell-type composition shifts</li>
+<li><strong>Single-cell RNA-seq (scRNA-seq)</strong> resolves gene expression at the resolution of individual cells, enabling cell-type-specific DE analysis</li>
+<li>The sparsity and heterogeneity of single-cell data prompted development of specialised DE tools</li>
+</ul>
+<div class="fragment">
+<p><strong>The key question for any DE method:</strong></p>
+<blockquote>
+<p>When we observe a difference in gene expression between conditions, is it a true biological effect — or an artefact of the analysis?</p>
+</blockquote>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>What is differential expression analysis?</strong></p>
+</div>
+<div class="callout-content">
+<p>DE analysis tests, for each gene, whether its expression differs significantly between two conditions (e.g., treated vs.&nbsp;untreated). In single-cell data this is performed within a given cell type, comparing cells from different biological replicates.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="what-are-biological-replicates" class="slide level2" style="font-size: 85%;">
+<h2>What are Biological Replicates?</h2>
+<ul>
+<li>A biological replicate is an <span class="alert">independent biological sample</span> — a distinct animal, patient, or well — processed and sequenced separately</li>
+<li>Replicates from the same condition differ due to inherent biological and technical variability</li>
+<li>This between-replicate variation is <span class="fg" style="--col: #9a2515">unavoidable</span> and must be accounted for in statistical inference</li>
+</ul>
+<div class="fragment">
+<p><strong>Why this matters:</strong></p>
+<ul>
+<li>Statistical inference in any experiment should generalise beyond the specific cells in the dataset</li>
+<li>If cells from the same replicate are treated as independent observations, the effective sample size is vastly <span class="fg" style="--col: #9a2515">inflated</span></li>
+<li>This conflates between-replicate noise with the biological signal of interest</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="methods" class="title-slide slide level1 center" data-background-color="#107895">
+<h1>Methods</h1>
+
+</section>
+<section id="a-ground-truth-resource" class="slide level2" style="font-size: 85%;">
+<h2>A Ground-Truth Resource</h2>
+<h3 id="gold-standard-datasets-with-experimental-ground-truth">18 gold-standard datasets with experimental ground truth</h3>
+<p>Rather than relying on simulations, the authors curated datasets with <strong>matched bulk and single-cell RNA-seq</strong> from the same purified cell populations, perturbations, and laboratories:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 27%">
+<col style="width: 32%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Study</th>
+<th>Cell type</th>
+<th>Perturbation</th>
+<th>Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hagai et al.</td>
+<td>Bone marrow mononuclear cells</td>
+<td>LPS or poly-I:C stimulation</td>
+<td>Mouse, rat, pig, rabbit</td>
+</tr>
+<tr class="even">
+<td>Cano-Gamez et al.</td>
+<td>Naive / memory T cells</td>
+<td>T cell activation (Th0, Th2, Th17, iTreg)</td>
+<td>Human</td>
+</tr>
+<tr class="odd">
+<td>Angelidis et al.</td>
+<td>Alveolar macrophages, pneumocytes</td>
+<td>Young vs.&nbsp;old</td>
+<td>Mouse</td>
+</tr>
+<tr class="even">
+<td>Reyfman et al.</td>
+<td>Alveolar macrophages, pneumocytes</td>
+<td>Pulmonary fibrosis vs.&nbsp;control</td>
+<td>Human</td>
+</tr>
+</tbody>
+</table>
+<p>Ground truth: DE genes identified from the <strong>bulk RNA-seq</strong> counterpart</p>
+</section>
+<section id="de-methods-compared" class="slide level2" style="font-size: 85%;">
+<h2>14 DE Methods Compared</h2>
+<p>Seven <strong>single-cell methods</strong> (test individual cells):</p>
+<ul>
+<li>Wilcoxon rank-sum test, t-test, logistic regression, negative binomial GLM, Poisson GLM, likelihood ratio test, MAST (two-part hurdle model)</li>
+</ul>
+<p>Six <strong>pseudobulk methods</strong> (aggregate cells per replicate, then test):</p>
+<ul>
+<li>edgeR-LRT, edgeR-QLF, DESeq2-LRT, DESeq2-Wald, limma-trend, limma-voom</li>
+</ul>
+<p>One <strong>linear mixed model</strong> (lmerTest)</p>
+<div class="fragment">
+<blockquote>
+<p>Together, these methods account for 86.1% of the statistical approaches used in 500 recent scRNA-seq publications. The Wilcoxon rank-sum test alone is the single most commonly used method.</p>
+</blockquote>
+</div>
+</section>
+<section id="performance-metric-aucc" class="slide level2" style="font-size: 85%;">
+<h2>Performance Metric: AUCC</h2>
+<h3 id="area-under-the-concordance-curve">Area Under the Concordance Curve</h3>
+<ol type="1">
+<li>Rank genes in both the single-cell and matched bulk DE analyses by statistical significance</li>
+<li>For each cutoff (top 1 gene, top 2, …, top 500), compute the overlap between the two ranked lists</li>
+<li>Sum overlaps to produce a curve; normalise the area to [0, 1]</li>
+</ol>
+<p>. . .</p>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li>AUCC = 1: perfect concordance with bulk (ground truth)</li>
+<li>AUCC = 0: no concordance — effectively random</li>
+<li>Complemented by transcriptome-wide rank correlation (Spearman) and GO term enrichment concordance</li>
+</ul>
+</section></section>
+<section>
+<section id="results" class="title-slide slide level1 center" data-background-color="#107895">
+<h1>Results</h1>
+
+</section>
+<section id="pseudobulk-methods-outperform-single-cell-methods" class="slide level2" style="font-size: 85%;">
+<h2>Pseudobulk Methods Outperform Single-Cell Methods</h2>
+<h3 id="aucc-across-18-ground-truth-datasets">AUCC across 18 ground-truth datasets</h3>
+<p>Top 6 methods by AUCC are <strong>all pseudobulk</strong>:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Mean AUCC</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>edgeR-LRT</td>
+<td>0.43</td>
+<td>Pseudobulk</td>
+</tr>
+<tr class="even">
+<td>edgeR-QLF</td>
+<td>0.41</td>
+<td>Pseudobulk</td>
+</tr>
+<tr class="odd">
+<td>DESeq2-LRT</td>
+<td>0.39</td>
+<td>Pseudobulk</td>
+</tr>
+<tr class="even">
+<td>limma-trend</td>
+<td>0.38</td>
+<td>Pseudobulk</td>
+</tr>
+<tr class="odd">
+<td>DESeq2-Wald</td>
+<td>0.37</td>
+<td>Pseudobulk</td>
+</tr>
+<tr class="even">
+<td>limma-voom</td>
+<td>0.36</td>
+<td>Pseudobulk</td>
+</tr>
+<tr class="odd">
+<td>Wilcoxon</td>
+<td>0.23</td>
+<td>Single-cell</td>
+</tr>
+<tr class="even">
+<td>MAST</td>
+<td>0.20</td>
+<td>Single-cell</td>
+</tr>
+<tr class="odd">
+<td>Poisson</td>
+<td>0.13</td>
+<td>Single-cell</td>
+</tr>
+</tbody>
+</table>
+<p>Differences between pseudobulk and single-cell methods were <span class="alert">highly significant</span> across all 18 datasets.</p>
+</section>
+<section id="pseudobulk-methods-functional-enrichment" class="slide level2" style="font-size: 95%;">
+<h2>Pseudobulk Methods: Functional Enrichment</h2>
+<h3 id="go-term-enrichment-concordance-also-favours-pseudobulk">GO term enrichment concordance also favours pseudobulk</h3>
+<ul>
+<li>The AUCC advantage of pseudobulk methods extended to <strong>Gene Ontology (GO) term enrichment</strong> analysis</li>
+<li>Single-cell methods failed to identify biologically relevant GO terms correctly</li>
+<li>Example: mouse phagocytes stimulated with poly-I:C (a synthetic dsRNA) — single-cell methods missed the GO term “response to exogenous dsRNA” (GO:0043330), which is the <span class="alert">expected biological signal</span></li>
+<li>Pseudobulk methods also more faithfully predicted <strong>changes in protein abundance</strong> (validated against matching proteomics data)</li>
+</ul>
+</section>
+<section id="single-cell-methods-are-biased-towards-highly-expressed-genes" class="slide level2" style="font-size: 70%;">
+<h2>Single-Cell Methods Are Biased Towards Highly Expressed Genes</h2>
+<h3 id="an-unexpected-finding-about-which-genes-are-affected">An unexpected finding about which genes are affected</h3>
+<p>Initial hypothesis: pseudobulk methods outperform because they reduce zero-inflation (improving power for lowly expressed genes)</p>
+<p>. . .</p>
+<p><strong>What was actually found:</strong></p>
+<ul>
+<li>Performance differences were <span class="fg" style="--col: #9a2515">minimal for lowly expressed genes</span></li>
+<li>The largest differences emerged among <span class="alert">highly expressed genes</span></li>
+<li>False positives from single-cell methods were more highly expressed than those from pseudobulk methods</li>
+<li>False negatives from single-cell methods tended to be lowly expressed</li>
+</ul>
+<p>. . .</p>
+<p><strong>ERCC spike-in validation:</strong> In single-cell libraries containing equal concentrations of synthetic spike-in RNAs, single-cell methods incorrectly identified many abundant spike-ins as DE — an impossibility given the experimental design. Pseudobulk methods avoided this entirely.</p>
+</section>
+<section id="the-mechanism-between-replicate-variation" class="slide level2" style="font-size: 75%;">
+<h2>The Mechanism: Between-Replicate Variation</h2>
+<h3 id="two-knockout-experiments-reveal-the-root-cause">Two knockout experiments reveal the root cause</h3>
+<p><strong>Experiment 1 — Disable aggregation:</strong> Apply pseudobulk methods (edgeR, DESeq2, limma) directly to individual cells, skipping the aggregation step</p>
+<ul>
+<li>Result: <span class="fg" style="--col: #9a2515">pseudobulk advantage vanishes</span>; bias towards highly expressed genes re-emerges</li>
+</ul>
+<p>. . .</p>
+<p><strong>Experiment 2 — Shuffle replicates:</strong> Create “pseudo-replicates” by randomising the replicate label associated with each cell</p>
+<ul>
+<li>Result: <span class="fg" style="--col: #9a2515">same degradation in performance</span> and re-emergence of high-expression bias</li>
+</ul>
+<p>. . .</p>
+<p><strong>Common factor:</strong> Both manipulations destroy information about <strong>biological replicates</strong>. In an exemplary poly-I:C dataset, shuffling replicates decreased the variance of gene expression for 98.2% of genes; the same directional decrease was observed in every one of the 46 datasets tested, causing tests to falsely attribute replicate-level noise to the perturbation.</p>
+</section>
+<section id="false-discoveries-without-any-biological-difference" class="slide level2" style="font-size: 85%;">
+<h2>False Discoveries Without Any Biological Difference</h2>
+<h3 id="simulations-testing-for-de-between-randomly-assigned-groups">Simulations: testing for DE between randomly assigned groups</h3>
+<ul>
+<li>Simulated scRNA-seq data with <strong>no true DE</strong> between conditions, but varying levels of between-replicate heterogeneity</li>
+<li>Randomly split replicates into artificial “treatment” and “control” groups</li>
+<li>Performed DE analysis
+<ul>
+<li><strong>Single-cell methods:</strong> detected <span class="fg" style="--col: #9a2515">hundreds of DE genes</span> — proportional to the degree of between-replicate variation</li>
+<li><strong>Pseudobulk methods:</strong> successfully controlled false discoveries</li>
+<li><strong>Pseudo-replicates:</strong> reintroduced spurious DE genes to pseudobulk methods</li>
+<li><strong>More cells:</strong> <span class="fg" style="--col: #9a2515">exacerbated</span> the problem (more cells per replicate → more inflated pseudo-sample-size)</li>
+<li><strong>More replicates:</strong> reduced false discoveries (the only effective remedy)</li>
+</ul></li>
+</ul>
+</section>
+<section id="false-discoveries-in-real-data" class="slide level2" style="font-size: 80%;">
+<h2>False Discoveries in Real Data</h2>
+<h3 id="fourteen-datasets-with-6-control-replicates">Fourteen datasets with ≥6 control replicates</h3>
+<ul>
+<li>Identified 14 published scRNA-seq datasets with at least <strong>6 control replicates</strong></li>
+<li>Randomly split control samples into artificial treatment vs.&nbsp;control groups</li>
+<li>DE analysis between these groups (no true biological difference exists)</li>
+</ul>
+<p>. . .</p>
+<p><strong>Result:</strong> Single-cell methods produced a <span class="fg" style="--col: #9a2515">systematic excess of false positives</span> across all 14 datasets. The false DE genes were enriched for hundreds of GO terms — despite the complete absence of any perturbation.</p>
+<p>. . .</p>
+<p><strong>Human vs.&nbsp;mouse:</strong> Human scRNA-seq datasets showed <span class="alert">significantly more between-replicate variability</span> than mouse datasets (where genotype, environment, and perturbation timing can be precisely controlled), making human single-cell studies <span class="fg" style="--col: #9a2515">most vulnerable</span> to false discoveries.</p>
+</section>
+<section id="false-discoveries-extend-to-spatial-transcriptomics" class="slide level2" style="font-size: 75%;">
+<h2>False Discoveries Extend to Spatial Transcriptomics</h2>
+<h3 id="the-same-pitfall-applies-beyond-scrna-seq">The same pitfall applies beyond scRNA-seq</h3>
+<ul>
+<li>Analysed a spatial transcriptomics dataset profiling spinal cords from an ALS mouse model</li>
+<li>Randomly partitioned data from <strong>control mice</strong> into two groups</li>
+<li>Performed DE within each spinal cord region (dorsal, lateral, ventral, etc.)</li>
+</ul>
+<p>. . .</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>DE genes detected (no true effect)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wilcoxon rank-sum test</td>
+<td><span class="fg" style="--col: #9a2515">Thousands per region</span></td>
+</tr>
+<tr class="even">
+<td>edgeR-LRT (pseudobulk)</td>
+<td>Effectively zero</td>
+</tr>
+</tbody>
+</table>
+<p>. . .</p>
+<p>Any technology generating many observations per biological replicate — whether scRNA-seq spots or spatial barcodes — is susceptible to the same failure mode when between-replicate variation is ignored.</p>
+</section>
+<section id="in-vivo-validation-injured-mouse-spinal-cord" class="slide level2" style="font-size: 70%;">
+<h2>In Vivo Validation: Injured Mouse Spinal Cord</h2>
+<h3 id="translating-the-principles-to-new-biology">Translating the principles to new biology</h3>
+<ul>
+<li>Performed <strong>single-nucleus RNA-seq</strong> (snRNA-seq) of the lumbar spinal cord in mice with chronic spinal cord injury (SCI) vs.&nbsp;uninjured controls</li>
+<li>19,237 nuclei covering all major spinal cord cell types</li>
+<li>Cell type prioritisation (Augur) identified <span class="alert">endothelial cells</span> as most transcriptionally perturbed</li>
+</ul>
+<p>. . .</p>
+<p>DE analysis of injured vs.&nbsp;uninjured endothelial cells:</p>
+<ul>
+<li>edgeR-LRT and Wilcoxon identified largely distinct gene sets (only 4 genes in common)</li>
+<li><strong>RNAscope in vivo screen</strong> of 19 method-unique genes:</li>
+</ul>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Genes screened</th>
+<th>Validated</th>
+<th>Validation rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>edgeR-LRT</td>
+<td>6</td>
+<td>5</td>
+<td><span class="fg" style="--col: #107895">83%</span></td>
+</tr>
+<tr class="even">
+<td>Wilcoxon rank-sum test</td>
+<td>13</td>
+<td>3</td>
+<td><span class="fg" style="--col: #9a2515">23%</span></td>
+</tr>
+</tbody>
+</table>
+<p>Validated edgeR-LRT genes (e.g., <em>Slc7a11</em>, <em>Igfbp6</em>) pointed to <span class="alert">chronic hypoxia</span> in the lumbar cord — a biologically coherent finding confirmed by atrophic blood vessel morphology.</p>
+</section>
+<section id="mixed-models-theoretically-sound-practically-limited" class="slide level2" style="font-size: 65%;">
+<h2>Mixed Models: Theoretically Sound, Practically Limited</h2>
+<h3 id="why-not-just-model-replicates-explicitly">Why not just model replicates explicitly?</h3>
+<p>Mixed models (GLMMs) should account for both within-replicate and between-replicate variation, potentially outperforming pseudobulk</p>
+<p>. . .</p>
+<p><strong>What the authors found:</strong></p>
+<ul>
+<li>Evaluated 8 additional Poisson / negative binomial GLMMs</li>
+<li>In datasets of 25–50 cells: GLMMs could perform well under specific parameter combinations</li>
+<li>In datasets of <strong>≥500 cells:</strong> performance converged to that of pseudobulk methods — <span class="fg" style="--col: #9a2515">no advantage</span></li>
+<li>Computational cost of the best-performing GLMM: average <strong>13.5 hours per cell type</strong> in downsampled datasets</li>
+<li>Pseudobulk methods: <strong>minutes per cell type</strong> across all 46 datasets</li>
+</ul>
+<p>. . .</p>
+<blockquote>
+<p>Pseudobulk approaches provide an excellent trade-off between speed and accuracy for single-cell DE analysis in practice.</p>
+</blockquote>
+</section></section>
+<section>
+<section id="discussion" class="title-slide slide level1 center" data-background-color="#107895">
+<h1>Discussion</h1>
+
+</section>
+<section id="why-single-cell-methods-fail-the-core-mechanism" class="slide level2" style="font-size: 95%;">
+<h2>Why Single-Cell Methods Fail: The Core Mechanism</h2>
+<h3 id="a-cascade-of-consequences-from-ignoring-replicates">A cascade of consequences from ignoring replicates</h3>
+<ol type="1">
+<li>Each cell is treated as an independent observation — <span class="fg" style="--col: #9a2515">inflating the effective sample size</span></li>
+<li>The variance of gene expression across pseudo-replicates is <span class="fg" style="--col: #9a2515">systematically underestimated</span> for 98%+ of genes</li>
+<li>This underestimation is <span class="fg" style="--col: #9a2515">disproportionately large for highly expressed genes</span> (which are also more variable between replicates)</li>
+<li>Test statistics are inflated → p-values are too small → <span class="fg" style="--col: #9a2515">false positives</span>, especially for highly expressed genes</li>
+<li>False discoveries are enriched for GO terms, creating a <span class="fg" style="--col: #9a2515">convincing but misleading biological narrative</span></li>
+</ol>
+</section>
+<section id="recommendations-for-practitioners" class="slide level2" style="font-size: 95%;">
+<h2>Recommendations for Practitioners</h2>
+<h3 id="what-to-do-when-performing-de-analysis-in-scrna-seq">What to do when performing DE analysis in scRNA-seq</h3>
+<ol type="1">
+<li><strong>Always use pseudobulk methods</strong> — aggregate counts within each biological replicate per cell type, then apply edgeR, DESeq2, or limma</li>
+<li><strong>Never use pseudo-replicates</strong> as a substitute for true biological replication — random cell groupings do not capture between-replicate variability</li>
+<li><strong>Increase the number of biological replicates</strong> — more cells per sample does not help; more independent samples does</li>
+<li><strong>Be especially cautious with human tissue data</strong> — greater between-replicate variability makes it the most vulnerable context</li>
+<li><strong>Scrutinise highly expressed genes</strong> called as DE by single-cell methods — these are most likely to be false positives</li>
+</ol>
+</section>
+<section id="implications-for-the-field" class="slide level2" style="font-size: 75%;">
+<h2>Implications for the Field</h2>
+<h3 id="a-call-for-a-paradigm-shift">A call for a paradigm shift</h3>
+<ul>
+<li>At time of publication, <strong>most studies in the past two years</strong> had used inappropriate DE methods</li>
+<li>The most widely used analysis packages (e.g., Seurat) employed single-cell DE methods by default</li>
+<li>The increasing prevalence of multi-condition, multi-replicate datasets makes the problem <span class="alert">more acute, not less</span></li>
+</ul>
+<p>. . .</p>
+<blockquote>
+<p>“Our findings suggest that many published findings may be false. Moreover, if left unresolved, substantial research funding may be allocated to follow up on these false discoveries, to the detriment of science.”</p>
+</blockquote>
+<p>. . .</p>
+<p>The false discovery problem also affects <span class="alert">spatial transcriptomics</span> — a rapidly growing technology — suggesting the issue is not unique to scRNA-seq.</p>
+</section>
+<section id="limitations" class="slide level2" style="font-size: 85%;">
+<h2>Limitations</h2>
+<ol type="1">
+<li><strong>Ground-truth scope:</strong> The 18 gold-standard datasets cover a limited range of cell types, species, and perturbations; the relative ranking of methods may shift in other contexts</li>
+<li><strong>No pseudobulk without replicates:</strong> Pseudobulk methods require ≥2 biological replicates per condition — they cannot be applied to single-replicate datasets</li>
+<li><strong>AUCC is not the only metric:</strong> Concordance with bulk RNA-seq is an imperfect proxy for biological truth; bulk and scRNA-seq measure slightly different populations</li>
+<li><strong>Snapshot in time:</strong> The software landscape evolves; some packages (e.g., Seurat) have since updated their recommendations in response to findings like these</li>
+<li><strong>Mixed models not exhaustively evaluated:</strong> Only a subset of possible GLMM formulations were tested; some specialised tools may perform better than those assessed</li>
+</ol>
+</section>
+<section id="the-r-package" class="slide level2" style="font-size: 85%;">
+<h2>The R Package</h2>
+<h3 id="toolbox-for-accessible-pseudobulk-de">Toolbox for accessible pseudobulk DE</h3>
+<ul>
+<li>All 14 DE methods implemented in a single <strong>R package</strong> (Supplementary Software 1)</li>
+<li>Enables researchers to apply pseudobulk approaches without manually wrangling edgeR/DESeq2/limma</li>
+<li>Designed for direct use with standard scRNA-seq workflows (e.g., Seurat or SingleCellExperiment objects)</li>
+</ul>
+<p>. . .</p>
+<p><strong>Recommended method: edgeR-LRT</strong> (highest AUCC across the 18-dataset compendium)</p>
+<ul>
+<li>Aggregates counts per cell type per biological replicate</li>
+<li>Applies a negative binomial model with a likelihood ratio test</li>
+<li>Computationally efficient: minutes per cell type on standard hardware</li>
+</ul>
+</section>
+<section id="key-takeaways" class="slide level2">
+<h2>Key Takeaways</h2>
+<ol type="1">
+<li><span class="alert">Pseudobulk methods</span> (edgeR, DESeq2, limma) are the best-performing approach for scRNA-seq DE — validated against 18 experimental ground-truth datasets</li>
+<li>The Wilcoxon rank-sum test and other single-cell methods <span class="fg" style="--col: #9a2515">systematically bias towards highly expressed genes</span> and produce false positives</li>
+<li>The root cause is <span class="fg" style="--col: #9a2515">ignoring between-replicate variation</span> — not a property of any particular test statistic</li>
+<li>Single-cell methods can identify <span class="fg" style="--col: #9a2515">hundreds of DE genes in the complete absence of a perturbation</span>, and this extends to spatial transcriptomics</li>
+<li><span class="alert">More replicates</span>, not more cells, is the remedy — and human studies are most at risk</li>
+</ol>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Squair et al.&nbsp;(2021) <em>Nat Commun</em> | DOI: 10.1038/s41467-021-25960-2</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="journal_club_scde_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="journal_club_scde_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="journal_club_scde_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="journal_club_scde_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="journal_club_scde_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="journal_club_scde_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="journal_club_scde_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="journal_club_scde_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="journal_club_scde_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="journal_club_scde_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

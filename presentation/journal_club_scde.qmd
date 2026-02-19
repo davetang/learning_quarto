@@ -1,0 +1,350 @@
+---
+title: "Confronting False Discoveries in Single-Cell Differential Expression"
+subtitle: "Journal Club"
+format:
+  clean-revealjs:
+    slide-number: true
+    footer: "Squair et al. (2021) *Nat Commun* | DOI: 10.1038/s41467-021-25960-2"
+author:
+  - name: Dave Tang
+date: last-modified
+date-format: "YYYY-MM-DD"
+---
+
+## Paper Overview
+
+### Squair JW, Gautier M, Kathe C, ..., Skinnider MA, Courtine G (2021)
+
+- **Published:** *Nature Communications* 12:5692 (2021)
+- **Affiliations:** EPFL, CHUV/UNIL (Lausanne), University of British Columbia, NIH
+- **DOI:** [10.1038/s41467-021-25960-2](https://doi.org/10.1038/s41467-021-25960-2)
+
+. . .
+
+**Central question:** What distinguishes accurate from inaccurate statistical methods for single-cell differential expression, and how widespread are false discoveries in published analyses?
+
+## Motivation
+
+- scRNA-seq enables cell-type-specific dissection of responses to disease, trauma, and perturbation
+- Many statistical methods exist, but their relative performance was poorly understood
+- Prior benchmarks relied on [simulated data]{.alert} — results depended heavily on the simulation model chosen, leading to contradictory conclusions
+- The most widely used methods cover 86.1% of recent scRNA-seq studies
+- No large-scale evaluation against an [experimental ground truth]{.alert} had been performed
+
+## Three Key Findings
+
+::: {.incremental}
+1. [Pseudobulk methods]{.alert} — which aggregate cells within biological replicates before testing — consistently and substantially outperform single-cell DE methods
+2. Single-cell DE methods are systematically [biased towards highly expressed genes]{.alert}, causing both false positives and false negatives
+3. Failing to account for [between-replicate variation]{.alert} produces hundreds of false discoveries — even in the complete absence of any biological difference
+:::
+
+# Background {background-color="#107895"}
+
+## From Bulk to Single-Cell RNA-seq {style="font-size: 80%;"}
+
+- **Bulk RNA-seq** measures average expression across all cells in a tissue — changes are confounded by cell-type composition shifts
+- **Single-cell RNA-seq (scRNA-seq)** resolves gene expression at the resolution of individual cells, enabling cell-type-specific DE analysis
+- The sparsity and heterogeneity of single-cell data prompted development of specialised DE tools
+
+. . .
+
+**The key question for any DE method:**
+
+> When we observe a difference in gene expression between conditions, is it a true biological effect — or an artefact of the analysis?
+
+::: {.callout-note}
+## What is differential expression analysis?
+DE analysis tests, for each gene, whether its expression differs significantly between two conditions (e.g., treated vs. untreated). In single-cell data this is performed within a given cell type, comparing cells from different biological replicates.
+:::
+
+## What are Biological Replicates? {style="font-size: 85%;"}
+
+- A biological replicate is an [independent biological sample]{.alert} — a distinct animal, patient, or well — processed and sequenced separately
+- Replicates from the same condition differ due to inherent biological and technical variability
+- This between-replicate variation is [unavoidable]{.fg style="--col: #9a2515"} and must be accounted for in statistical inference
+
+. . .
+
+**Why this matters:**
+
+- Statistical inference in any experiment should generalise beyond the specific cells in the dataset
+- If cells from the same replicate are treated as independent observations, the effective sample size is vastly [inflated]{.fg style="--col: #9a2515"}
+- This conflates between-replicate noise with the biological signal of interest
+
+# Methods {background-color="#107895"}
+
+## A Ground-Truth Resource {style="font-size: 85%;"}
+
+### 18 gold-standard datasets with experimental ground truth
+
+Rather than relying on simulations, the authors curated datasets with **matched bulk and single-cell RNA-seq** from the same purified cell populations, perturbations, and laboratories:
+
+| Study | Cell type | Perturbation | Species |
+|-------|-----------|-------------|---------|
+| Hagai et al. | Bone marrow mononuclear cells | LPS or poly-I:C stimulation | Mouse, rat, pig, rabbit |
+| Cano-Gamez et al. | Naive / memory T cells | T cell activation (Th0, Th2, Th17, iTreg) | Human |
+| Angelidis et al. | Alveolar macrophages, pneumocytes | Young vs. old | Mouse |
+| Reyfman et al. | Alveolar macrophages, pneumocytes | Pulmonary fibrosis vs. control | Human |
+
+Ground truth: DE genes identified from the **bulk RNA-seq** counterpart
+
+## 14 DE Methods Compared {style="font-size: 85%;"}
+
+Seven **single-cell methods** (test individual cells):
+
+- Wilcoxon rank-sum test, t-test, logistic regression, negative binomial GLM, Poisson GLM, likelihood ratio test, MAST (two-part hurdle model)
+
+Six **pseudobulk methods** (aggregate cells per replicate, then test):
+
+- edgeR-LRT, edgeR-QLF, DESeq2-LRT, DESeq2-Wald, limma-trend, limma-voom
+
+One **linear mixed model** (lmerTest)
+
+. . .
+
+> Together, these methods account for 86.1% of the statistical approaches used in 500 recent scRNA-seq publications. The Wilcoxon rank-sum test alone is the single most commonly used method.
+
+## Performance Metric: AUCC {style="font-size: 85%;"}
+
+### Area Under the Concordance Curve
+
+1. Rank genes in both the single-cell and matched bulk DE analyses by statistical significance
+2. For each cutoff (top 1 gene, top 2, ..., top 500), compute the overlap between the two ranked lists
+3. Sum overlaps to produce a curve; normalise the area to \[0, 1\]
+
+. . .
+
+**Interpretation:**
+
+- AUCC = 1: perfect concordance with bulk (ground truth)
+- AUCC = 0: no concordance — effectively random
+- Complemented by transcriptome-wide rank correlation (Spearman) and GO term enrichment concordance
+
+# Results {background-color="#107895"}
+
+## Pseudobulk Methods Outperform Single-Cell Methods {style="font-size: 85%;"}
+
+### AUCC across 18 ground-truth datasets
+
+Top 6 methods by AUCC are **all pseudobulk**:
+
+| Method | Mean AUCC | Type |
+|--------|-----------|------|
+| edgeR-LRT | 0.43 | Pseudobulk |
+| edgeR-QLF | 0.41 | Pseudobulk |
+| DESeq2-LRT | 0.39 | Pseudobulk |
+| limma-trend | 0.38 | Pseudobulk |
+| DESeq2-Wald | 0.37 | Pseudobulk |
+| limma-voom | 0.36 | Pseudobulk |
+| Wilcoxon | 0.23 | Single-cell |
+| MAST | 0.20 | Single-cell |
+| Poisson | 0.13 | Single-cell |
+
+Differences between pseudobulk and single-cell methods were [highly significant]{.alert} across all 18 datasets.
+
+## Pseudobulk Methods: Functional Enrichment {style="font-size: 95%;"}
+
+### GO term enrichment concordance also favours pseudobulk
+
+- The AUCC advantage of pseudobulk methods extended to **Gene Ontology (GO) term enrichment** analysis
+- Single-cell methods failed to identify biologically relevant GO terms correctly
+- Example: mouse phagocytes stimulated with poly-I:C (a synthetic dsRNA) — single-cell methods missed the GO term "response to exogenous dsRNA" (GO:0043330), which is the [expected biological signal]{.alert}
+- Pseudobulk methods also more faithfully predicted **changes in protein abundance** (validated against matching proteomics data)
+
+## Single-Cell Methods Are Biased Towards Highly Expressed Genes {style="font-size: 70%;"}
+
+### An unexpected finding about which genes are affected
+
+Initial hypothesis: pseudobulk methods outperform because they reduce zero-inflation (improving power for lowly expressed genes)
+
+. . .
+
+**What was actually found:**
+
+- Performance differences were [minimal for lowly expressed genes]{.fg style="--col: #9a2515"}
+- The largest differences emerged among [highly expressed genes]{.alert}
+- False positives from single-cell methods were more highly expressed than those from pseudobulk methods
+- False negatives from single-cell methods tended to be lowly expressed
+
+. . .
+
+**ERCC spike-in validation:** In single-cell libraries containing equal concentrations of synthetic spike-in RNAs, single-cell methods incorrectly identified many abundant spike-ins as DE — an impossibility given the experimental design. Pseudobulk methods avoided this entirely.
+
+## The Mechanism: Between-Replicate Variation {style="font-size: 75%;"}
+
+### Two knockout experiments reveal the root cause
+
+**Experiment 1 — Disable aggregation:** Apply pseudobulk methods (edgeR, DESeq2, limma) directly to individual cells, skipping the aggregation step
+
+- Result: [pseudobulk advantage vanishes]{.fg style="--col: #9a2515"}; bias towards highly expressed genes re-emerges
+
+. . .
+
+**Experiment 2 — Shuffle replicates:** Create "pseudo-replicates" by randomising the replicate label associated with each cell
+
+- Result: [same degradation in performance]{.fg style="--col: #9a2515"} and re-emergence of high-expression bias
+
+. . .
+
+**Common factor:** Both manipulations destroy information about **biological replicates**. In an exemplary poly-I:C dataset, shuffling replicates decreased the variance of gene expression for 98.2% of genes; the same directional decrease was observed in every one of the 46 datasets tested, causing tests to falsely attribute replicate-level noise to the perturbation.
+
+## False Discoveries Without Any Biological Difference {style="font-size: 85%;"}
+
+### Simulations: testing for DE between randomly assigned groups
+
+- Simulated scRNA-seq data with **no true DE** between conditions, but varying levels of between-replicate heterogeneity
+- Randomly split replicates into artificial "treatment" and "control" groups
+- Performed DE analysis
+    - **Single-cell methods:** detected [hundreds of DE genes]{.fg style="--col: #9a2515"} — proportional to the degree of between-replicate variation
+    - **Pseudobulk methods:** successfully controlled false discoveries
+    - **Pseudo-replicates:** reintroduced spurious DE genes to pseudobulk methods
+    - **More cells:** [exacerbated]{.fg style="--col: #9a2515"} the problem (more cells per replicate → more inflated pseudo-sample-size)
+    - **More replicates:** reduced false discoveries (the only effective remedy)
+
+## False Discoveries in Real Data {style="font-size: 80%;"}
+
+### Fourteen datasets with ≥6 control replicates
+
+- Identified 14 published scRNA-seq datasets with at least **6 control replicates**
+- Randomly split control samples into artificial treatment vs. control groups
+- DE analysis between these groups (no true biological difference exists)
+
+. . .
+
+**Result:** Single-cell methods produced a [systematic excess of false positives]{.fg style="--col: #9a2515"} across all 14 datasets. The false DE genes were enriched for hundreds of GO terms — despite the complete absence of any perturbation.
+
+. . .
+
+**Human vs. mouse:** Human scRNA-seq datasets showed [significantly more between-replicate variability]{.alert} than mouse datasets (where genotype, environment, and perturbation timing can be precisely controlled), making human single-cell studies [most vulnerable]{.fg style="--col: #9a2515"} to false discoveries.
+
+## False Discoveries Extend to Spatial Transcriptomics {style="font-size: 75%;"}
+
+### The same pitfall applies beyond scRNA-seq
+
+- Analysed a spatial transcriptomics dataset profiling spinal cords from an ALS mouse model
+- Randomly partitioned data from **control mice** into two groups
+- Performed DE within each spinal cord region (dorsal, lateral, ventral, etc.)
+
+. . .
+
+| Method | DE genes detected (no true effect) |
+|--------|--------------------------------------|
+| Wilcoxon rank-sum test | [Thousands per region]{.fg style="--col: #9a2515"} |
+| edgeR-LRT (pseudobulk) | Effectively zero |
+
+. . .
+
+Any technology generating many observations per biological replicate — whether scRNA-seq spots or spatial barcodes — is susceptible to the same failure mode when between-replicate variation is ignored.
+
+## In Vivo Validation: Injured Mouse Spinal Cord {style="font-size: 70%;"}
+
+### Translating the principles to new biology
+
+- Performed **single-nucleus RNA-seq** (snRNA-seq) of the lumbar spinal cord in mice with chronic spinal cord injury (SCI) vs. uninjured controls
+- 19,237 nuclei covering all major spinal cord cell types
+- Cell type prioritisation (Augur) identified [endothelial cells]{.alert} as most transcriptionally perturbed
+
+. . .
+
+DE analysis of injured vs. uninjured endothelial cells:
+
+- edgeR-LRT and Wilcoxon identified largely distinct gene sets (only 4 genes in common)
+- **RNAscope in vivo screen** of 19 method-unique genes:
+
+| Method | Genes screened | Validated | Validation rate |
+|--------|---------------|-----------|----------------|
+| edgeR-LRT | 6 | 5 | [83%]{.fg style="--col: #107895"} |
+| Wilcoxon rank-sum test | 13 | 3 | [23%]{.fg style="--col: #9a2515"} |
+
+Validated edgeR-LRT genes (e.g., *Slc7a11*, *Igfbp6*) pointed to [chronic hypoxia]{.alert} in the lumbar cord — a biologically coherent finding confirmed by atrophic blood vessel morphology.
+
+## Mixed Models: Theoretically Sound, Practically Limited {style="font-size: 65%;"}
+
+### Why not just model replicates explicitly?
+
+Mixed models (GLMMs) should account for both within-replicate and between-replicate variation, potentially outperforming pseudobulk
+
+. . .
+
+**What the authors found:**
+
+- Evaluated 8 additional Poisson / negative binomial GLMMs
+- In datasets of 25–50 cells: GLMMs could perform well under specific parameter combinations
+- In datasets of **≥500 cells:** performance converged to that of pseudobulk methods — [no advantage]{.fg style="--col: #9a2515"}
+- Computational cost of the best-performing GLMM: average **13.5 hours per cell type** in downsampled datasets
+- Pseudobulk methods: **minutes per cell type** across all 46 datasets
+
+. . .
+
+> Pseudobulk approaches provide an excellent trade-off between speed and accuracy for single-cell DE analysis in practice.
+
+# Discussion {background-color="#107895"}
+
+## Why Single-Cell Methods Fail: The Core Mechanism {style="font-size: 95%;"}
+
+### A cascade of consequences from ignoring replicates
+
+1. Each cell is treated as an independent observation — [inflating the effective sample size]{.fg style="--col: #9a2515"}
+2. The variance of gene expression across pseudo-replicates is [systematically underestimated]{.fg style="--col: #9a2515"} for 98%+ of genes
+3. This underestimation is [disproportionately large for highly expressed genes]{.fg style="--col: #9a2515"} (which are also more variable between replicates)
+4. Test statistics are inflated → p-values are too small → [false positives]{.fg style="--col: #9a2515"}, especially for highly expressed genes
+5. False discoveries are enriched for GO terms, creating a [convincing but misleading biological narrative]{.fg style="--col: #9a2515"}
+
+## Recommendations for Practitioners {style="font-size: 95%;"}
+
+### What to do when performing DE analysis in scRNA-seq
+
+1. **Always use pseudobulk methods** — aggregate counts within each biological replicate per cell type, then apply edgeR, DESeq2, or limma
+2. **Never use pseudo-replicates** as a substitute for true biological replication — random cell groupings do not capture between-replicate variability
+3. **Increase the number of biological replicates** — more cells per sample does not help; more independent samples does
+4. **Be especially cautious with human tissue data** — greater between-replicate variability makes it the most vulnerable context
+5. **Scrutinise highly expressed genes** called as DE by single-cell methods — these are most likely to be false positives
+
+## Implications for the Field {style="font-size: 75%;"}
+
+### A call for a paradigm shift
+
+- At time of publication, **most studies in the past two years** had used inappropriate DE methods
+- The most widely used analysis packages (e.g., Seurat) employed single-cell DE methods by default
+- The increasing prevalence of multi-condition, multi-replicate datasets makes the problem [more acute, not less]{.alert}
+
+. . .
+
+> "Our findings suggest that many published findings may be false. Moreover, if left unresolved, substantial research funding may be allocated to follow up on these false discoveries, to the detriment of science."
+
+. . .
+
+The false discovery problem also affects [spatial transcriptomics]{.alert} — a rapidly growing technology — suggesting the issue is not unique to scRNA-seq.
+
+## Limitations {style="font-size: 85%;"}
+
+1. **Ground-truth scope:** The 18 gold-standard datasets cover a limited range of cell types, species, and perturbations; the relative ranking of methods may shift in other contexts
+2. **No pseudobulk without replicates:** Pseudobulk methods require ≥2 biological replicates per condition — they cannot be applied to single-replicate datasets
+3. **AUCC is not the only metric:** Concordance with bulk RNA-seq is an imperfect proxy for biological truth; bulk and scRNA-seq measure slightly different populations
+4. **Snapshot in time:** The software landscape evolves; some packages (e.g., Seurat) have since updated their recommendations in response to findings like these
+5. **Mixed models not exhaustively evaluated:** Only a subset of possible GLMM formulations were tested; some specialised tools may perform better than those assessed
+
+## The R Package {style="font-size: 85%;"}
+
+### Toolbox for accessible pseudobulk DE
+
+- All 14 DE methods implemented in a single **R package** (Supplementary Software 1)
+- Enables researchers to apply pseudobulk approaches without manually wrangling edgeR/DESeq2/limma
+- Designed for direct use with standard scRNA-seq workflows (e.g., Seurat or SingleCellExperiment objects)
+
+. . .
+
+**Recommended method: edgeR-LRT** (highest AUCC across the 18-dataset compendium)
+
+- Aggregates counts per cell type per biological replicate
+- Applies a negative binomial model with a likelihood ratio test
+- Computationally efficient: minutes per cell type on standard hardware
+
+## Key Takeaways
+
+1. [Pseudobulk methods]{.alert} (edgeR, DESeq2, limma) are the best-performing approach for scRNA-seq DE — validated against 18 experimental ground-truth datasets
+2. The Wilcoxon rank-sum test and other single-cell methods [systematically bias towards highly expressed genes]{.fg style="--col: #9a2515"} and produce false positives
+3. The root cause is [ignoring between-replicate variation]{.fg style="--col: #9a2515"} — not a property of any particular test statistic
+4. Single-cell methods can identify [hundreds of DE genes in the complete absence of a perturbation]{.fg style="--col: #9a2515"}, and this extends to spatial transcriptomics
+5. [More replicates]{.alert}, not more cells, is the remedy — and human studies are most at risk
