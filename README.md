@@ -3,6 +3,7 @@
 - [Quarto](#quarto)
 - [Quarto CLI](#quarto-cli)
 - [Notebooks](#notebooks)
+- [Quarto Projects](#quarto-projects)
 - [Tips](#tips)
 - [Useful links](#useful-links)
 
@@ -168,6 +169,101 @@ Output created: hello.html
 
 [ 2023/08/15 09:26:06 ] Work complete
 0 minutes and 6 seconds elapsed.
+```
+
+# Quarto Projects
+
+A Quarto Project is a directory that contains a `_quarto.yml` configuration file, which coordinates how multiple `.qmd` files are rendered together into a cohesive output (e.g. a website, book, or blog). Projects enable shared metadata, navigation, and site-wide options across all documents.
+
+## Initialise a project
+
+Use `quarto create project` to scaffold a new project interactively, or pass the type and directory name directly:
+
+```console
+# create a website project in the current directory
+quarto create project website .
+
+# other project types: book, blog, manuscript, default
+quarto create project book mybook
+```
+
+This generates a `_quarto.yml` file and starter `.qmd` files appropriate for the chosen project type.
+
+## Render a project
+
+Run `quarto render` from the project root to render all documents defined in `_quarto.yml`. Output is written to the `_site/` directory by default for website projects.
+
+```console
+# Render every document in the project
+quarto render
+
+# Render a single file within the project
+quarto render index.qmd
+
+# Render to a specific format
+quarto render --to pdf
+```
+
+## R and R packages
+
+Quarto uses whichever `R` binary is first on `PATH` - there is no project-level R version pinning out of the box. You can verify which R it will use with:
+
+```console
+quarto check
+```
+```
+Quarto 1.8.26
+[snipped]
+      Version: 4.5.2
+      Path: /usr/lib/R
+      LibPaths:
+        - /home/dtang/R/x86_64-pc-linux-gnu-library/4.5
+        - /usr/local/lib/R/site-library
+        - /usr/lib/R/site-library
+        - /usr/lib/R/library
+      knitr: 1.50
+      rmarkdown: 2.30
+[snipped]
+```
+
+R packages are loaded from the library paths that R itself reports (`R -e ".libPaths()"`), which typically means the user library (`~/R/<platform>/<version>/`) and the system library. There is no project-local package isolation by default, so every project on a machine shares the same global package installation.
+
+To get reproducible, project-local package libraries, add [renv](https://rstudio.github.io/renv/) to the project:
+
+```r
+# Run once inside the project to initialise a private library
+renv::init()
+```
+
+Quarto detects an active `renv` environment automatically (via the project's `.Rprofile`) and installs or restores packages into the project-local `renv/library/` instead of the global library. Commit `renv.lock`, `.Rprofile`, and `renv/activate.R` to version control so collaborators and CI runners can reproduce the exact same package versions with `renv::restore()`.
+
+## Preview a project locally
+
+`quarto preview` starts a local development server and live-reloads the browser whenever a source file changes — useful while authoring.
+
+```console
+quarto preview
+```
+
+## Publish to GitHub Pages
+
+Quarto has built-in support for publishing to GitHub Pages via the `quarto publish` command. On first run it will ask for confirmation and create or update the `gh-pages` branch; subsequent runs are non-interactive.
+
+```console
+# Publish (or re-publish) to GitHub Pages
+quarto publish gh-pages
+```
+
+Quarto renders the project, copies the output to the `gh-pages` branch, and pushes it to the remote. Make sure GitHub Pages is configured to serve from the `gh-pages` branch in the repository settings (**Settings -> Pages -> Branch -> gh-pages / root**).
+
+For CI/CD pipelines (e.g. GitHub Actions), freeze computed outputs first so the workflow does not need to re-execute code:
+
+```console
+# Freeze all outputs before committing (run locally)
+quarto render --freeze
+
+# Then in CI, publish without re-executing notebooks
+quarto publish gh-pages --no-render
 ```
 
 # Tips
