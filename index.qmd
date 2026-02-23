@@ -36,7 +36,8 @@ format:
 | 4 | [LLMs & Science](presentation/journal_club_llm_science.html) | Journal club: LLMs and scientific production |
 | 5 | [Spatial DEG Methods](presentation/journal_club_spatial_deg.html) | Journal club: DEG methods in spatial transcriptomics |
 | 6 | [scRNA-seq DE](presentation/journal_club_scde.html) | Journal club: false discoveries in single-cell DE |
-| 7 | [Sandbox](presentation/sandbox.html) | Experimental slides and testing |
+| 7 | [Vibe Coding & OSS](presentation/vibe_coding_oss.html) | Journal club: vibe coding and open source sustainability |
+| 8 | [Sandbox](presentation/sandbox.html) | Experimental slides and testing |
 
 :::
 

@@ -1,0 +1,354 @@
+---
+title: "Vibe Coding Kills Open Source?"
+subtitle: "Journal Club"
+format:
+  clean-revealjs:
+    slide-number: true
+    footer: "Koren, Békés, Hinz & Lohmann (2026) *arXiv* | arXiv:2601.15494v1"
+author:
+  - name: Dave Tang
+date: last-modified
+date-format: "YYYY-MM-DD"
+---
+
+## Paper Overview
+
+### Koren M, Békés G, Hinz J, Lohmann A (2026)
+
+- **Posted:** *arXiv*, 21 Jan 2026
+- **Affiliations:** Central European University, KRTK, CEPR, CESifo; Bielefeld University; Kiel Institute for the World Economy
+- **Pre-print:** [arXiv:2601.15494v1](https://arxiv.org/abs/2601.15494v1)
+
+. . .
+
+**Central question:** Does the widespread adoption of vibe coding — AI-mediated software development — threaten the long-run sustainability of the open source software (OSS) ecosystem?
+
+## Motivation
+
+- AI coding assistants (Claude Code, Cursor, Lovable) are rapidly transforming how software is built
+- [Vibe coding]{.alert}: a human translates intent into software via an AI agent, often without reading documentation or engaging with maintainers
+- OSS is nonrival and creates enormous social value — but many maintainers sustain projects through [direct user engagement]{.alert} (documentation visits, bug reports, reputation)
+- If AI mediation substitutes for direct interaction, the same technology that makes software easier to use may [erode the revenue base]{.fg style="--col: #9a2515"} that motivates supply
+- No prior general-equilibrium analysis of how vibe coding feeds back into OSS entry and sharing decisions
+
+## Three Key Findings
+
+::: {.incremental}
+1. In the [short run]{.alert}, when AI primarily boosts developer productivity, vibe coding raises OSS entry, quality, and welfare — while the mass of shared packages stays constant
+2. In the [long run]{.fg style="--col: #9a2515"}, under traditional engagement-based business models, vibe coding reduces OSS entry, variety, quality, and welfare — despite the productivity gains
+3. Sustaining OSS at its current scale requires [per-user monetization to remain close to current levels]{.alert}, or a major shift toward platform redistribution, foundation grants, or enterprise funding
+:::
+
+# Background {background-color="#107895"}
+
+## What Is Vibe Coding? {style="font-size: 85%;"}
+
+- Traditional developer workflow: select packages → read documentation → interact with maintainers → report bugs
+- [Vibe coding]{.alert}: an AI agent selects, composes, and modifies packages end-to-end; the human developer may not know which upstream components were used
+
+. . .
+
+**Two economic consequences:**
+
+1. **Productivity channel (positive):** lowers the cost of using and building on existing code
+2. **Demand-diversion channel (negative):** reduces direct engagement → maintainers earn less private return per unit of usage
+
+. . .
+
+::: {.callout-note}
+## Why does this matter for OSS supply?
+OSS maintainers typically capture value through engagement-based channels: documentation traffic generates consulting leads, GitHub stars create job opportunities, public Q&A signals demand. An AI intermediary that bypasses these surfaces can decouple usage from monetizable engagement.
+:::
+
+## AI Adoption: A Large, Fast Shock {style="font-size: 80%;"}
+
+### Rapid diffusion across the industry
+
+- By October 2024, [>25%]{.alert} of new code at Google was AI-generated and accepted by engineers (Pichai, 2024)
+- At Anthropic, CEO Dario Amodei reported in September 2025 that ["70, 80, 90 percent of the code is written by Claude"]{.alert}
+- Using GitHub commit data from 170,000 developers, Daniotti et al. (2025) estimate AI generated [~29–30%]{.alert} of Python functions authored by U.S. contributors by end 2024
+
+. . .
+
+### Capability improvements are equally striking
+
+| Year | Model | SWE-bench solve rate |
+|------|-------|---------------------|
+| 2024 | Claude 2 | 1.96% |
+| Early 2026 | Claude 4.5 | 74.2% |
+
+Rapid performance gains help explain why adoption accelerates sharply once capability crosses a usability threshold.
+
+## The Engagement Substitution Problem {style="font-size: 85%;"}
+
+### Evidence that AI mediation decouples usage from engagement
+
+**Stack Overflow:**
+
+- del Rio-Chanona et al. (2024) show ChatGPT access reduced Stack Overflow activity by [~25%]{.fg style="--col: #9a2515"} within six months
+- Overall Stack Overflow traffic has [continued declining sharply]{.fg style="--col: #9a2515"} since (Orosz, 2025)
+
+. . .
+
+**Tailwind CSS (a concrete case):**
+
+- Weekly npm downloads: [rising steadily]{.fg style="--col: #107895"} — growing usage
+- Stack Overflow questions tagged `tailwind-css`: [falling]{.fg style="--col: #9a2515"}
+- Documentation traffic: [down ~40%]{.fg style="--col: #9a2515"} from early 2023 (creator Adam Wathan, 2026)
+- Revenue: [down ~80%]{.fg style="--col: #9a2515"} (Wathan, 2026)
+
+. . .
+
+> Usage and engagement have decoupled — exactly the mechanism the model formalises.
+
+## Concentration in OSS Outcomes {style="font-size: 85%;"}
+
+### OSS outcomes follow a Pareto distribution
+
+- Of ~125 million GitHub repositories, only **10.32 million** have ever received at least one star
+- Among JavaScript npm packages: 840,419 published; only 392,828 ever appear as a dependency
+- Log–rank regressions on GitHub stars yield Pareto exponent slopes of [1.08–2.24]{.alert} depending on the tail truncation
+
+. . .
+
+**Why this matters for the model:**
+
+- Most repositories attract [no attention]{.fg style="--col: #9a2515"} and are never reused
+- A small upper tail accounts for a large share of usage and downstream dependence
+- The model captures this with a [Pareto quality distribution]{.alert} and an endogenous sharing cutoff
+
+# Model {background-color="#107895"}
+
+## Model Overview {style="font-size: 90%;"}
+
+### A monopolistic competition framework for OSS
+
+Inspired by Krugman (1980) and Melitz (2003), the model has four components:
+
+::: {.incremental}
+1. **Users** choose among packages that differ in quality using a Fréchet discrete-choice demand system — they value [variety and quality]{.alert}
+2. **Developers** incur an up-front cost, draw project quality from a [Pareto distribution]{.alert}, then decide whether to release as OSS by paying a fixed sharing cost
+3. **Software production function:** development cost decreases in existing software quality and variety — a ["software-begets-software" feedback]{.alert}
+4. **Vibe coding:** adds an inner nest — after choosing a package, the user decides between direct and AI-mediated usage, affecting both utility and monetizable engagement
+:::
+
+## Users and Package Choice {style="font-size: 85%;"}
+
+### Fréchet discrete-choice demand
+
+A user's utility from package $k$ with quality $q_k$:
+
+$$U_{ik} = \nu_{ik} q_k u, \quad \nu_{ik} \sim \text{Fréchet}(\sigma, \cdot)$$
+
+- $\sigma > 1$: substitutability across packages (higher = easier to switch)
+- $u$: productivity multiplier (affected by vibe coding)
+
+Expected user utility across the best available package:
+
+$$U = \bar{q} \, u \, m_s^{1/\sigma}$$
+
+where $\bar{q}$ = average quality, $m_s$ = mass of shared packages. Welfare rises with [quality, productivity, and variety]{.alert}.
+
+## Developers and the Sharing Decision {style="font-size: 65%;"}
+
+### Endogenous selection into sharing
+
+1. Developers pay up-front cost $\Phi$ before quality is known
+2. After observing realized quality $q \sim \text{Pareto}(\gamma)$, share if payoff exceeds cost:
+
+$$\Pi(q) = \pi \cdot \frac{q^\sigma}{m_s \bar{q}^\sigma} \geq \tau$$
+
+- $\pi$: reward per [direct]{.alert} user (the key variable affected by vibe coding)
+- $\tau$: fixed sharing cost (packaging, documentation, maintenance)
+
+. . .
+
+**Equilibrium sharing cutoff $q_0$:** only projects with $q \geq q_0$ are released as OSS.
+
+$$m_s = \frac{\pi}{\tau \Lambda^\sigma}, \quad \bar{q} = \Lambda^{1+\sigma/\gamma} \left(\frac{\tau m}{\pi}\right)^{1/\gamma}$$
+
+Notably, the mass of shared software $m_s$ increases in the reward per user $\pi$ — this is the channel vibe coding threatens.
+
+## Vibe Coding in the Model {style="font-size: 85%;"}
+
+### An inner nest: how users interact with a chosen package
+
+After selecting package $k$, users choose between:
+
+- **Direct usage:** read docs, visit project page, discover commercial offerings → [monetizable engagement]{.alert}
+- **Vibe-coded usage:** interact through an AI assistant trained on documentation → [no direct engagement]{.fg style="--col: #9a2515"}
+
+The vibe coding adoption share follows an S-curve:
+
+$$v = \frac{\zeta^\theta}{1 + \zeta^\theta}$$
+
+where $\zeta$ = AI capability (productivity of vibe coding) and $\theta$ = substitutability between usage modes.
+
+. . .
+
+The utility multiplier from having the option: $u = (1-v)^{-1/\theta} > 1$
+
+When $\theta$ is large (modes are close substitutes), the productivity gain is [modest]{.fg style="--col: #9a2515"} even for high adoption — and the demand-diversion channel dominates more strongly.
+
+# Results {background-color="#107895"}
+
+## Short-Run Effects: Developer Adoption Only {style="font-size: 85%;"}
+
+### When AI helps developers build, but users still engage directly
+
+Under this scenario, $\pi$ remains unchanged (users still interact directly with OSS):
+
+| Outcome | Change | Direction |
+|---------|--------|-----------|
+| Developer entry $m$ | $(1-v)^{-\beta/(\theta\eta)}$ | [Up]{.fg style="--col: #107895"} |
+| Shared packages $m_s$ | Unchanged | Neutral |
+| Average quality $\bar{q}$ | $(1-v)^{-\beta/(\theta\gamma\eta)}$ | [Up]{.fg style="--col: #107895"} |
+| User welfare $U$ | $(1-v)^{-\beta/(\theta\gamma\eta)}$ | [Up]{.fg style="--col: #107895"} |
+
+. . .
+
+- More entry, higher quality — but the fraction of projects that are shared [falls]{.fg style="--col: #9a2515"} (entry rises, $m_s$ constant → more unshared "AI slop")
+- Consistent with reports that 20% of curl security reports in 2025 were AI-generated fabrications (Stenberg, 2025)
+
+## Long-Run Effects: Traditional Business Models {style="font-size: 90%;"}
+
+### When engagement-based monetization erodes: $\pi = \bar{\pi}(1-v)$
+
+| Outcome | Change | Direction |
+|---------|--------|-----------|
+| Developer entry $m$ | $(1-v)^{1+\beta(1/\sigma - 1/\theta)/\eta}$ | [Down]{.fg style="--col: #9a2515"} |
+| Shared packages $m_s$ | $(1-v)$ | [Down]{.fg style="--col: #9a2515"} |
+| Average quality $\bar{q}$ | $(1-v)^{\beta(1/\sigma - 1/\theta)/(\gamma\eta)}$ | [Down]{.fg style="--col: #9a2515"} |
+| User welfare $U$ | $(1-v)^{1/\sigma - 1/\theta + \beta(1/\sigma - 1/\theta)/(\gamma\eta)}$ | [Down]{.fg style="--col: #9a2515"} |
+
+where $\eta = 1 - \beta/\gamma > 0$ and $\theta > \sigma$ (usage modes are closer substitutes than packages).
+
+. . .
+
+The [reward channel dominates]{.alert}: a 70% drop in vibe coding adoption ($v = 0.7$) causes only a ~12% reduction in development cost, but per-user revenue collapses by 70% under the traditional model.
+
+## The Horse Race: Which Channel Wins? {style="font-size: 70%;"}
+
+### Two forces with opposite signs
+
+**Cost channel (positive):** vibe coding lowers development costs
+
+- Elasticity of entry to productivity: $\beta/\eta < 1$
+- When $\theta$ is large: productivity gain $u = (1-v)^{-1/\theta}$ is [small]{.fg style="--col: #9a2515"}
+
+. . .
+
+**Reward channel (negative):** vibe coding erodes engagement-based revenue
+
+- Elasticity of entry to reward: $(1 + \beta/\sigma - \beta/\gamma)/\eta > 1$
+- Amplified by the [software-begets-software feedback]{.alert}: lower entry → worse ecosystem → higher development costs → even less entry
+
+. . .
+
+> The same magnification mechanism that once accelerated OSS growth now accelerates contraction.
+
+## Minimum Monetization Bound {style="font-size: 80%;"}
+
+### How much can per-user revenue fall before OSS collapses?
+
+Sustaining baseline entry ($m \geq m_0$) requires:
+
+$$\frac{\pi}{\pi_0} \geq (1-v)^\omega, \quad \omega \equiv \frac{1/\theta}{1/\beta + 1/\sigma - 1/\gamma} \in (0,1)$$
+
+**Quantitative example** ($v = 0.7$, $\theta = 3$, calibrated $\omega \approx 0.1$):
+
+::: {.incremental}
+- Productivity benefit: development cost falls by [~12%]{.fg style="--col: #107895"}
+- Maximum tolerable revenue decline: [~11%]{.fg style="--col: #107895"} (i.e., $\pi/\pi_0 \geq 0.89$)
+- Revenue decline under traditional model: [~70%]{.fg style="--col: #9a2515"} (i.e., $\pi/\pi_0 = 0.3$)
+:::
+
+. . .
+
+The gap between a 70% revenue collapse and an 11% sustainable decline is the central quantitative result.
+
+## Alternative Business Models {style="font-size: 70%;"}
+
+### Two polar cases from a revenue decomposition
+
+Let $\alpha$ = share of revenue independent of usage mode; $\rho$ = vibe discount (fraction of lost monetization for vibe-coded users).
+
+**Corollary 4 — Minimum vibe-coder contribution:**
+
+If all revenue is usage-dependent ($\alpha = 0$), sustaining entry requires:
+
+$$\rho \leq \frac{1-(1-v)^\omega}{v}$$
+
+For $v = 0.7$, $\omega = 0.1$: vibe coders must contribute at least [84%]{.alert} of what direct users contribute.
+
+. . .
+
+**Corollary 5 — Minimum usage-independent revenue:**
+
+If vibe coders contribute nothing ($\rho = 1$), at least [84%]{.alert} of revenue must come from enterprise licensing or foundation grants.
+
+## Calibration {style="font-size: 85%;"}
+
+### Parameter values and their empirical basis
+
+| Parameter | Role | Calibration target | Value |
+|-----------|------|--------------------|-------|
+| $\beta$ | Software share in production | Production-function evidence (ICT firms) | 1/3 |
+| $\gamma$ | Quality tail thickness | Pareto tail of GitHub stars | 3 |
+| $\sigma$ | Package substitutability | Video game demand elasticity (Clements & Ohashi, 2005) | ≈1.5 |
+| $\theta$ | Usage-mode substitutability | Field experiments on AI coding productivity | 3–4 |
+| $\zeta$ | AI capability | Implied by $(v, \theta)$ and observed adoption | — |
+
+. . .
+
+The asymmetry of elasticities — entry responds about [3.3×]{.alert} more strongly to monetization than to productivity — underlies the main result.
+
+# Discussion {background-color="#107895"}
+
+## Underprovision Is Already a Feature, Not a Bug {style="font-size: 95%;"}
+
+### The baseline market already underprovides OSS
+
+- Developers capture a small fraction of the social value they create (empirical ratio: development cost ≈ [0.1%]{.fg style="--col: #9a2515"} of user utility)
+- Free entry ensures zero expected profit — developers are indifferent about entering
+- A social planner would set $m > m_{eq}$ because the private return understates the social marginal benefit
+
+. . .
+
+> Vibe coding makes this pre-existing underprovision problem [worse]{.fg style="--col: #9a2515"} — not better — under traditional monetization, despite the productivity gains.
+
+## Policy Directions {style="font-size: 75%;"}
+
+### Three mechanisms to close the private-social return gap
+
+1. **"Spotify for OSS" — platform-level revenue redistribution**
+   - AI platforms already meter usage at fine granularity (tokens, tool calls, package downloads)
+   - Revenue sharing based on attributable usage is technically feasible with existing infrastructure
+   - Would reduce the vibe discount $\rho$ toward zero
+
+2. **Direct transfers to OSS infrastructure**
+   - Foundation grants, corporate sponsorships, government funding
+   - GitHub Sponsors, npm funding URLs already exist as mechanisms
+   - 2024 Open Source Software Funding Survey: $7.7B annually contributed — but concentrated in employee labor
+
+3. **Alternative monetization channels**
+   - Enterprise licensing, API fees, developer-focused services
+   - Partial but incomplete insurance: reduces rate of decline but cannot prevent collapse when $\rho = 1$
+
+## Limitations {style="font-size: 80%;"}
+
+1. **Abstracts from team collaboration** — larger teams may mitigate negative effects, but the model treats each project as a single developer
+2. **Nested logit assumes substitutability** — the model assumes direct and vibe-coded usage are substitutes in utility; AI may also overlook parts of large packages due to context window limits
+3. **Engagement-based monetization broadly defined** — the paper treats reputation and job opportunities as engagement-dependent, which requires a broad interpretation
+4. **No distinct enterprise/SaaS sector** — large enterprises (>69% of the OSS services market) can price access directly, which changes how AI mediation affects their revenues
+5. **Symmetric packages** — in practice, infrastructure packages (high downstream dependence, low visibility) and application packages differ markedly in their exposure to vibe coding
+6. **Key elasticities unquantified** — $\theta$ (usage-mode substitutability) and $\beta$ (software-begets-software parameter) need empirical estimation; the paper's results are sensitive to their magnitudes
+
+## Key Takeaways {style="font-size: 90%;"}
+
+1. Vibe coding is [already large and fast]{.alert}: AI tools went from negligible to majority usage within two years, driven by rapid capability improvements
+2. The [short-run effect is positive]{.fg style="--col: #107895"}: AI primarily boosts developer productivity, raising quality and welfare without eroding monetization
+3. The [long-run effect is negative]{.fg style="--col: #9a2515"} under traditional OSS business models: engagement-based revenue collapses faster than development costs fall
+4. The [magnification mechanism runs in reverse]{.fg style="--col: #9a2515"}: the same feedback loops that accelerated OSS growth will accelerate contraction
+5. Sustainable OSS requires [new monetization institutions]{.alert}: platform redistribution, foundation grants, or enterprise funding must compensate for lost engagement revenue
+6. The model is a [call to action]{.alert}, not a doom prophecy: the infrastructure for solutions largely exists — what is needed is coordination and will
